@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/main.py", line 39, in <module>
+    sol = Solutions()
+          ^^^^^^^^^^^
+  File "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/main.py", line 9, in __init__
+    self.see_all()
+  File "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/main.py", line 36, in see_all
+    self.exercise1()
+  File "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/main.py", line 32, in exercise1
+    wandb.log({"plot": [wandb.Image(img, caption)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/main.py", line 32, in <listcomp>
+    wandb.log({"plot": [wandb.Image(img, caption)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/sdk/data_types/image.py", line 161, in __init__
+    self._initialize_from_data(data_or_path, mode)
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/sdk/data_types/image.py", line 301, in _initialize_from_data
+    self._image = pil_image.fromarray(
+                  ^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/PIL/Image.py", line 3013, in fromarray
+    return frombuffer(mode, size, obj, "raw", rawmode, 0, 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/PIL/Image.py", line 2940, in frombuffer
+    return frombytes(mode, size, data, decoder_name, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/PIL/Image.py", line 2881, in frombytes
+    im = new(mode, size)
+         ^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/PIL/Image.py", line 2845, in new
+    return im._new(core.fill(mode, size, color))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: unrecognized image mode

@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/main.py", line 38, in <module>
+    sol = Solutions()
+          ^^^^^^^^^^^
+  File "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/main.py", line 9, in __init__
+    self.see_all()
+  File "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/main.py", line 35, in see_all
+    self.exercise1()
+  File "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/main.py", line 31, in exercise1
+    wandb.log({"plot": [wandb.Image(img, caption,mode='P')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/main.py", line 31, in <listcomp>
+    wandb.log({"plot": [wandb.Image(img, caption,mode='P')
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Image.__init__() got multiple values for argument 'mode'

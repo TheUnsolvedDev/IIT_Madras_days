@@ -1,0 +1,78 @@
+{
+    "os": "Linux-6.2.0-36-generic-x86_64-with-glibc2.35",
+    "python": "3.11.5",
+    "heartbeatAt": "2023-11-17T11:45:52.636080",
+    "startedAt": "2023-11-17T11:45:51.894752",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/neural_network.py",
+    "codePathLocal": "neural_network.py",
+    "codePath": "Classes/DL/Assignment1/neural_network.py",
+    "git": {
+        "remote": "https://github.com/TheUnsolvedDev/IIT_Madras_days.git",
+        "commit": "d9cc9693947b5d5ce3965cea6b71aebbfe3f5305"
+    },
+    "email": "shuvrajeet17@gmail.com",
+    "root": "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days",
+    "host": "desktop",
+    "username": "shuvrajeet",
+    "executable": "/home/shuvrajeet/miniconda3/envs/ResearchIITM/bin/python",
+    "cpu_count": 6,
+    "cpu_count_logical": 6,
+    "cpu_freq": {
+        "current": 2618.2895000000003,
+        "min": 2200.0,
+        "max": 3600.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2605.523,
+            "min": 2200.0,
+            "max": 3600.0
+        },
+        {
+            "current": 1939.35,
+            "min": 2200.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2278.831,
+            "min": 2200.0,
+            "max": 3600.0
+        },
+        {
+            "current": 3902.437,
+            "min": 2200.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2191.521,
+            "min": 2200.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2792.075,
+            "min": 2200.0,
+            "max": 3600.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 438.5479202270508,
+            "used": 156.75609588623047
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 2060 SUPER",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 2060 SUPER",
+            "memory_total": 8589934592
+        }
+    ],
+    "memory": {
+        "total": 31.257389068603516
+    }
+}

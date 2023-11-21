@@ -1,0 +1,416 @@
+2023-11-17 09:39:32,984 INFO    StreamThr :1008908 [internal.py:wandb_internal():86] W&B internal server running at pid: 1008908, started at: 2023-11-17 09:39:32.984399
+2023-11-17 09:39:32,987 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status
+2023-11-17 09:39:32,988 INFO    WriterThread:1008908 [datastore.py:open_for_write():85] open: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/run-n21ghdao.wandb
+2023-11-17 09:39:32,988 DEBUG   SenderThread:1008908 [sender.py:send():380] send: header
+2023-11-17 09:39:32,991 DEBUG   SenderThread:1008908 [sender.py:send():380] send: run
+2023-11-17 09:39:33,614 INFO    SenderThread:1008908 [dir_watcher.py:__init__():211] watching files in: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files
+2023-11-17 09:39:33,614 INFO    SenderThread:1008908 [sender.py:_start_run_threads():1124] run started: n21ghdao with start time 1700194172.983704
+2023-11-17 09:39:33,623 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: check_version
+2023-11-17 09:39:33,624 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: check_version
+2023-11-17 09:39:33,694 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: run_start
+2023-11-17 09:39:33,702 DEBUG   HandlerThread:1008908 [system_info.py:__init__():32] System info init
+2023-11-17 09:39:33,703 DEBUG   HandlerThread:1008908 [system_info.py:__init__():47] System info init done
+2023-11-17 09:39:33,703 INFO    HandlerThread:1008908 [system_monitor.py:start():194] Starting system monitor
+2023-11-17 09:39:33,703 INFO    SystemMonitor:1008908 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-11-17 09:39:33,703 INFO    HandlerThread:1008908 [system_monitor.py:probe():214] Collecting system info
+2023-11-17 09:39:33,703 INFO    SystemMonitor:1008908 [interfaces.py:start():190] Started cpu monitoring
+2023-11-17 09:39:33,704 INFO    SystemMonitor:1008908 [interfaces.py:start():190] Started disk monitoring
+2023-11-17 09:39:33,704 INFO    SystemMonitor:1008908 [interfaces.py:start():190] Started gpu monitoring
+2023-11-17 09:39:33,705 INFO    SystemMonitor:1008908 [interfaces.py:start():190] Started memory monitoring
+2023-11-17 09:39:33,705 INFO    SystemMonitor:1008908 [interfaces.py:start():190] Started network monitoring
+2023-11-17 09:39:33,714 DEBUG   HandlerThread:1008908 [system_info.py:probe():196] Probing system
+2023-11-17 09:39:33,715 DEBUG   HandlerThread:1008908 [system_info.py:_probe_git():181] Probing git
+2023-11-17 09:39:33,719 DEBUG   HandlerThread:1008908 [system_info.py:_probe_git():189] Probing git done
+2023-11-17 09:39:33,720 DEBUG   HandlerThread:1008908 [system_info.py:probe():244] Probing system done
+2023-11-17 09:39:33,720 DEBUG   HandlerThread:1008908 [system_monitor.py:probe():223] {'os': 'Linux-6.2.0-36-generic-x86_64-with-glibc2.35', 'python': '3.11.5', 'heartbeatAt': '2023-11-17T04:09:33.714563', 'startedAt': '2023-11-17T04:09:32.980111', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/neural_network.py', 'codePathLocal': 'neural_network.py', 'codePath': 'Classes/DL/Assignment1/neural_network.py', 'git': {'remote': 'https://github.com/TheUnsolvedDev/IIT_Madras_days.git', 'commit': 'd9cc9693947b5d5ce3965cea6b71aebbfe3f5305'}, 'email': 'shuvrajeet17@gmail.com', 'root': '/home/shuvrajeet/Documents/GitHub/IIT_Madras_days', 'host': 'desktop', 'username': 'shuvrajeet', 'executable': '/home/shuvrajeet/miniconda3/envs/ResearchIITM/bin/python', 'cpu_count': 6, 'cpu_count_logical': 6, 'cpu_freq': {'current': 2387.882, 'min': 2200.0, 'max': 3600.0}, 'cpu_freq_per_core': [{'current': 2573.347, 'min': 2200.0, 'max': 3600.0}, {'current': 3645.685, 'min': 2200.0, 'max': 3600.0}, {'current': 2859.588, 'min': 2200.0, 'max': 3600.0}, {'current': 3328.753, 'min': 2200.0, 'max': 3600.0}, {'current': 1975.796, 'min': 2200.0, 'max': 3600.0}, {'current': 3874.1, 'min': 2200.0, 'max': 3600.0}], 'disk': {'/': {'total': 438.5479202270508, 'used': 156.14308547973633}}, 'gpu': 'NVIDIA GeForce RTX 2060 SUPER', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 2060 SUPER', 'memory_total': 8589934592}], 'memory': {'total': 31.257389068603516}}
+2023-11-17 09:39:33,720 INFO    HandlerThread:1008908 [system_monitor.py:probe():224] Finished collecting system info
+2023-11-17 09:39:33,720 INFO    HandlerThread:1008908 [system_monitor.py:probe():227] Publishing system info
+2023-11-17 09:39:33,720 DEBUG   HandlerThread:1008908 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-11-17 09:39:33,720 DEBUG   HandlerThread:1008908 [system_info.py:_save_pip():68] Saving pip packages done
+2023-11-17 09:39:33,720 DEBUG   HandlerThread:1008908 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-11-17 09:39:34,615 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/requirements.txt
+2023-11-17 09:39:34,615 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/conda-environment.yaml
+2023-11-17 09:39:36,333 DEBUG   HandlerThread:1008908 [system_info.py:_save_conda():87] Saving conda packages done
+2023-11-17 09:39:36,333 INFO    HandlerThread:1008908 [system_monitor.py:probe():229] Finished publishing system info
+2023-11-17 09:39:36,338 DEBUG   SenderThread:1008908 [sender.py:send():380] send: files
+2023-11-17 09:39:36,338 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-metadata.json with policy now
+2023-11-17 09:39:36,343 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-17 09:39:36,343 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: stop_status
+2023-11-17 09:39:36,345 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-17 09:39:36,614 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/conda-environment.yaml
+2023-11-17 09:39:36,615 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-metadata.json
+2023-11-17 09:39:36,747 DEBUG   SenderThread:1008908 [sender.py:send():380] send: telemetry
+2023-11-17 09:39:36,748 DEBUG   SenderThread:1008908 [sender.py:send():380] send: telemetry
+2023-11-17 09:39:36,748 DEBUG   SenderThread:1008908 [sender.py:send():380] send: run
+2023-11-17 09:39:37,044 INFO    SenderThread:1008908 [sender.py:send_run():1002] updated run: n21ghdao
+2023-11-17 09:39:37,283 INFO    wandb-upload_0:1008908 [upload_job.py:push():131] Uploaded file /tmp/tmpjmq620k8wandb/l1rri1dg-wandb-metadata.json
+2023-11-17 09:39:37,615 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/config.yaml
+2023-11-17 09:39:38,048 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:39:42,579 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:42,580 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:42,580 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:42,581 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:42,616 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:39:42,623 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:42,623 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:42,623 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:42,624 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:42,624 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:42,624 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:42,624 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:42,624 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:42,750 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:42,751 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:42,751 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:42,751 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:42,751 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:42,751 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:42,751 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:42,752 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:43,616 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:39:43,752 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:39:48,753 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:39:48,934 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:48,934 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:48,934 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:48,935 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:48,935 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:48,935 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:48,935 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:48,934 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:48,936 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:48,936 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:48,936 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:48,936 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:49,078 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:49,078 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:49,078 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:49,078 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:49,078 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:49,078 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:49,079 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:49,079 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:49,617 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:39:51,343 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-17 09:39:51,343 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: stop_status
+2023-11-17 09:39:51,345 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-17 09:39:54,629 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:39:55,245 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:55,245 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:55,245 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:55,245 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:55,287 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:55,287 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:55,287 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:55,287 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:55,288 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:55,288 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:55,288 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:55,288 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:55,389 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:55,389 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:39:55,389 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:55,389 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:55,390 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:55,390 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:39:55,390 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:39:55,390 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:39:55,619 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:40:00,391 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:40:01,624 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:01,625 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:01,625 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:01,625 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:01,626 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:01,626 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:01,626 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:01,626 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:01,627 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:01,627 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:01,627 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:01,627 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:01,772 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:01,772 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:01,772 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:01,772 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:01,773 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:01,773 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:01,773 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:01,773 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:02,620 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:40:05,776 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:40:06,344 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-17 09:40:06,344 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-17 09:40:06,344 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: stop_status
+2023-11-17 09:40:06,621 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/config.yaml
+2023-11-17 09:40:07,902 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:07,903 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:07,903 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:07,904 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:07,947 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:07,947 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:07,948 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:07,948 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:07,948 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:07,948 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:07,948 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:07,948 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:08,046 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:08,046 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:08,046 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:08,046 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:08,047 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:08,047 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:08,047 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:08,047 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:08,622 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:40:12,048 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:40:14,214 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:14,214 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:14,214 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:14,215 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:14,215 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:14,216 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:14,216 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:14,216 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:14,216 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:14,216 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:14,217 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:14,217 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:14,384 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:14,385 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:14,385 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:14,385 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:14,385 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:14,385 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:14,385 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:14,386 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:14,623 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:40:17,386 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:40:20,496 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:20,496 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:20,496 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:20,497 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:20,497 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:20,498 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:20,498 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:20,498 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:20,499 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:20,499 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:20,499 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:20,499 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:20,624 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:40:20,640 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:20,641 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:20,641 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:20,641 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:20,641 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:20,641 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:20,641 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:20,642 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:21,343 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-17 09:40:21,344 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: stop_status
+2023-11-17 09:40:21,344 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-17 09:40:21,625 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:40:22,635 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:40:26,743 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:26,744 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:26,744 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:26,744 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:26,787 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:26,787 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:26,787 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:26,788 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:26,788 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:26,788 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:26,788 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:26,788 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:26,887 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:26,887 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:26,887 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:26,888 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:26,888 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:26,888 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:26,888 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:26,888 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:27,626 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:40:27,889 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:40:32,889 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:40:32,981 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:32,981 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:32,982 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:32,982 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:32,982 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:32,982 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:32,982 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:32,982 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:32,983 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:32,983 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:32,983 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:32,983 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:33,122 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:33,122 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:33,123 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:33,123 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:33,123 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:33,123 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:33,123 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:33,123 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:33,627 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:40:33,705 DEBUG   SystemMonitor:1008908 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-11-17 09:40:33,706 DEBUG   SenderThread:1008908 [sender.py:send():380] send: stats
+2023-11-17 09:40:36,343 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-17 09:40:36,344 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: stop_status
+2023-11-17 09:40:36,344 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-17 09:40:38,707 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:40:39,433 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:39,433 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:39,433 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:39,434 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:39,475 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:39,475 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:39,476 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:39,476 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:39,476 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:39,476 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:39,476 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:39,477 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:39,628 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:39,629 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:40:39,629 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 09:40:39,629 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:39,629 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:39,630 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:39,630 DEBUG   SenderThread:1008908 [sender.py:send():380] send: history
+2023-11-17 09:40:39,630 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 09:40:39,630 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:39,630 DEBUG   SenderThread:1008908 [sender.py:send():380] send: telemetry
+2023-11-17 09:40:39,630 DEBUG   SenderThread:1008908 [sender.py:send():380] send: exit
+2023-11-17 09:40:39,630 INFO    SenderThread:1008908 [sender.py:send_exit():585] handling exit code: 0
+2023-11-17 09:40:39,630 INFO    SenderThread:1008908 [sender.py:send_exit():587] handling runtime: 65
+2023-11-17 09:40:39,631 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:39,631 INFO    SenderThread:1008908 [sender.py:send_exit():593] send defer
+2023-11-17 09:40:39,631 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:39,631 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 0
+2023-11-17 09:40:39,631 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:39,631 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 0
+2023-11-17 09:40:39,631 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 1
+2023-11-17 09:40:39,631 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:39,631 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 1
+2023-11-17 09:40:39,631 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:39,631 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 1
+2023-11-17 09:40:39,631 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 2
+2023-11-17 09:40:39,632 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:39,632 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 2
+2023-11-17 09:40:39,632 INFO    HandlerThread:1008908 [system_monitor.py:finish():203] Stopping system monitor
+2023-11-17 09:40:39,632 DEBUG   SystemMonitor:1008908 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-11-17 09:40:39,632 DEBUG   SystemMonitor:1008908 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-11-17 09:40:39,632 INFO    HandlerThread:1008908 [interfaces.py:finish():202] Joined cpu monitor
+2023-11-17 09:40:39,632 INFO    HandlerThread:1008908 [interfaces.py:finish():202] Joined disk monitor
+2023-11-17 09:40:39,679 INFO    HandlerThread:1008908 [interfaces.py:finish():202] Joined gpu monitor
+2023-11-17 09:40:39,679 INFO    HandlerThread:1008908 [interfaces.py:finish():202] Joined memory monitor
+2023-11-17 09:40:39,679 INFO    HandlerThread:1008908 [interfaces.py:finish():202] Joined network monitor
+2023-11-17 09:40:39,680 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:39,680 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 2
+2023-11-17 09:40:39,680 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 3
+2023-11-17 09:40:39,680 DEBUG   SenderThread:1008908 [sender.py:send():380] send: stats
+2023-11-17 09:40:39,680 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:39,680 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 3
+2023-11-17 09:40:39,680 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:39,680 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 3
+2023-11-17 09:40:39,680 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 4
+2023-11-17 09:40:39,680 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:39,680 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 4
+2023-11-17 09:40:39,681 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:39,681 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 4
+2023-11-17 09:40:39,681 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 5
+2023-11-17 09:40:39,681 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:39,681 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 5
+2023-11-17 09:40:39,681 DEBUG   SenderThread:1008908 [sender.py:send():380] send: summary
+2023-11-17 09:40:39,681 INFO    SenderThread:1008908 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 09:40:39,681 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:39,681 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 5
+2023-11-17 09:40:39,681 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 6
+2023-11-17 09:40:39,681 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:39,681 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 6
+2023-11-17 09:40:39,682 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:39,682 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 6
+2023-11-17 09:40:39,684 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 09:40:39,973 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 7
+2023-11-17 09:40:39,973 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:39,973 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 7
+2023-11-17 09:40:39,973 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:39,973 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 7
+2023-11-17 09:40:39,973 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 8
+2023-11-17 09:40:39,973 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:39,973 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 8
+2023-11-17 09:40:39,973 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:39,973 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 8
+2023-11-17 09:40:39,973 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 9
+2023-11-17 09:40:39,973 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:39,973 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 9
+2023-11-17 09:40:39,973 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:39,973 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 9
+2023-11-17 09:40:39,973 INFO    SenderThread:1008908 [dir_watcher.py:finish():358] shutting down directory watcher
+2023-11-17 09:40:40,629 INFO    Thread-12 :1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:40:40,629 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 09:40:40,630 INFO    SenderThread:1008908 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/config.yaml
+2023-11-17 09:40:40,630 INFO    SenderThread:1008908 [dir_watcher.py:finish():388] scan: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files
+2023-11-17 09:40:40,630 INFO    SenderThread:1008908 [dir_watcher.py:finish():402] scan save: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/config.yaml config.yaml
+2023-11-17 09:40:40,630 INFO    SenderThread:1008908 [dir_watcher.py:finish():402] scan save: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/conda-environment.yaml conda-environment.yaml
+2023-11-17 09:40:40,630 INFO    SenderThread:1008908 [dir_watcher.py:finish():402] scan save: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/requirements.txt requirements.txt
+2023-11-17 09:40:40,634 INFO    SenderThread:1008908 [dir_watcher.py:finish():402] scan save: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-metadata.json wandb-metadata.json
+2023-11-17 09:40:40,634 INFO    SenderThread:1008908 [dir_watcher.py:finish():402] scan save: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json wandb-summary.json
+2023-11-17 09:40:40,634 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 10
+2023-11-17 09:40:40,636 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 09:40:40,636 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:40,638 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 10
+2023-11-17 09:40:40,638 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:40,638 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 10
+2023-11-17 09:40:40,638 INFO    SenderThread:1008908 [file_pusher.py:finish():175] shutting down file pusher
+2023-11-17 09:40:41,238 INFO    wandb-upload_2:1008908 [upload_job.py:push():131] Uploaded file /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/requirements.txt
+2023-11-17 09:40:41,462 INFO    wandb-upload_0:1008908 [upload_job.py:push():131] Uploaded file /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/conda-environment.yaml
+2023-11-17 09:40:41,490 INFO    wandb-upload_1:1008908 [upload_job.py:push():131] Uploaded file /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/config.yaml
+2023-11-17 09:40:41,532 INFO    wandb-upload_3:1008908 [upload_job.py:push():131] Uploaded file /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/files/wandb-summary.json
+2023-11-17 09:40:41,629 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 09:40:41,630 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 09:40:41,732 INFO    Thread-11 (_thread_body):1008908 [sender.py:transition_state():613] send defer: 11
+2023-11-17 09:40:41,733 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:41,733 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 11
+2023-11-17 09:40:41,733 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:41,733 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 11
+2023-11-17 09:40:41,733 INFO    SenderThread:1008908 [file_pusher.py:join():181] waiting for file pusher
+2023-11-17 09:40:41,733 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 12
+2023-11-17 09:40:41,733 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:41,734 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 12
+2023-11-17 09:40:41,734 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:41,734 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 12
+2023-11-17 09:40:41,734 INFO    SenderThread:1008908 [file_stream.py:finish():595] file stream finish called
+2023-11-17 09:40:42,605 INFO    SenderThread:1008908 [file_stream.py:finish():599] file stream finish is done
+2023-11-17 09:40:42,606 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 13
+2023-11-17 09:40:42,606 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:42,606 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 13
+2023-11-17 09:40:42,606 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:42,606 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 13
+2023-11-17 09:40:42,606 INFO    SenderThread:1008908 [sender.py:transition_state():613] send defer: 14
+2023-11-17 09:40:42,606 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 09:40:42,607 INFO    HandlerThread:1008908 [handler.py:handle_request_defer():172] handle defer: 14
+2023-11-17 09:40:42,607 DEBUG   SenderThread:1008908 [sender.py:send():380] send: final
+2023-11-17 09:40:42,607 DEBUG   SenderThread:1008908 [sender.py:send():380] send: footer
+2023-11-17 09:40:42,607 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: defer
+2023-11-17 09:40:42,607 INFO    SenderThread:1008908 [sender.py:send_request_defer():609] handle sender defer: 14
+2023-11-17 09:40:42,608 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 09:40:42,608 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 09:40:42,608 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-17 09:40:42,609 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: server_info
+2023-11-17 09:40:42,609 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: server_info
+2023-11-17 09:40:42,652 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: get_summary
+2023-11-17 09:40:42,652 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: sampled_history
+2023-11-17 09:40:42,652 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: job_info
+2023-11-17 09:40:42,868 DEBUG   SenderThread:1008908 [sender.py:send_request():407] send_request: job_info
+2023-11-17 09:40:42,869 DEBUG   HandlerThread:1008908 [handler.py:handle_request():146] handle_request: shutdown
+2023-11-17 09:40:42,869 INFO    HandlerThread:1008908 [handler.py:finish():866] shutting down handler
+2023-11-17 09:40:43,653 INFO    WriterThread:1008908 [datastore.py:close():294] close: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_093932-n21ghdao/run-n21ghdao.wandb
+2023-11-17 09:40:43,869 INFO    SenderThread:1008908 [sender.py:finish():1536] shutting down sender
+2023-11-17 09:40:43,869 INFO    SenderThread:1008908 [file_pusher.py:finish():175] shutting down file pusher
+2023-11-17 09:40:43,869 INFO    SenderThread:1008908 [file_pusher.py:join():181] waiting for file pusher

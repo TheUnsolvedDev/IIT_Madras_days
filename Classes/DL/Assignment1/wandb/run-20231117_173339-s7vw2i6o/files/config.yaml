@@ -1,0 +1,59 @@
+wandb_version: 1
+
+activation_functions:
+  desc: null
+  value: sigmoid
+batch_size:
+  desc: null
+  value: 64
+learning_rate:
+  desc: null
+  value: 0.0001
+number_of_epochs:
+  desc: null
+  value: 10
+number_of_hidden_layers:
+  desc: null
+  value: 4
+optimizer:
+  desc: null
+  value: adam
+size_of_every_hidden_layer:
+  desc: null
+  value: 128
+weight_decay:
+  desc: null
+  value: 0
+weight_initialisation:
+  desc: null
+  value: random
+_wandb:
+  desc: null
+  value:
+    python_version: 3.11.5
+    cli_version: 0.16.0
+    framework: keras
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1700222619.888816
+    t:
+      1:
+      - 2
+      - 3
+      - 12
+      - 55
+      2:
+      - 2
+      - 3
+      - 12
+      - 55
+      3:
+      - 2
+      - 17
+      - 23
+      - 37
+      4: 3.11.5
+      5: 0.16.0
+      8:
+      - 5
+      13: linux-x86_64

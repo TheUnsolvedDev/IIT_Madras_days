@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib.ticker import LinearLocator
 
+plt.ion()
+
 
 class Solutions:
     def __init__(self) -> None:
@@ -24,25 +26,50 @@ class Solutions:
         term4 = sub1_term4.T @ x
 
         return (term1 + term2 + term3 + term4).squeeze()
-    
+
     def exercise1(self):
         X = np.arange(-5, 5, 0.25)
         Y = np.arange(-5, 5, 0.25)
         X, Y = np.meshgrid(X, Y)
-        
+
         fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
-        
-        Z = [Solutions.f([x,y]) for x,y in zip(X.flatten(),Y.flatten())]
+
+        Z = [Solutions.f([x, y]) for x, y in zip(X.flatten(), Y.flatten())]
         Z = np.array(Z).reshape(X.shape)
-        
+
         surf = ax.plot_surface(X, Y, Z, cmap=cm.coolwarm,
-                       linewidth=0, antialiased=False)
+                               linewidth=0, antialiased=False)
         # fig.colorbar(surf, shrink=0.5, aspect=5)
-        plt.show()
-        
-        
+        plt.show(block=True)
+
+    def exercise2(self):
+        dataset = np.array([[0, 2],
+                            [0.5, 1],
+                            [1, 4],
+                            [1.5, 3],
+                            [2, 6],
+                            [2.5, 5],
+                            [3, 8],
+                            [3.5, 7],
+                            [4, 10],
+                            [4.5, 9]
+                            ])
+        x = dataset[:, 0].reshape(-1, 1)
+        y = dataset[:, 1].reshape(-1, 1)
+
+        X = np.hstack([np.ones_like(x), x])
+        m = np.linalg.inv(np.dot(X.T, X))@X.T@y
+        line = X@m
+
+        Lambda = 100
+        m2 = np.array([[0],[2]])#np.linalg.inv(np.dot(X.T, X) + Lambda*np.eye(X.shape[1]))@X.T@y
+        line2 = X@m2
+        plt.scatter(x, y)
+        plt.plot(x, line, color='red')
+        plt.plot(x, line2, color='green')
+        plt.show(block=True)
 
 
 if __name__ == '__main__':
     answer = Solutions()
-    answer.exercise1()
+    answer.exercise2()

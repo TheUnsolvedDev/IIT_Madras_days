@@ -1,0 +1,714 @@
+2023-11-17 06:37:44,450 INFO    StreamThr :748912 [internal.py:wandb_internal():86] W&B internal server running at pid: 748912, started at: 2023-11-17 06:37:44.450185
+2023-11-17 06:37:44,453 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status
+2023-11-17 06:37:44,454 INFO    WriterThread:748912 [datastore.py:open_for_write():85] open: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/run-1tq38arr.wandb
+2023-11-17 06:37:44,455 DEBUG   SenderThread:748912 [sender.py:send():380] send: header
+2023-11-17 06:37:44,457 DEBUG   SenderThread:748912 [sender.py:send():380] send: run
+2023-11-17 06:37:45,084 INFO    SenderThread:748912 [dir_watcher.py:__init__():211] watching files in: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files
+2023-11-17 06:37:45,084 INFO    SenderThread:748912 [sender.py:_start_run_threads():1124] run started: 1tq38arr with start time 1700183264.449676
+2023-11-17 06:37:45,259 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: check_version
+2023-11-17 06:37:45,259 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: check_version
+2023-11-17 06:37:45,346 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: run_start
+2023-11-17 06:37:45,352 DEBUG   HandlerThread:748912 [system_info.py:__init__():32] System info init
+2023-11-17 06:37:45,352 DEBUG   HandlerThread:748912 [system_info.py:__init__():47] System info init done
+2023-11-17 06:37:45,352 INFO    HandlerThread:748912 [system_monitor.py:start():194] Starting system monitor
+2023-11-17 06:37:45,352 INFO    SystemMonitor:748912 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-11-17 06:37:45,352 INFO    HandlerThread:748912 [system_monitor.py:probe():214] Collecting system info
+2023-11-17 06:37:45,354 INFO    SystemMonitor:748912 [interfaces.py:start():190] Started cpu monitoring
+2023-11-17 06:37:45,355 INFO    SystemMonitor:748912 [interfaces.py:start():190] Started disk monitoring
+2023-11-17 06:37:45,356 INFO    SystemMonitor:748912 [interfaces.py:start():190] Started gpu monitoring
+2023-11-17 06:37:45,356 INFO    SystemMonitor:748912 [interfaces.py:start():190] Started memory monitoring
+2023-11-17 06:37:45,357 INFO    SystemMonitor:748912 [interfaces.py:start():190] Started network monitoring
+2023-11-17 06:37:45,359 DEBUG   HandlerThread:748912 [system_info.py:probe():196] Probing system
+2023-11-17 06:37:45,361 DEBUG   HandlerThread:748912 [system_info.py:_probe_git():181] Probing git
+2023-11-17 06:37:45,365 DEBUG   HandlerThread:748912 [system_info.py:_probe_git():189] Probing git done
+2023-11-17 06:37:45,365 DEBUG   HandlerThread:748912 [system_info.py:probe():244] Probing system done
+2023-11-17 06:37:45,365 DEBUG   HandlerThread:748912 [system_monitor.py:probe():223] {'os': 'Linux-6.2.0-36-generic-x86_64-with-glibc2.35', 'python': '3.11.5', 'heartbeatAt': '2023-11-17T01:07:45.359878', 'startedAt': '2023-11-17T01:07:44.445738', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/neural_network.py', 'codePathLocal': 'neural_network.py', 'codePath': 'Classes/DL/Assignment1/neural_network.py', 'git': {'remote': 'https://github.com/TheUnsolvedDev/IIT_Madras_days.git', 'commit': 'd9cc9693947b5d5ce3965cea6b71aebbfe3f5305'}, 'email': 'shuvrajeet17@gmail.com', 'root': '/home/shuvrajeet/Documents/GitHub/IIT_Madras_days', 'host': 'desktop', 'username': 'shuvrajeet', 'executable': '/home/shuvrajeet/miniconda3/envs/ResearchIITM/bin/python3', 'cpu_count': 6, 'cpu_count_logical': 6, 'cpu_freq': {'current': 3847.0724999999998, 'min': 2200.0, 'max': 3600.0}, 'cpu_freq_per_core': [{'current': 3851.676, 'min': 2200.0, 'max': 3600.0}, {'current': 3852.116, 'min': 2200.0, 'max': 3600.0}, {'current': 3833.365, 'min': 2200.0, 'max': 3600.0}, {'current': 3849.199, 'min': 2200.0, 'max': 3600.0}, {'current': 3848.997, 'min': 2200.0, 'max': 3600.0}, {'current': 3847.082, 'min': 2200.0, 'max': 3600.0}], 'disk': {'/': {'total': 438.5479202270508, 'used': 156.1905403137207}}, 'gpu': 'NVIDIA GeForce RTX 2060 SUPER', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 2060 SUPER', 'memory_total': 8589934592}], 'memory': {'total': 31.257389068603516}}
+2023-11-17 06:37:45,365 INFO    HandlerThread:748912 [system_monitor.py:probe():224] Finished collecting system info
+2023-11-17 06:37:45,365 INFO    HandlerThread:748912 [system_monitor.py:probe():227] Publishing system info
+2023-11-17 06:37:45,365 DEBUG   HandlerThread:748912 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-11-17 06:37:45,366 DEBUG   HandlerThread:748912 [system_info.py:_save_pip():68] Saving pip packages done
+2023-11-17 06:37:45,366 DEBUG   HandlerThread:748912 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-11-17 06:37:46,085 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/conda-environment.yaml
+2023-11-17 06:37:46,085 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/requirements.txt
+2023-11-17 06:37:48,085 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/conda-environment.yaml
+2023-11-17 06:37:48,180 DEBUG   HandlerThread:748912 [system_info.py:_save_conda():87] Saving conda packages done
+2023-11-17 06:37:48,180 INFO    HandlerThread:748912 [system_monitor.py:probe():229] Finished publishing system info
+2023-11-17 06:37:48,183 DEBUG   SenderThread:748912 [sender.py:send():380] send: files
+2023-11-17 06:37:48,183 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-metadata.json with policy now
+2023-11-17 06:37:48,190 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-17 06:37:48,190 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: stop_status
+2023-11-17 06:37:48,192 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-17 06:37:48,556 DEBUG   SenderThread:748912 [sender.py:send():380] send: telemetry
+2023-11-17 06:37:48,556 DEBUG   SenderThread:748912 [sender.py:send():380] send: telemetry
+2023-11-17 06:37:48,556 DEBUG   SenderThread:748912 [sender.py:send():380] send: run
+2023-11-17 06:37:48,876 INFO    SenderThread:748912 [sender.py:send_run():1002] updated run: 1tq38arr
+2023-11-17 06:37:49,085 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/config.yaml
+2023-11-17 06:37:49,085 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-metadata.json
+2023-11-17 06:37:49,105 INFO    wandb-upload_0:748912 [upload_job.py:push():131] Uploaded file /tmp/tmpcxjbyfugwandb/6je3j7e7-wandb-metadata.json
+2023-11-17 06:37:49,876 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:37:51,677 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:51,677 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:51,677 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:51,678 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:51,719 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:51,719 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:51,720 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:51,720 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:51,720 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:51,720 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:51,720 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:51,721 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:52,086 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-summary.json
+2023-11-17 06:37:52,271 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:52,271 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:52,272 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:52,272 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:52,272 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:52,272 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:52,272 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:52,272 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:53,086 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-summary.json
+2023-11-17 06:37:54,063 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:54,064 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:54,064 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:54,064 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:54,064 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:54,064 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:54,064 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:54,065 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:54,065 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:54,065 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:54,065 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:54,065 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:54,086 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-summary.json
+2023-11-17 06:37:54,356 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:54,356 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:54,357 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:54,357 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:54,357 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:54,357 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:54,357 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:54,358 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:55,087 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-summary.json
+2023-11-17 06:37:55,358 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:37:55,892 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:55,892 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:55,892 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:55,893 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:55,893 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:55,893 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:55,893 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:55,893 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:55,896 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:55,896 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:55,896 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:55,896 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:56,087 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-summary.json
+2023-11-17 06:37:56,184 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:56,184 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:56,184 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:56,185 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:56,185 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:56,185 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:56,185 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:56,185 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:57,087 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-summary.json
+2023-11-17 06:37:57,303 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:57,304 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:57,304 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:57,304 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:57,304 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:57,304 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:57,304 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:57,305 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:57,305 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:57,305 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:57,305 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:57,306 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:57,620 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:57,620 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:57,620 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:57,620 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:57,621 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:57,621 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:57,621 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:57,621 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:58,087 INFO    Thread-12 :748912 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-summary.json
+2023-11-17 06:37:59,412 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:59,412 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:59,412 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:59,412 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:59,413 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:59,413 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:59,413 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:59,413 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:59,413 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:59,414 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:59,414 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:59,414 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:59,645 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:59,645 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:59,645 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:59,645 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:59,645 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: partial_history
+2023-11-17 06:37:59,646 DEBUG   SenderThread:748912 [sender.py:send():380] send: history
+2023-11-17 06:37:59,646 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: summary_record
+2023-11-17 06:37:59,646 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:59,646 DEBUG   SenderThread:748912 [sender.py:send():380] send: telemetry
+2023-11-17 06:37:59,647 DEBUG   SenderThread:748912 [sender.py:send():380] send: exit
+2023-11-17 06:37:59,647 INFO    SenderThread:748912 [sender.py:send_exit():585] handling exit code: 0
+2023-11-17 06:37:59,647 INFO    SenderThread:748912 [sender.py:send_exit():587] handling runtime: 14
+2023-11-17 06:37:59,647 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:59,647 INFO    SenderThread:748912 [sender.py:send_exit():593] send defer
+2023-11-17 06:37:59,647 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:37:59,647 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 0
+2023-11-17 06:37:59,647 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:37:59,647 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 0
+2023-11-17 06:37:59,647 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 1
+2023-11-17 06:37:59,647 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:37:59,647 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 1
+2023-11-17 06:37:59,647 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:37:59,647 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 1
+2023-11-17 06:37:59,647 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 2
+2023-11-17 06:37:59,647 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:37:59,647 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 2
+2023-11-17 06:37:59,647 INFO    HandlerThread:748912 [system_monitor.py:finish():203] Stopping system monitor
+2023-11-17 06:37:59,648 DEBUG   SystemMonitor:748912 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-11-17 06:37:59,648 DEBUG   SystemMonitor:748912 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-11-17 06:37:59,648 INFO    HandlerThread:748912 [interfaces.py:finish():202] Joined cpu monitor
+2023-11-17 06:37:59,648 DEBUG   SystemMonitor:748912 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-11-17 06:37:59,648 INFO    HandlerThread:748912 [interfaces.py:finish():202] Joined disk monitor
+2023-11-17 06:37:59,678 INFO    HandlerThread:748912 [interfaces.py:finish():202] Joined gpu monitor
+2023-11-17 06:37:59,678 INFO    HandlerThread:748912 [interfaces.py:finish():202] Joined memory monitor
+2023-11-17 06:37:59,678 INFO    HandlerThread:748912 [interfaces.py:finish():202] Joined network monitor
+2023-11-17 06:37:59,678 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:37:59,678 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 2
+2023-11-17 06:37:59,678 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 3
+2023-11-17 06:37:59,678 DEBUG   SenderThread:748912 [sender.py:send():380] send: stats
+2023-11-17 06:37:59,678 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:37:59,679 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 3
+2023-11-17 06:37:59,679 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:37:59,679 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 3
+2023-11-17 06:37:59,679 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 4
+2023-11-17 06:37:59,679 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:37:59,679 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 4
+2023-11-17 06:37:59,679 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:37:59,679 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 4
+2023-11-17 06:37:59,679 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 5
+2023-11-17 06:37:59,679 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:37:59,679 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 5
+2023-11-17 06:37:59,679 DEBUG   SenderThread:748912 [sender.py:send():380] send: summary
+2023-11-17 06:37:59,679 INFO    SenderThread:748912 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-11-17 06:37:59,680 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:37:59,680 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 5
+2023-11-17 06:37:59,680 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 6
+2023-11-17 06:37:59,680 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:37:59,680 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 6
+2023-11-17 06:37:59,680 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:37:59,680 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 6
+2023-11-17 06:37:59,682 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:00,009 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 7
+2023-11-17 06:38:00,009 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:38:00,009 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 7
+2023-11-17 06:38:00,009 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:38:00,009 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 7
+2023-11-17 06:38:00,009 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 8
+2023-11-17 06:38:00,009 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:38:00,009 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 8
+2023-11-17 06:38:00,009 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:38:00,009 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 8
+2023-11-17 06:38:00,009 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 9
+2023-11-17 06:38:00,010 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:38:00,010 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 9
+2023-11-17 06:38:00,010 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:38:00,010 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 9
+2023-11-17 06:38:00,010 INFO    SenderThread:748912 [dir_watcher.py:finish():358] shutting down directory watcher
+2023-11-17 06:38:00,088 INFO    SenderThread:748912 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/config.yaml
+2023-11-17 06:38:00,088 INFO    SenderThread:748912 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-summary.json
+2023-11-17 06:38:00,089 INFO    SenderThread:748912 [dir_watcher.py:finish():388] scan: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files
+2023-11-17 06:38:00,089 INFO    SenderThread:748912 [dir_watcher.py:finish():402] scan save: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/config.yaml config.yaml
+2023-11-17 06:38:00,089 INFO    SenderThread:748912 [dir_watcher.py:finish():402] scan save: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/conda-environment.yaml conda-environment.yaml
+2023-11-17 06:38:00,090 INFO    SenderThread:748912 [dir_watcher.py:finish():402] scan save: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/requirements.txt requirements.txt
+2023-11-17 06:38:00,091 INFO    SenderThread:748912 [dir_watcher.py:finish():402] scan save: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-metadata.json wandb-metadata.json
+2023-11-17 06:38:00,091 INFO    SenderThread:748912 [dir_watcher.py:finish():402] scan save: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-summary.json wandb-summary.json
+2023-11-17 06:38:00,093 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 10
+2023-11-17 06:38:00,093 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:38:00,093 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 10
+2023-11-17 06:38:00,095 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:38:00,095 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 10
+2023-11-17 06:38:00,096 INFO    SenderThread:748912 [file_pusher.py:finish():175] shutting down file pusher
+2023-11-17 06:38:00,648 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:00,648 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:00,689 INFO    wandb-upload_1:748912 [upload_job.py:push():131] Uploaded file /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/conda-environment.yaml
+2023-11-17 06:38:01,648 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:01,648 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:02,649 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:02,649 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:03,649 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:03,649 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:04,649 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:04,650 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:05,650 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:05,650 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:05,650 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:06,650 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:06,650 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:07,650 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:07,650 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:08,651 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:08,651 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:09,651 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:09,651 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:10,651 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:10,651 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:10,652 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:11,651 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:11,652 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:12,652 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:12,652 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:13,652 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:13,652 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:14,653 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:14,653 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:15,653 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:15,653 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:15,653 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:16,653 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:16,654 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:17,654 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:17,654 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:18,654 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:18,654 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:19,654 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:19,655 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:20,655 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:20,655 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:20,655 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:21,655 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:21,655 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:22,655 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:22,656 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:23,656 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:23,656 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:24,656 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:24,656 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:25,656 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:25,657 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:25,657 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:26,657 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:26,657 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:27,657 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:27,657 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:28,657 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:28,658 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:29,658 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:29,658 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:30,658 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:30,658 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:30,658 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:31,658 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:31,658 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:32,659 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:32,659 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:33,659 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:33,659 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:34,659 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:34,660 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:35,660 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:35,660 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:35,660 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:36,660 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:36,660 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:37,660 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:37,661 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:38,661 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:38,661 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:39,661 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:39,661 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:40,661 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:40,662 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:40,662 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:41,292 INFO    wandb-upload_2:748912 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+TimeoutError: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connection.py", line 179, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7f0dd7dcc650>, 'Connection to api.wandb.ai timed out. (connect timeout=20)')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f0dd7dcc650>, 'Connection to api.wandb.ai timed out. (connect timeout=20)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/sdk/internal/internal_api.py", line 366, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/sdk/lib/gql_request.py", line 58, in execute
+    request = self.session.post(self.url, **post_args)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/requests/sessions.py", line 637, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/requests/adapters.py", line 507, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f0dd7dcc650>, 'Connection to api.wandb.ai timed out. (connect timeout=20)'))
+2023-11-17 06:38:41,373 INFO    wandb-upload_3:748912 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+TimeoutError: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connection.py", line 179, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7f0dd7dcf410>, 'Connection to api.wandb.ai timed out. (connect timeout=20)')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f0dd7dcf410>, 'Connection to api.wandb.ai timed out. (connect timeout=20)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/sdk/internal/internal_api.py", line 366, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/wandb/sdk/lib/gql_request.py", line 58, in execute
+    request = self.session.post(self.url, **post_args)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/requests/sessions.py", line 637, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shuvrajeet/miniconda3/envs/ResearchIITM/lib/python3.11/site-packages/requests/adapters.py", line 507, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f0dd7dcf410>, 'Connection to api.wandb.ai timed out. (connect timeout=20)'))
+2023-11-17 06:38:41,662 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:41,662 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:42,662 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:42,662 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:43,662 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:43,663 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:44,663 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:44,663 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:45,663 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:45,663 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:45,663 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:46,663 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:46,664 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:47,664 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:47,664 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:48,664 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:48,664 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:49,664 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:49,665 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:50,665 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:50,665 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:50,665 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:51,665 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:51,665 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:52,665 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:52,666 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:53,666 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:53,666 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:54,666 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:54,667 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:55,667 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:55,667 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:55,667 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:38:56,667 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:56,668 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:57,667 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:57,668 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:58,668 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:58,668 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:38:59,668 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:38:59,668 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:00,668 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:00,669 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:00,669 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:01,669 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:01,669 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:02,669 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:02,669 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:03,670 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:03,670 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:04,670 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:04,670 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:05,670 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:05,670 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:05,671 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:06,671 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:06,671 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:07,671 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:07,671 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:08,671 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:08,672 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:09,672 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:09,672 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:10,672 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:10,672 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:10,672 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:11,672 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:11,672 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:12,673 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:12,673 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:13,673 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:13,673 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:14,673 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:14,674 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:15,674 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:15,674 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:15,674 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:16,674 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:16,674 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:17,674 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:17,675 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:18,675 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:18,675 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:19,675 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:19,675 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:20,675 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:20,676 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:20,676 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:21,676 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:21,676 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:22,676 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:22,676 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:23,676 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:23,677 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:24,677 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:24,677 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:25,677 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:25,677 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:25,678 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:26,677 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:26,678 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:27,678 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:27,678 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:28,678 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:28,678 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:29,679 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:29,679 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:30,679 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:30,680 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:30,680 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:31,680 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:31,680 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:32,680 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:32,681 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:33,681 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:33,681 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:34,681 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:34,681 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:35,681 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:35,682 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:35,682 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:36,536 INFO    wandb-upload_2:748912 [upload_job.py:push():131] Uploaded file /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/requirements.txt
+2023-11-17 06:39:36,681 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:36,682 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:37,463 INFO    wandb-upload_3:748912 [upload_job.py:push():131] Uploaded file /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/wandb-summary.json
+2023-11-17 06:39:37,682 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:37,682 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:38,682 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:38,682 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:39,683 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:39,683 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:40,683 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:40,683 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:40,684 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:41,683 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:41,684 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:42,684 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:42,684 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:43,684 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:43,684 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:44,684 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:44,685 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:45,685 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:45,685 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:45,685 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:46,685 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:46,685 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:47,686 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:47,686 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:48,686 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:48,686 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:49,686 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:49,687 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:50,687 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:50,687 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:50,687 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:51,687 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:51,687 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:52,687 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:52,688 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:53,688 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:53,688 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:54,688 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:54,688 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:55,688 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:55,689 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:55,689 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:39:56,689 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:56,689 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:57,689 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:57,689 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:58,689 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:58,690 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:39:59,690 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:39:59,690 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:00,690 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:00,690 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:00,691 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:40:01,690 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:01,691 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:02,299 WARNING FileStreamThread:748912 [file_stream.py:request_with_retry():668] requests_with_retry encountered retryable exception: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /files/shuvrajeet/Numpy-DL2/1tq38arr/file_stream (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f0dd7dd0c50>, 'Connection to api.wandb.ai timed out. (connect timeout=180)')). func: functools.partial(<bound method Session.post of <requests.sessions.Session object at 0x7f0dd7e82f90>>, timeout=180), args: ('https://api.wandb.ai/files/shuvrajeet/Numpy-DL2/1tq38arr/file_stream',), kwargs: {'json': {'files': {'wandb-history.jsonl': {'offset': 0, 'content': ['{"epoch": 1, "_timestamp": 1700183271.6769855, "_runtime": 7.227309465408325, "_step": 0}']}}, 'dropped': 0}}
+2023-11-17 06:40:02,691 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:02,691 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:03,691 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:03,691 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:04,691 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:04,692 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:05,692 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:05,692 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:05,692 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:40:06,692 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:06,692 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:07,692 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:07,693 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:08,693 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:08,693 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:09,693 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:09,693 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:10,693 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:10,694 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:10,694 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: status_report
+2023-11-17 06:40:10,932 INFO    wandb-upload_0:748912 [upload_job.py:push():131] Uploaded file /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/files/config.yaml
+2023-11-17 06:40:11,133 INFO    Thread-11 (_thread_body):748912 [sender.py:transition_state():613] send defer: 11
+2023-11-17 06:40:11,133 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:40:11,133 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 11
+2023-11-17 06:40:11,133 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:40:11,133 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 11
+2023-11-17 06:40:11,133 INFO    SenderThread:748912 [file_pusher.py:join():181] waiting for file pusher
+2023-11-17 06:40:11,133 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 12
+2023-11-17 06:40:11,134 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:40:11,134 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 12
+2023-11-17 06:40:11,134 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:40:11,134 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 12
+2023-11-17 06:40:11,134 INFO    SenderThread:748912 [file_stream.py:finish():595] file stream finish called
+2023-11-17 06:40:11,646 INFO    SenderThread:748912 [file_stream.py:finish():599] file stream finish is done
+2023-11-17 06:40:11,646 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 13
+2023-11-17 06:40:11,646 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:40:11,646 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 13
+2023-11-17 06:40:11,647 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:40:11,647 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 13
+2023-11-17 06:40:11,647 INFO    SenderThread:748912 [sender.py:transition_state():613] send defer: 14
+2023-11-17 06:40:11,647 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: defer
+2023-11-17 06:40:11,647 INFO    HandlerThread:748912 [handler.py:handle_request_defer():172] handle defer: 14
+2023-11-17 06:40:11,647 DEBUG   SenderThread:748912 [sender.py:send():380] send: final
+2023-11-17 06:40:11,647 DEBUG   SenderThread:748912 [sender.py:send():380] send: footer
+2023-11-17 06:40:11,647 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: defer
+2023-11-17 06:40:11,647 INFO    SenderThread:748912 [sender.py:send_request_defer():609] handle sender defer: 14
+2023-11-17 06:40:11,648 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-17 06:40:11,648 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: poll_exit
+2023-11-17 06:40:11,648 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-17 06:40:11,649 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: server_info
+2023-11-17 06:40:11,649 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: server_info
+2023-11-17 06:40:11,691 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: get_summary
+2023-11-17 06:40:11,691 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: sampled_history
+2023-11-17 06:40:11,691 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: job_info
+2023-11-17 06:40:11,915 DEBUG   SenderThread:748912 [sender.py:send_request():407] send_request: job_info
+2023-11-17 06:40:11,916 DEBUG   HandlerThread:748912 [handler.py:handle_request():146] handle_request: shutdown
+2023-11-17 06:40:11,916 INFO    HandlerThread:748912 [handler.py:finish():866] shutting down handler
+2023-11-17 06:40:12,692 INFO    WriterThread:748912 [datastore.py:close():294] close: /home/shuvrajeet/Documents/GitHub/IIT_Madras_days/Classes/DL/Assignment1/wandb/run-20231117_063744-1tq38arr/run-1tq38arr.wandb
+2023-11-17 06:40:12,915 INFO    SenderThread:748912 [sender.py:finish():1536] shutting down sender
+2023-11-17 06:40:12,916 INFO    SenderThread:748912 [file_pusher.py:finish():175] shutting down file pusher
+2023-11-17 06:40:12,916 INFO    SenderThread:748912 [file_pusher.py:join():181] waiting for file pusher
