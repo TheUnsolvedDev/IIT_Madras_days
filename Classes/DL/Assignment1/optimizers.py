@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class Optimizers:
     @staticmethod
     def sgd(weights_and_bias, grads, alpha):
@@ -105,9 +106,9 @@ class Optimizers:
             velocity_db = opt_parameters['velocity_db' +
                                          str(l)] / (1-(beta**iter_number))
             square_dw = opt_parameters['square_dw' +
-                                       str(l)] / (1-(beta**iter_number))
+                                       str(l)] / (1-(beta2**iter_number))
             square_db = opt_parameters['square_db' +
-                                       str(l)] / (1-(beta**iter_number))
+                                       str(l)] / (1-(beta2**iter_number))
             w -= alpha * (velocity_dw / (np.sqrt(square_dw)+10**-8))
             b -= alpha * (velocity_db / (np.sqrt(square_db)+10**-8))
             weights_and_bias[wb_keys[l]] = (w, b)
