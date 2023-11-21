@@ -345,10 +345,10 @@ class Solutions:
         x_s = []
         f_s = []
 
-        for i in range(1, self.T+1):
+        for i in range(self.T):
             x_s.append(x_start)
             f_s.append(Solutions.f(x_start))
-            x_start, v, m = Solutions.adam(x_start, v, m, i, alpha)
+            x_start, v, m = Solutions.adam(x_start, v, m, i+1, alpha)
 
         # 2D plot
         norm_distances = np.sqrt(np.sum(np.square(x_s - x_start), axis=1))
