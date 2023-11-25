@@ -34,7 +34,7 @@ class Solutions:
 
     @staticmethod
     def linear_regression_gradient_descent(data, labels, steps, alpha, history=None, plot=True):
-        x_random = np.array([np.random.normal()
+        x_random = np.array([5*np.random.normal()
                             for _ in range(len(Solutions.x_star))])
         if plot:
             plt.ion()
@@ -388,6 +388,135 @@ class Solutions:
         for w, b in zip(W.flatten(), B.flatten()):
             grad_w, grad_b = 1, 2
 
+    @staticmethod
+    def sigmoid(x):
+        return 1/(1+np.exp(-x))
+
+    @staticmethod
+    def sigmoid_model(x, w, b):
+        logit = x@w + b
+        return logit
+
+    @staticmethod
+    def pred(x):
+        return np.where(x <= 0.5, 1, -1)
+
+    @staticmethod
+    def logistic_loss(y_true, y_pred):
+        return np.mean(np.log(1+np.exp(-y_true*y_pred)))
+
+    @staticmethod
+    def grad_logs(x, y, w, b):
+        z = Solutions.sigmoid_model(x, w, b).reshape(-1, 1)
+        grads_w = (Solutions.sigmoid(y*z)*y)*x
+        grads_b = (Solutions.sigmoid(y*z)*y)
+        return grads_w.mean(axis=0), grads_b.mean(axis=0)
+
+    @staticmethod
+    def logistic_regression_gradient_descent(data, labels, steps=1000, alpha=0.001, history=None, plot=True):
+        x_random = np.array([3*np.random.normal()
+                            for _ in range(data.shape[1]+1)])
+        if plot:
+            plt.ion()
+            fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+            X = data[:, 0]
+            Y = data[:, 1]
+            Z = Solutions.sigmoid_model(
+                data, x_random[:2], x_random[2]).reshape(X.shape)
+            Z = Solutions.pred(Z)
+            ax.scatter(X, Y, labels, label='True Labels')
+            ax.scatter(X, Y, Z+0.1, label='Prediction')
+            ax.legend(loc='upper left')
+            plt.show(block=True)
+
+        for _ in range(steps):
+            pred = Solutions.sigmoid_model(data, x_random[:2], x_random[2])
+            loss = Solutions.logistic_loss(labels, pred)
+
+            print('[{}/{}]\t Current Loss is {:.3f}\t'.format(_, steps, loss))
+            w_grad, b_grad = Solutions.grad_logs(
+                data, labels, x_random[: 2], x_random[2])
+            x_random[:2] -= alpha*w_grad
+            x_random[2] -= alpha*b_grad
+
+        if plot:
+            plt.ion()
+            fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+            X = data[:, 0]
+            Y = data[:, 1]
+            h = 100
+            x_min, x_max = X.min() - 1, X.max() + 1
+            y_min, y_max = Y.min() - 1, Y.max() + 1
+            xx, yy = np.meshgrid(np.linspace(x_min, x_max, h),
+                                 np.linspace(y_min, y_max, h))
+            Z_prime = Solutions.sigmoid_model(
+                np.c_[xx.ravel(), yy.ravel()], x_random[:2], x_random[2]).reshape(xx.shape)
+            Z = Solutions.sigmoid_model(
+                data, x_random[:2], x_random[2]).reshape(X.shape)
+            Z = Solutions.pred(Z)
+            ax.plot_wireframe(xx, yy, Z_prime)
+            ax.scatter(X, Y, labels, label='True Labels')
+            ax.scatter(X, Y, Z+0.1, label='Prediction')
+            ax.legend(loc='upper left')
+            plt.show(block=True)
+        return x_random
+
+    @staticmethod
+    def logistic_regression_stochastic_gradient_descent(data, labels, steps=1000, S=10, alpha=0.001, history=None, plot=True):
+        x_random = np.array([3*np.random.normal()
+                            for _ in range(data.shape[1]+1)])
+        if plot:
+            plt.ion()
+            fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+            X = data[:, 0]
+            Y = data[:, 1]
+            Z = Solutions.sigmoid_model(
+                data, x_random[:2], x_random[2]).reshape(X.shape)
+            Z = Solutions.pred(Z)
+            ax.scatter(X, Y, labels, label='True Labels')
+            ax.scatter(X, Y, Z+0.1, label='Prediction')
+            ax.legend(loc='upper left')
+            plt.show(block=True)
+
+        num_batches = len(data) // S
+        for _ in range(steps):
+            batch_indices = np.arange(num_batches)
+            np.random.shuffle(batch_indices)
+            for batch_index in batch_indices:
+                batched_data = data[(batch_index)*S:(batch_index+1)*S]
+                batched_labels = labels[(batch_index)*S:(batch_index+1)*S]
+                pred = Solutions.sigmoid_model(
+                    batched_data, x_random[:2], x_random[2])
+                loss = Solutions.logistic_loss(batched_labels, pred)
+
+            print('[{}/{}]\t Current Loss is {:.3f}\t'.format(_, steps, loss))
+            w_grad, b_grad = Solutions.grad_logs(
+                data, labels, x_random[: 2], x_random[2])
+            x_random[:2] -= alpha*w_grad
+            x_random[2] -= alpha*b_grad
+
+        if plot:
+            plt.ion()
+            fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+            X = data[:, 0]
+            Y = data[:, 1]
+            h = 100  
+            x_min, x_max = X.min() - 1, X.max() + 1
+            y_min, y_max = Y.min() - 1, Y.max() + 1
+            xx, yy = np.meshgrid(np.linspace(x_min, x_max, h),
+                                 np.linspace(y_min, y_max, h))
+            Z_prime = Solutions.sigmoid_model(
+                np.c_[xx.ravel(), yy.ravel()], x_random[:2], x_random[2]).reshape(xx.shape)
+            Z = Solutions.sigmoid_model(
+                data, x_random[:2], x_random[2]).reshape(X.shape)
+            Z = Solutions.pred(Z)
+            ax.plot_wireframe(xx, yy, Z_prime)
+            ax.scatter(X, Y, labels, label='True Labels')
+            ax.scatter(X, Y, Z+0.1, label='Prediction')
+            ax.legend(loc='upper left')
+            plt.show(block=True)
+        return x_random
+
     def exercise2(self):
         kids = np.hstack([np.random.uniform(30, 45, size=(
             50, 1)), np.random.uniform(125, 145, (50, 1))])
@@ -396,10 +525,10 @@ class Solutions:
         data = np.vstack([kids, adults])
         labels = np.vstack(
             [-1*np.ones((data.shape[0]//2, 1)), np.ones((data.shape[0]//2, 1))])
-        print(data.shape,labels.shape)
+        self.exercise2a(data, labels)
 
     def exercise2a(self, data, labels):
-        pass
+        Solutions.logistic_regression_stochastic_gradient_descent(data, labels)
 
 
 if __name__ == '__main__':

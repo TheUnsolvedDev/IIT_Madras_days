@@ -62,11 +62,17 @@ class Solutions:
         line = X@m
 
         Lambda = 100
-        m2 = np.array([[0],[2]])#np.linalg.inv(np.dot(X.T, X) + Lambda*np.eye(X.shape[1]))@X.T@y
+        # np.linalg.inv(np.dot(X.T, X) + Lambda*np.eye(X.shape[1]))@X.T@y
+        m2 = np.array([[2], [2]])
+        m3 = np.array([[0], [2]])
         line2 = X@m2
+        line3 = X@m3
         plt.scatter(x, y)
         plt.plot(x, line, color='red')
         plt.plot(x, line2, color='green')
+        plt.plot(x, line3, color='green')
+        plt.xlabel('x[1]')
+        plt.ylabel('x[2]')
         plt.show(block=True)
 
 

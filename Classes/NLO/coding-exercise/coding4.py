@@ -384,12 +384,12 @@ class Solutions:
         plt.show()
 
     def exercise1a(self):
-        # self.plot_gradient_descent()
-        # self.plot_heavy_ball_method()
-        # self.plot_nesterov_accelerated_gradient()
-        # self.plot_newton_method()
-        # self.plot_quasi_newton_method()
-        # self.plot_rms_prop()
+        self.plot_gradient_descent()
+        self.plot_heavy_ball_method()
+        self.plot_nesterov_accelerated_gradient()
+        self.plot_newton_method()
+        self.plot_quasi_newton_method()
+        self.plot_rms_prop()
         self.plot_adam()
 
 
