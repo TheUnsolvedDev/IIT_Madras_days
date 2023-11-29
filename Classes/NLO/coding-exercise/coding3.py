@@ -274,8 +274,8 @@ class Solutions:
         total_steps = 1000
         alpha = 0.1
 
-        w_s = np.linspace(-2.5, 2.5, 50)
-        b_s = np.linspace(-2.5, 2.5, 50)
+        w_s = np.linspace(-2.5, 2.5, 20)
+        b_s = np.linspace(-2.5, 2.5, 20)
         W, B = np.meshgrid(w_s, b_s)
 
         def error_fn(w, b): return np.square(labels - (w*data + b)).mean()
@@ -317,6 +317,7 @@ class Solutions:
             axs[1].set_ylabel('B side')
             axs[1].set_zlabel('Error side')
             print('\r [{}/{}]'.format(ind, len(errors_gd)))
+            
             fig.canvas.draw()
             fig.canvas.flush_events()
             # plt.savefig(f'images/{ind}.png')
@@ -533,4 +534,4 @@ class Solutions:
 
 if __name__ == '__main__':
     answers = Solutions()
-    answers.exercise2()
+    answers.exercise1()
