@@ -146,6 +146,16 @@ void delete_at_index(node **head, int index)
     }
 }
 
+void delete_all(node **head)
+{
+    while (*head != NULL)
+    {
+        node *temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
+}
+
 int main()
 {
     node *head = (node *)malloc(sizeof(node));
@@ -167,5 +177,6 @@ int main()
         delete_at_beginning(&head);
 
     print_list(head);
+    delete_all(&head);
     return 0;
 }
