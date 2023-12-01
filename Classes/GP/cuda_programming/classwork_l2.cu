@@ -31,7 +31,6 @@ void print_array(int *array, int len)
     printf("\n");
 }
 
-
 int main()
 {
     // print_square<<<1, 1>>>();
