@@ -21,6 +21,7 @@ def strategy1(SPARSITY, TYPE, SIZE, EPISODE_LENGTH):
     all_possible_actions = np.array(
         [env._action_vector(i) for i in range(env.total_actions)])
     fig, ax = plt.subplots(1, 2, figsize=(14, 6))
+    plt.axis('off')
 
     for t in tqdm.tqdm(range(EPISODE_LENGTH)):
         A_t, B_t = env.step(action)
@@ -39,12 +40,18 @@ def strategy1(SPARSITY, TYPE, SIZE, EPISODE_LENGTH):
             true_map = env.map_star
             pred_map = theta_hat.reshape(SIZE, SIZE)
             os.makedirs('plots_without_regualrization', exist_ok=True)
+            ax[0].axis('off')
+            ax[1].axis('off')
             ax[0].imshow(true_map)
             ax[0].set_title('True Map')
             ax[1].imshow(pred_map)
             ax[1].set_title('Predicted Map')
             plt.savefig(
                 f'plots_without_regualrization/map_{TYPE}_gen{t+1}.png')
+    plt.close()
+    true_map = env.map_star
+    pred_map = theta_hat.reshape(SIZE, SIZE)
+    return true_map, pred_map
 
 
 def strategy2(SPARSITY, TYPE, SIZE, EPISODE_LENGTH, ZERO_PRIOR=False):
@@ -87,6 +94,8 @@ def strategy2(SPARSITY, TYPE, SIZE, EPISODE_LENGTH, ZERO_PRIOR=False):
                     f'plots_with_priorless_regualrization', exist_ok=True)
             os.makedirs(
                 f'plots_with_regualrization', exist_ok=True)
+            ax[0].axis('off')
+            ax[1].axis('off')
             ax[0].imshow(true_map)
             ax[0].set_title('True Map')
             ax[1].imshow(pred_map)
@@ -96,3 +105,7 @@ def strategy2(SPARSITY, TYPE, SIZE, EPISODE_LENGTH, ZERO_PRIOR=False):
                     f'plots_with_priorless_regualrization/map_{TYPE}_gen{t+1}.png')
             plt.savefig(
                 f'plots_with_regualrization/map_{TYPE}_gen{t+1}.png')
+    plt.close()
+    true_map = env.map_star
+    pred_map = theta_hat.reshape(SIZE, SIZE)
+    return true_map, pred_map
