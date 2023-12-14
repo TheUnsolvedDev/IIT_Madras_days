@@ -2,37 +2,41 @@
 #include <cuda.h>
 #include <math.h>
 
-void write_ints(int len)
+void save_array(const char *filename, int *arr, int length)
 {
-    FILE *fptr = fopen("digit1.txt", "w");
-
-    for (int i = 0; i < len; i++)
+    FILE *file = fopen(filename, "wb");
+    if (file == NULL)
     {
-        fprintf(fptr, "%d\n", i);
+        printf("Error opening file %s for writing.\n", filename);
+        return;
     }
-    fclose(fptr);
+    fwrite(arr, sizeof(int), length, file);
+    fclose(file);
 }
 
-int *read_ints(int len)
+int *read_array(const char *filename, int length)
 {
-    FILE *fp = fopen("digit1.txt", "r");
-    if (fp == NULL)
+    FILE *file = fopen(filename, "rb");
+    if (file == NULL)
     {
-        printf("Error opening file.\n");
-        exit(0);
+        printf("Error opening file %s for reading.\n", filename);
+        return NULL;
     }
+    fseek(file, 0, SEEK_END);
+    length = ftell(file) / sizeof(int);
+    rewind(file);
+    int *arr = (int *)malloc((length) * sizeof(int));
 
-    int *digits = (int *)malloc(len * sizeof(int));
-
-    int i = 0;
-    while (fscanf(fp, "%d", &digits[i]) != EOF)
+    if (arr == NULL)
     {
-        printf("%d %d\n", i, digits[i]);
-        i++;
+        printf("Memory allocation failed.\n");
+        fclose(file);
+        return NULL;
     }
+    fread(arr, sizeof(int), length, file);
+    fclose(file);
 
-    fclose(fp);
-    return digits;
+    return arr;
 }
 
 __global__ void add_chain(int *z, int *x, int *y)
@@ -51,17 +55,44 @@ void print_list(int *array, int a_length)
 int main()
 {
     int N = 100;
-    write_ints(N);
-    int *arr = read_ints(N);
 
-    print_list(arr, N);
+    int *x = (int *)malloc(N * sizeof(int));
+    int *y = (int *)malloc(N * sizeof(int));
+    for (int i = 0; i < N; i++)
+    {
+        x[i] = i % (N / 10);
+        y[i] = i % (N / 20);
+    }
+    save_array("x.bin", x, N);
+    save_array("y.bin", y, N);
 
-    int *d_z, *d_y, *d_x;
+    int *new_x = read_array("x.bin", N);
+    int *new_y = read_array("y.bin", N);
 
-    // cudaMalloc(&d_x, N * sizeof(int));
-    // cudaMalloc(&d_x, N * sizeof(int));
-    // cudaMalloc(&d_x, N * sizeof(int));
+    int z[N], *d_z, *d_y, *d_x;
+    cudaMalloc(&d_x, N * sizeof(int));
+    cudaMalloc(&d_y, N * sizeof(int));
+    cudaMalloc(&d_z, N * sizeof(int));
 
-    free(arr);
+    cudaMemcpy(d_x, new_x, N * sizeof(int), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_y, new_y, N * sizeof(int), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_z, z, N * sizeof(int), cudaMemcpyHostToDevice);
+
+    add_chain<<<1, N>>>(d_z, d_x, d_y);
+    cudaDeviceSynchronize();
+    cudaMemcpy(x, d_x, N * sizeof(int), cudaMemcpyDeviceToHost);
+    cudaMemcpy(y, d_y, N * sizeof(int), cudaMemcpyDeviceToHost);
+    cudaMemcpy(z, d_z, N * sizeof(int), cudaMemcpyDeviceToHost);
+    print_list(x, N);
+    print_list(y, N);
+    print_list(z, N);
+
+    cudaFree(d_x);
+    cudaFree(d_y);
+    cudaFree(d_z);
+    free(x);
+    free(y);
+    free(new_x);
+    free(new_y);
     return 0;
 }
