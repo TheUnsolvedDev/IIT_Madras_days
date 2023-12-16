@@ -1,21 +1,23 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "initializers.h"
+#include "utils.h"
 
 void initialization_present()
 {
     printf("Initialization Present\n");
 }
 
-random_weights allocate_zero_weights(int rows, int cols)
+tensor allocate_zero_weights(int rows, int cols)
 {
-    random_weights rw;
+    tensor rw;
     rw.size[0] = rows;
     rw.size[1] = cols;
 
-    rw.weight = (float **)malloc(rows * sizeof(float *));
-    if (rw.weight == NULL)
+    rw.matrix = (float **)malloc(rows * sizeof(float *));
+    if (rw.matrix == NULL)
     {
         perror("Memory allocation failed");
         exit(EXIT_FAILURE);
@@ -23,8 +25,8 @@ random_weights allocate_zero_weights(int rows, int cols)
 
     for (int i = 0; i < rows; i++)
     {
-        rw.weight[i] = (float *)malloc(cols * sizeof(float));
-        if (rw.weight[i] == NULL)
+        rw.matrix[i] = (float *)malloc(cols * sizeof(float));
+        if (rw.matrix[i] == NULL)
         {
             perror("Memory allocation failed");
             exit(EXIT_FAILURE);
@@ -33,14 +35,14 @@ random_weights allocate_zero_weights(int rows, int cols)
     return rw;
 }
 
-random_weights allocate_one_weights(int rows, int cols)
+tensor allocate_one_weights(int rows, int cols)
 {
-    random_weights rw;
+    tensor rw;
     rw.size[0] = rows;
     rw.size[1] = cols;
 
-    rw.weight = (float **)malloc(rows * sizeof(float *));
-    if (rw.weight == NULL)
+    rw.matrix = (float **)malloc(rows * sizeof(float *));
+    if (rw.matrix == NULL)
     {
         perror("Memory allocation failed");
         exit(EXIT_FAILURE);
@@ -48,40 +50,8 @@ random_weights allocate_one_weights(int rows, int cols)
 
     for (int i = 0; i < rows; i++)
     {
-        rw.weight[i] = (float *)malloc(cols * sizeof(float));
-        if (rw.weight[i] == NULL)
-        {
-            perror("Memory allocation failed");
-            exit(EXIT_FAILURE);
-        }
-        else
-        {
-            for (int j = 0; j < cols; j++)
-            {
-                rw.weight[i][j] = (float)1.0;
-            }
-        }
-    }
-    return rw;
-}
-
-random_weights allocate_uniform_weights(int rows, int cols)
-{
-    random_weights rw;
-    rw.size[0] = rows;
-    rw.size[1] = cols;
-
-    rw.weight = (float **)malloc(rows * sizeof(float *));
-    if (rw.weight == NULL)
-    {
-        perror("Memory allocation failed");
-        exit(EXIT_FAILURE);
-    }
-
-    for (int i = 0; i < rows; i++)
-    {
-        rw.weight[i] = (float *)malloc(cols * sizeof(float));
-        if (rw.weight[i] == NULL)
+        rw.matrix[i] = (float *)malloc(cols * sizeof(float));
+        if (rw.matrix[i] == NULL)
         {
             perror("Memory allocation failed");
             exit(EXIT_FAILURE);
@@ -90,65 +60,103 @@ random_weights allocate_uniform_weights(int rows, int cols)
         {
             for (int j = 0; j < cols; j++)
             {
-                rw.weight[i][j] = (float)(rand() % 10000) / 10000.0;
+                rw.matrix[i][j] = (float)1.0;
             }
         }
     }
     return rw;
 }
 
-void free_weights(random_weights rw)
+tensor allocate_uniform_weights(int rows, int cols)
+{
+    tensor rw;
+    rw.size[0] = rows;
+    rw.size[1] = cols;
+
+    rw.matrix = (float **)malloc(rows * sizeof(float *));
+    if (rw.matrix == NULL)
+    {
+        perror("Memory allocation failed");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < rows; i++)
+    {
+        rw.matrix[i] = (float *)malloc(cols * sizeof(float));
+        if (rw.matrix[i] == NULL)
+        {
+            perror("Memory allocation failed");
+            exit(EXIT_FAILURE);
+        }
+        else
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                rw.matrix[i][j] = (float)(rand() % 10000) / 10000.0;
+            }
+        }
+    }
+    return rw;
+}
+
+float randn()
+{
+    float u1 = rand() / (float)RAND_MAX;
+    float u2 = rand() / (float)RAND_MAX;
+    return sqrtf(-2 * logf(u1)) * cosf(2 * M_PI * u2);
+}
+
+tensor allocate_normal_weights(int rows, int cols)
+{
+    tensor rw;
+    rw.size[0] = rows;
+    rw.size[1] = cols;
+
+    rw.matrix = (float **)malloc(rows * sizeof(float *));
+    if (rw.matrix == NULL)
+    {
+        perror("Memory allocation failed");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < rows; i++)
+    {
+        rw.matrix[i] = (float *)malloc(cols * sizeof(float));
+        if (rw.matrix[i] == NULL)
+        {
+            perror("Memory allocation failed");
+            exit(EXIT_FAILURE);
+        }
+        else
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                rw.matrix[i][j] = randn();
+            }
+        }
+    }
+    return rw;
+}
+
+void free_weights(tensor rw)
 {
     for (int i = 0; i < rw.size[0]; i++)
     {
-        free(rw.weight[i]);
+        free(rw.matrix[i]);
     }
-    free(rw.weight);
+    free(rw.matrix);
 }
 
-void print_weights(random_weights rw)
+void print_weights(tensor rw)
 {
     printf("\nweights:\n");
     for (int i = 0; i < rw.size[0]; i++)
     {
         for (int j = 0; j < rw.size[1]; j++)
         {
-            printf("%.4f\t", rw.weight[i][j]);
+            printf("%.4f\t", rw.matrix[i][j]);
         }
         printf("\n");
     }
     printf("shape:(%d,%d)\n", rw.size[0], rw.size[1]);
-}
-
-float *convert2DTo1D(float **arr2D, int rows, int cols)
-{
-    float *arr1D = (float *)malloc(rows * cols * sizeof(float));
-    for (int i = 0; i < rows; i++)
-    {
-        for (int j = 0; j < cols; j++)
-        {
-            arr1D[i * cols + j] = arr2D[i][j];
-        }
-    }
-    for (int i = 0; i < rows; i++)
-    {
-        free(arr2D[i]);
-    }
-    free(arr2D);
-    return arr1D;
-}
-
-float **convert1DTo2D(float *arr1D, int rows, int cols)
-{
-    float **arr2D = (float **)malloc(rows * sizeof(float *));
-    for (int i = 0; i < rows; i++)
-    {
-        arr2D[i] = (float *)malloc(cols * sizeof(float));
-        for (int j = 0; j < cols; j++)
-        {
-            arr2D[i][j] = arr1D[i * cols + j];
-        }
-    }
-    free(arr1D);
-    return arr2D;
 }

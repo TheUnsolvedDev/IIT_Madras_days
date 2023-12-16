@@ -1,6 +1,9 @@
 #ifndef _MATMUL_CUH_
+
 #define _MATMUL_CUH_
 
-extern void matmul_present();
+void matmul_present();
+
+tensor matrix_multiply(tensor a, tensor b);
 
 #endif
