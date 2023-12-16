@@ -4,6 +4,7 @@
 
 void matmul_present();
 
-tensor matrix_multiply(tensor a, tensor b);
+void matrix_multiply(tensor *a, tensor *b, tensor *c);
+void matrix_multiply_gpu(tensor *a, tensor *b, tensor *c);
 
 #endif

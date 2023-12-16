@@ -1,7 +1,7 @@
 CC := gcc
 NVCC := nvcc
 CFLAGS := -Wall -Wextra
-CUDAFLAGS := -arch=sm_75 -lcudart
+CUDAFLAGS := -arch=sm_75 #-lcudart
 
 SRC_DIR := src
 OBJ_DIR := obj

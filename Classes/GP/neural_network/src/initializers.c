@@ -31,6 +31,13 @@ tensor allocate_zero_weights(int rows, int cols)
             perror("Memory allocation failed");
             exit(EXIT_FAILURE);
         }
+        else
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                rw.matrix[i][j] = (float)0.0;
+            }
+        }
     }
     return rw;
 }
