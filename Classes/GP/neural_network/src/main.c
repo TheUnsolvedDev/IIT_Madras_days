@@ -60,11 +60,11 @@ int main(int argc, char **argv)
     double elapsed_time;
     for (int i = 0; i < iterations; i++)
     {
-        start_time = clock();
-        cpu_test();
-        end_time = clock();
-        elapsed_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
-        printf("Elapsed time: %.4f seconds on CPU \n", elapsed_time);
+        // start_time = clock();
+        // cpu_test();
+        // end_time = clock();
+        // elapsed_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+        // printf("Elapsed time: %.4f seconds on CPU \n", elapsed_time);
 
         start_time = clock();
         gpu_test();
@@ -72,5 +72,18 @@ int main(int argc, char **argv)
         elapsed_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
         printf("Elapsed time: %.4f seconds on GPU \n", elapsed_time);
     }
+
+    tensor l1 = allocate_normal_weights(10, 10);
+    tensor l2 = allocate_one_weights(10, 10);
+    tensor l3 = allocate_zero_weights(10, 10);
+
+    hadamard_gpu(&l1, &l2, &l3);
+    print_weights(l1);
+    print_weights(l2);
+    print_weights(l3);
+
+    free_weights(l1);
+    free_weights(l2);
+    free_weights(l3);
     return 0;
 }
