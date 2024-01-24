@@ -18,7 +18,7 @@ def read_value():
 
 
 if __name__ == "__main__":
-    SIZE = 8
+    SIZE = 10
     NUM_MAPS = 8
     ITERATION = 1000
     maps = {}
@@ -34,4 +34,4 @@ if __name__ == "__main__":
     maps['reg'] = reg
     maps['zero_prior'] = zero_prior
     write_value(maps)
-    # print(read_value())
+    print(read_value())
