@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 NUM_STEPS = 250
-MUs = np.array([5, -5, 6, 10, -7])
+MUs = np.array([5, -5, 6, 10, -7])*0.1
 NUM_ACTIONS = len(MUs)
 
 
@@ -87,18 +87,18 @@ def upper_confidence_bound_policy(bandit, c=2):
     return Q, rewards, average_rewards, best_action_count_history
 
 
-def bayesian_ucb_policy(bandit, alpha=1, beta=1):
+def bayesian_ucb_policy(bandit, c=2):
     rewards = np.zeros(NUM_STEPS)
     average_rewards = np.zeros(NUM_STEPS)
     best_action_count = np.zeros(NUM_STEPS)
     posterior_alpha_beta = np.ones((NUM_ACTIONS, 2))
+    EPSILON = 1e-8
 
     for t in range(NUM_STEPS):
         ucb_values = posterior_alpha_beta[:, 0] / \
             (posterior_alpha_beta[:, 0] + posterior_alpha_beta[:, 1])
-        ucb_values += np.sqrt(alpha * np.log(t + 1) /
-                              (posterior_alpha_beta[:, 0] + posterior_alpha_beta[:, 1]))
-
+        ucb_values += c*np.sqrt(EPSILON + (posterior_alpha_beta[:, 0]*posterior_alpha_beta[:, 1])/(
+            (posterior_alpha_beta[:, 0]+posterior_alpha_beta[:, 1]+1)*np.square(posterior_alpha_beta[:, 0]+posterior_alpha_beta[:, 1])))
         action = np.argmax(ucb_values)
         if action == np.argmax(MUs):
             best_action_count[t] = best_action_count[t-1] + 1
@@ -125,9 +125,11 @@ def thompson_sampling_policy(bandit, alpha=1, beta=1):
     average_rewards = np.zeros(NUM_STEPS)
     best_action_count = np.zeros(NUM_STEPS)
     alpha_beta = np.ones((NUM_ACTIONS, 2))
+    EPSILON = 1e-8
 
     for t in range(NUM_STEPS):
-        sampled_means = np.random.beta(alpha_beta[:, 0], alpha_beta[:, 1])
+        sampled_means = np.random.beta(
+            np.maximum(alpha_beta[:, 0], EPSILON), np.maximum(alpha_beta[:, 1], EPSILON))
         action = np.argmax(sampled_means)
         if action == np.argmax(MUs):
             best_action_count[t] = best_action_count[t-1] + 1
@@ -148,7 +150,7 @@ def main():
         'softmax_policy': softmax_policy(bandit),
         'upper_confidence_bound_policy': upper_confidence_bound_policy(bandit),
         'bayesian_ucb_policy': bayesian_ucb_policy(bandit),
-        # 'thompson_sampling_policy': thompson_sampling_policy(bandit),
+        'thompson_sampling_policy': thompson_sampling_policy(bandit),
     }
 
     fig_cols = len(settings.keys())
@@ -157,11 +159,11 @@ def main():
         fig_cols, fig_rows, figsize=(fig_cols*2, fig_rows*3))
     for ind, key in enumerate(settings.keys()):
         fig.tight_layout()
-        ax[ind][0].set_title(key)
         ax[ind][0].plot(settings[key][1])
         ax[ind][0].set_xlabel('steps')
         ax[ind][0].set_ylabel('rewards')
 
+        ax[ind][1].set_title(key)
         ax[ind][1].plot(settings[key][3]/NUM_STEPS)
         ax[ind][1].set_xlabel('step')
         ax[ind][1].set_ylabel('% of optimal action')
