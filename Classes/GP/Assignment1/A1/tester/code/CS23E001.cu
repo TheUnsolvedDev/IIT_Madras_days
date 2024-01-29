@@ -21,18 +21,18 @@ using std::cout;
 
 __global__ void CalculateHadamardProduct(long int *A, long int *B, int N)
 {
-
     // TODO: Write your kernel here
     int idx = threadIdx.x + blockDim.x + blockIdx.x;
+    int row = idx % 3;
+    int col = idx / 3;
     if (idx < N)
-        A[idx] = A[idx] * B[idx];
+        A[idx] = A[idx] * B[(idx % N) * N + (idx / N)];
 }
 
 __global__ void FindWeightMatrix(long int *A, long int *B, int N)
 {
-
     // TODO: Write your kernel here
-    int idx = blockDim.x * blockIdx.x + threadIdx.y * threadIdx.x + threadIdx.x;
+    int idx = (threadIdx.x * blockDim.x + threadIdx.y) * gridDim.x + blockIdx.x;
     if (idx < N)
         A[idx] = max(A[idx], B[idx]);
 }
@@ -41,6 +41,7 @@ __global__ void CalculateFinalMatrix(long int *A, long int *B, int N)
 {
 
     // TODO: Write your kernel here
+    int idx = 
 }
 
 int main(int argc, char **argv)
@@ -83,6 +84,16 @@ int main(int argc, char **argv)
     long int *d_B;
     long int *d_C;
     long int *d_D;
+
+    cudaMalloc(&d_A, N * N * sizeof(long int));
+    cudaMalloc(&d_B, N * N * sizeof(long int));
+    cudaMalloc(&d_C, N * N * sizeof(long int));
+    cudaMalloc(&d_D, 4 * N * N * sizeof(long int));
+
+    cudaMemcpy(d_A, A, N * N * sizeof(long int), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_B, B, N * N * sizeof(long int), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_C, C, N * N * sizeof(long int), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_D, D, 4 * N * N * sizeof(long int), cudaMemcpyHostToDevice);
 
     dim3 threadsPerBlock(1024, 1, 1);
     dim3 blocksPerGrid(ceil(N * N / 1024.0), 1, 1);
