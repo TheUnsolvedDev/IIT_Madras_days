@@ -55,18 +55,31 @@ __global__ void max_gpu(int *a, int *b, int *c, int N)
 __host__ void hadamard_quad_cpu(int *a, int *b, int *d, int N)
 {
     int d_size = 4 * N * N;
-    int quad1 = 0, quad2 = N, quad3 = N * N, quad4 = N + N * N;
+    int quad1 = 0, quad2 = N, quad3 = 2 * N * N, quad4 = N + (2 * N * N);
     for (int i = 0; i < N * N; i++)
     {
-        d[quad1 * N + (i % N)] = i;
+        d[i + quad1] = i;
+        d[i + quad2] = i;
+        d[i + quad3] = i;
+        d[i + quad4] = i;
         if ((i + 1) % N == 0)
-            quad1 += 1;
+        {
+            quad1 += N;
+            quad2 += N;
+            quad3 += N;
+            quad4 += N;
+        }
     }
+}
+
+__global__ void hadamard_quad_gpu(int *a, int *b, int *d, int N)
+{
+    int idx
 }
 
 int main()
 {
-    int N = 14;
+    int N = 10;
     int NN = N * N;
     printf("NN: %d\n", NN);
 
