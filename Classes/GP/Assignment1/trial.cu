@@ -74,7 +74,7 @@ __host__ void hadamard_quad_cpu(int *a, int *b, int *d, int N)
 
 __global__ void hadamard_quad_gpu(int *a, int *b, int *d, int N)
 {
-    int idx
+    // int idx
 }
 
 int main()
