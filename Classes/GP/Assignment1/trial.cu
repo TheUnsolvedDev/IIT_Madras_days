@@ -4,9 +4,12 @@
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 
-__global__ void trm()
+__global__ void CalculateHadamardProduct(long int *A, long int *B, int N)
 {
-    printf("%d %d %d\t", threadIdx.x, threadIdx.y, blockIdx.x);
+    // TODO: Write your kernel here
+    unsigned int idx = threadIdx.x + blockDim.x + blockIdx.x;
+    if (idx < N * N)
+        A[idx] = A[idx] * B[(idx % N) * N + (idx / N)];
 }
 
 __host__ void print_list(int *a, int N)
@@ -44,10 +47,12 @@ __host__ void check_correct(int *a, int *b, int N)
 __global__ void max_gpu(int *a, int *b, int *c, int N)
 {
 
-    int idx = (threadIdx.x * blockDim.x + threadIdx.y) * gridDim.x + blockIdx.x;
-    if (idx <= N)
+    unsigned int idx = threadIdx.x + blockDim.x * blockIdx.x;
+    unsigned int idy = threadIdx.y + blockDim.y * blockIdx.y;
+    unsigned int index = idx + idy * blockDim.x * gridDim.x;
+    if (index < N)
     {
-        c[idx] = MAX(a[idx], b[idx]);
+        c[index] = MAX(a[index], b[index]);
         // printf(" %d %d \t", c[idx], MAX(a[idx], b[idx]));
     }
 }
@@ -74,12 +79,29 @@ __host__ void hadamard_quad_cpu(int *a, int *b, int *d, int N)
 
 __global__ void hadamard_quad_gpu(int *a, int *b, int *d, int N)
 {
-    // int idx
+    // unsigned int block_traverse = gridDim.x * blockIdx.x + blockIdx.y;
+    // unsigned int thread_traverse = blockDim.x * threadIdx.x + threadIdx.y;
+    // unsigned int idx =  block_traverse * gridDim.x + thread_traverse;
+    // unsigned int idx = (threadIdx.x * blockDim.x + threadIdx.y) * gridDim.x + gridDim.x * blockIdx.x + blockIdx.y;
+
+    unsigned int idx = threadIdx.x + blockDim.x * blockIdx.x;
+    unsigned int idy = threadIdx.y + blockDim.y * blockIdx.y;
+    unsigned int index = idx + idy * blockDim.x * gridDim.x;
+    unsigned int quad1 = 0;
+
+    if (index < 4 * N * N)
+    {
+        quad1 = (index / N);
+        d[index + quad1 * N] = index % (N * N);
+
+        quad1 = (index / N);
+        d[index + quad1 * N + N] = index % (N * N);
+    }
 }
 
 int main()
 {
-    int N = 10;
+    int N = 28;
     int NN = N * N;
     printf("NN: %d\n", NN);
 
@@ -123,13 +145,19 @@ int main()
     cudaDeviceSynchronize();
 
     cudaMemcpy(c_gpu, dc_gpu, NN * sizeof(int), cudaMemcpyDeviceToHost);
-    print_list(c_cpu, NN);
+    // print_list(c_cpu, NN);
     check_correct(c_cpu, c_gpu, NN);
 
-    // threads = dim3(32, 32, 1);
-    // blocks = dim3(ceil(2 * N / 32.0), ceil(2 * N / 32.0), 1);
     hadamard_quad_cpu(a, d, e_cpu, N);
-    print_list(e_cpu, 4 * NN);
+    // print_list(e_cpu, 4 * NN);
+
+    threads = dim3(32, 32, 1);
+    blocks = dim3(ceil(2 * N / 32.0), ceil(2 * N / 32.0), 1);
+    hadamard_quad_gpu<<<blocks, threads>>>(da, dd, de_gpu, N);
+
+    cudaMemcpy(e_gpu, de_gpu, 4 * NN * sizeof(int), cudaMemcpyDeviceToHost);
+    // print_list(e_gpu, 4 * NN);
+    check_correct(e_cpu, e_gpu, 4 * NN);
 
     cudaFree(da);
     cudaFree(db);

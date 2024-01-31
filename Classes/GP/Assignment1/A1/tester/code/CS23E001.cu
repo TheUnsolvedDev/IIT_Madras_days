@@ -22,26 +22,42 @@ using std::cout;
 __global__ void CalculateHadamardProduct(long int *A, long int *B, int N)
 {
     // TODO: Write your kernel here
-    int idx = threadIdx.x + blockDim.x + blockIdx.x;
-    int row = idx % 3;
-    int col = idx / 3;
-    if (idx < N)
-        A[idx] = A[idx] * B[(idx % N) * N + (idx / N)];
+    unsigned int idx = threadIdx.x + blockDim.x * blockIdx.x;
+    unsigned int idy = threadIdx.y + blockDim.y * blockIdx.y;
+    unsigned int index = idx + idy * blockDim.x * gridDim.x;
+
+    // unsigned int index = threadIdx.x + blockDim.x + blockIdx.x;
+    if (index < N * N)
+        A[index] = A[index] * B[(index % N) * N + (index / N)];
 }
 
 __global__ void FindWeightMatrix(long int *A, long int *B, int N)
 {
     // TODO: Write your kernel here
-    int idx = (threadIdx.x * blockDim.x + threadIdx.y) * gridDim.x + blockIdx.x;
-    if (idx < N)
-        A[idx] = max(A[idx], B[idx]);
+    unsigned int idx = threadIdx.x + blockDim.x * blockIdx.x;
+    unsigned int idy = threadIdx.y + blockDim.y * blockIdx.y;
+    unsigned int index = idx + idy * blockDim.x * gridDim.x;
+    if (index < N * N)
+        A[index] = max(A[index], B[index]);
 }
 
 __global__ void CalculateFinalMatrix(long int *A, long int *B, int N)
 {
 
     // TODO: Write your kernel here
-    int idx = 
+    unsigned int idx = threadIdx.x + blockDim.x * blockIdx.x;
+    unsigned int idy = threadIdx.y + blockDim.y * blockIdx.y;
+    unsigned int index = idx + idy * blockDim.x * gridDim.x;
+
+    unsigned int quad1 = 0;
+
+    if (index < 4 * N * N)
+    {
+        quad1 = (index / N);
+        B[index + quad1 * N] = B[index + quad1 * N] * A[index % (N * N)];
+
+        B[index + quad1 * N + N] = B[index + quad1 * N + N] * A[index % (N * N)];
+    }
 }
 
 int main(int argc, char **argv)
