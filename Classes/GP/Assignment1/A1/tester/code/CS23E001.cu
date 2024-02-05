@@ -43,13 +43,22 @@ __global__ void CalculateFinalMatrix(long int *A, long int *B, int N)
     // TODO: Write your kernel here
     unsigned int index = (threadIdx.x + blockDim.x * blockIdx.x) + (threadIdx.y + blockDim.y * blockIdx.y) * blockDim.x * gridDim.x;
 
-    unsigned int quad1 = 0;
-
     if (index < 4 * N * N)
     {
-        quad1 = (index / N);
-        B[index + quad1 * N] *= A[index % (N * N)];
-        B[index + quad1 * N + N] *=  A[index % (N * N)];
+        int row = index / (2 * N);
+        int col = index % (2 * N);
+
+        int row_offset, col_offset;
+        if (row >= N)
+            row_offset = (row - N);
+        else
+            row_offset = row;
+
+        if (col >= N)
+            col_offset = (col - N);
+        else
+            col_offset = col;
+        B[row * 2 * N + col] *= A[row_offset * N + col_offset];
     }
 }
 
