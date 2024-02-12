@@ -72,12 +72,12 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <button type="submit">Login</button>
+            <button type="submit" alt>Login</button>
         </form>
         <div id="response"></div>
     </div>
     
-    <script>
+    <!-- <script>
         document.getElementById('postForm').addEventListener('submit', function(event) {
             event.preventDefault(); 
 
@@ -85,12 +85,12 @@
             const username = formData.get('username');
             const password = formData.get('password');
 
-            fetch('/your/post/url', {
+            fetch('/index.html', { // Send POST request to server root
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: JSON.stringify({ username: username, password: password }) // Convert data to JSON string
+                body: new URLSearchParams(formData).toString() // Convert form data to URL encoded format
             })
             .then(response => response.text())
             .then(data => {
@@ -99,7 +99,13 @@
             .catch(error => {
                 console.error('Error:', error);
             });
+            // if (password === 'CS3205'){
+            //     window.location.href='index.html?username='+encodeURIComponent(username);
+            // }
+            // else{
+            //     window.location.href='index.html?username=YouWillNotBeAbleToAccess';
+            // }
         });
-    </script>
+    </script> -->
 </body>
 </html>

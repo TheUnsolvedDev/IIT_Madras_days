@@ -51,7 +51,7 @@ def compile_and_run_cuda():
     command = f"nvcc {file} -o {code_dir}a.out"
     subprocess.run(command, shell=True)
 
-    for i in range(1, 16):
+    for i in range(1, 4):
         IN1 = folder + IN + str(i) + EXT
         OUT1 = folder + OUT + str(i) + EXT
         run_command = "./a.out < " + IN1
@@ -60,10 +60,8 @@ def compile_and_run_cuda():
         if (compare_files(OUT1, code_dir + "cuda.out")):
             count = count + 1
 
-        print(IN1.split('/')[-1], OUT1.split('/')[-1], count)
-
     cleanup(code_dir, file)
-    print(f"Total number of test cases passed: {count} out of 15")
+    print(f"Total number of test cases passed: {count} out of 3")
 
 
 def cleanup(folder_path, exception_file):

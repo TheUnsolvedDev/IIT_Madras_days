@@ -3,16 +3,17 @@ import tqdm
 import matplotlib.pyplot as plt
 
 from strategy import Strategies
-from environment import *
+from room_environment import *
 
 
 class Solver:
-    def __init__(self, type, size, sparsity, episode_length) -> None:
+    def __init__(self, env, type, size, sparsity, episode_length) -> None:
         self.type = type
         self.size = size
         self.sparsity = sparsity
         self.episode_length = episode_length
-        self.env = Environment(type=type, sparsity=sparsity, size=size)
+        # self.env = Environment(type=type, sparsity=sparsity, size=size)
+        self.env = env
         self.strategy = Strategies()
         self.num_images = 24
 
@@ -42,7 +43,7 @@ class Solver:
                     self.A_ts, self.B_ts)
             elif strategy == 'with_reg':
                 theta_hat = self.strategy.with_regularization(
-                    self.A_ts, self.B_ts, size=self.size, sparsity=self.sparsity)
+                    self.A_ts, self.B_ts, size=self.size, sparsity=self.env.sparsity)
             elif strategy == 'with_reg_and_zero_prior':
                 theta_hat = self.strategy.with_regularization_and_zero_prior(
                     self.A_ts, self.B_ts, size=self.size)
@@ -104,7 +105,10 @@ if __name__ == '__main__':
             evaluation_dict[metric.__name__][strategy] = []
 
     for type in range(num_maps):
-        solve = Solver(type=type, size=10, sparsity=0.6, episode_length=500)
+        rng = np.random.default_rng(type)
+        environ = CreateRooms(type=type, size=12)
+        solve = Solver(environ, type=type, size=12,
+                       sparsity=0.6, episode_length=1000)
         for strategy in strategies:
             true_map, pred_map = solve.simulate(strategy)
             map_dict[strategy].append((true_map, pred_map))

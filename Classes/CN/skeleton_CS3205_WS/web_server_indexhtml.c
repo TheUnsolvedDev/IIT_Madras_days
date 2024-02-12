@@ -13,32 +13,6 @@ void send_response(int client_socket, const char *response)
     send(client_socket, response, strlen(response), 0);
 }
 
-void send_file(int client_socket, const char *file_path, const char *content_type)
-{
-    FILE *file = fopen(file_path, "rb");
-    if (file != NULL)
-    {
-        char buffer[BUFFER_SIZE];
-        size_t bytes_read;
-
-        char header[BUFFER_SIZE];
-        sprintf(header, "HTTP/1.1 200 OK\r\nContent-Type: %s\r\n\r\n", content_type);
-        send_response(client_socket, header);
-
-        while ((bytes_read = fread(buffer, 1, sizeof(buffer), file)) > 0)
-        {
-            send(client_socket, buffer, bytes_read, 0);
-        }
-
-        fclose(file);
-    }
-    else
-    {
-        const char *error_response = "HTTP/1.1 500 Internal Server Error\r\n\r\nInternal Server Error";
-        send_response(client_socket, error_response);
-    }
-}
-
 char *extract_after_data(const char *buffer)
 {
     const char *data_pos = strstr(buffer, "username");
@@ -61,11 +35,128 @@ void handle_request(int client_socket, const char *request)
     {
         if (strcmp(path, "/") == 0 || strcmp(path, "/login.html") == 0)
         {
-            send_file(client_socket, "login.html", "text/html");
+            FILE *file = fopen("login.html", "rb");
+            if (file != NULL)
+            {
+                char buffer[BUFFER_SIZE];
+                size_t bytes_read;
+
+                char header[BUFFER_SIZE];
+                sprintf(header, "HTTP/1.1 200 OK\r\nContent-Type: %s\r\n\r\n", "text/html");
+                send_response(client_socket, header);
+
+                while ((bytes_read = fread(buffer, 1, sizeof(buffer), file)) > 0)
+                {
+                    send(client_socket, buffer, bytes_read, 0);
+                }
+
+                fclose(file);
+            }
+            else
+            {
+                const char *error_response = "HTTP/1.1 500 Internal Server Error\r\n\r\nInternal Server Error";
+                send_response(client_socket, error_response);
+            }
         }
         else if (strcmp(path, "/image.jpg") == 0)
         {
-            send_file(client_socket, "images/image.jpg", "image/jpg");
+            FILE *file = fopen("images/image.jpg", "rb");
+            if (file != NULL)
+            {
+                char buffer[BUFFER_SIZE];
+                size_t bytes_read;
+
+                char header[BUFFER_SIZE];
+                sprintf(header, "HTTP/1.1 200 OK\r\nContent-Type: %s\r\n\r\n", "image/jpg");
+                send_response(client_socket, header);
+
+                while ((bytes_read = fread(buffer, 1, sizeof(buffer), file)) > 0)
+                {
+                    send(client_socket, buffer, bytes_read, 0);
+                }
+
+                fclose(file);
+            }
+            else
+            {
+                const char *error_response = "HTTP/1.1 500 Internal Server Error\r\n\r\nInternal Server Error";
+                send_response(client_socket, error_response);
+            }
+        }
+        else if (strcmp(path, "/images/iit_madras_logo.png") == 0)
+        {
+            FILE *file = fopen("images/iit_madras_logo.png", "rb");
+            if (file != NULL)
+            {
+                char buffer[BUFFER_SIZE];
+                size_t bytes_read;
+
+                char header[BUFFER_SIZE];
+                sprintf(header, "HTTP/1.1 200 OK\r\nContent-Type: %s\r\n\r\n", "image/png");
+                send_response(client_socket, header);
+
+                while ((bytes_read = fread(buffer, 1, sizeof(buffer), file)) > 0)
+                {
+                    send(client_socket, buffer, bytes_read, 0);
+                }
+
+                fclose(file);
+            }
+            else
+            {
+                const char *error_response = "HTTP/1.1 500 Internal Server Error\r\n\r\nInternal Server Error";
+                send_response(client_socket, error_response);
+            }
+        }
+        else if (strcmp(path, "/images/404.jpg") == 0)
+        {
+            FILE *file = fopen("images/404.jpg", "rb");
+            if (file != NULL)
+            {
+                char buffer[BUFFER_SIZE];
+                size_t bytes_read;
+
+                char header[BUFFER_SIZE];
+                sprintf(header, "HTTP/1.1 200 OK\r\nContent-Type: %s\r\n\r\n", "image/jpg");
+                send_response(client_socket, header);
+
+                while ((bytes_read = fread(buffer, 1, sizeof(buffer), file)) > 0)
+                {
+                    send(client_socket, buffer, bytes_read, 0);
+                }
+
+                fclose(file);
+            }
+            else
+            {
+                const char *error_response = "HTTP/1.1 500 Internal Server Error\r\n\r\n";
+                send_response(client_socket, error_response);
+            }
+        }
+        else if (strstr(path, "/index.html") != NULL || strstr(path, "/?") != NULL)
+        {
+            FILE *file = fopen("index.html", "rb");
+            if (file != NULL)
+            {
+                char buffer[BUFFER_SIZE];
+                size_t bytes_read;
+
+                char header[BUFFER_SIZE];
+                sprintf(header, "HTTP/1.1 301 Moved Permanently \r\nContent-Type: %s\r\n\r\n", "text/html");
+                send_response(client_socket, header);
+
+                while ((bytes_read = fread(buffer, 1, sizeof(buffer), file)) > 0)
+                {
+                    send(client_socket, buffer, bytes_read, 0);
+                }
+
+                fclose(file);
+            }
+            else
+            {
+                const char *error_response = "HTTP/1.1 500 Internal Server Error\r\n\r\n";
+                send_response(client_socket, error_response);
+            }
         }
         else
         {
@@ -87,23 +178,34 @@ void handle_request(int client_socket, const char *request)
             }
             else
             {
-                const char *error_response = "HTTP/1.1 500 Internal Server Error\r\n\r\nInternal Server Error";
+                const char *error_response = "HTTP/1.1 500 Internal Server Error\r\n\r\n";
                 send_response(client_socket, error_response);
             }
         }
     }
     else if (strcmp(method, "POST") == 0)
     {
-        time_t rawtime;
-        struct tm *timeinfo;
-        time(&rawtime);
-        timeinfo = localtime(&rawtime);
+        // FILE *file = fopen("index.html", "rb");
+        // if (file != NULL)
+        // {
+        //     char response[BUFFER_SIZE];
+        //     snprintf(response, BUFFER_SIZE, "HTTP/1.1 301 Moved Permanently Found\r\nLocation: %s\r\n\r\n", "/index.html");
+        //     printf("got posted\n");
 
-        const char *response = "HTTP/1.1 200 OK\r\n\r content-type: POST \r\n\r";
-        send_response(client_socket, response);
+        //     char buffer[BUFFER_SIZE];
+        //     size_t bytes_read;
+        //     while ((bytes_read = fread(buffer, 1, sizeof(buffer), file)) > 0)
+        //     {
+        //         send(client_socket, buffer, bytes_read, 0);
+        //     }
 
-        printf("The data is %s\n", extract_after_data(request));
-        printf("Current local time and date: %s\n", asctime(timeinfo));
+        //     fclose(file);
+        // }
+        // else
+        // {
+        //     const char *error_response = "HTTP/1.1 500 Internal Server Error\r\n\r\nInternal Server Error";
+        //     send_response(client_socket, error_response);
+        // }
     }
     else
     {
