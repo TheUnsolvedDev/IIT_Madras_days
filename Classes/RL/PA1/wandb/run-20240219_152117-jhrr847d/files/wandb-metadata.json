@@ -1,0 +1,77 @@
+{
+    "os": "Linux-6.1.71-1-MANJARO-x86_64-with-glibc2.38",
+    "python": "3.11.6",
+    "heartbeatAt": "2024-02-19T09:51:18.188209",
+    "startedAt": "2024-02-19T09:51:17.438262",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/TheUnsolvedDev/IIT_Madras_days.git",
+        "commit": "fae1dbacf6715718834c488d0bb59302292a5253"
+    },
+    "email": "59395895+TheUnsolvedDev@users.noreply.github.com",
+    "root": "/home/shuvrajeet/Documents/GitHub/IIT_Madras_days",
+    "host": "desktop",
+    "username": "shuvrajeet",
+    "executable": "/bin/python",
+    "cpu_count": 6,
+    "cpu_count_logical": 6,
+    "cpu_freq": {
+        "current": 3768.522166666666,
+        "min": 2200.0,
+        "max": 3600.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3134.211,
+            "min": 2200.0,
+            "max": 3600.0
+        },
+        {
+            "current": 3888.168,
+            "min": 2200.0,
+            "max": 3600.0
+        },
+        {
+            "current": 3891.575,
+            "min": 2200.0,
+            "max": 3600.0
+        },
+        {
+            "current": 3899.268,
+            "min": 2200.0,
+            "max": 3600.0
+        },
+        {
+            "current": 3898.418,
+            "min": 2200.0,
+            "max": 3600.0
+        },
+        {
+            "current": 3899.493,
+            "min": 2200.0,
+            "max": 3600.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 404.89136123657227,
+            "used": 155.17958450317383
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 2060 SUPER",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 2060 SUPER",
+            "memory_total": 8589934592
+        }
+    ],
+    "memory": {
+        "total": 31.269012451171875
+    }
+}

@@ -1,0 +1,8 @@
+{'algo': 'qlearning', 'start_state': '0_4', 'wind': False, 'p_good_value': 0.7}
+{'algo': 'qlearning', 'start_state': '0_4', 'wind': False, 'p_good_value': 1.0}
+{'algo': 'qlearning', 'start_state': '0_4', 'wind': True, 'p_good_value': 0.7}
+{'algo': 'qlearning', 'start_state': '0_4', 'wind': True, 'p_good_value': 1.0}
+{'algo': 'qlearning', 'start_state': '3_6', 'wind': False, 'p_good_value': 0.7}
+{'algo': 'qlearning', 'start_state': '3_6', 'wind': False, 'p_good_value': 1.0}
+{'algo': 'qlearning', 'start_state': '3_6', 'wind': True, 'p_good_value': 0.7}
+{'algo': 'qlearning', 'start_state': '3_6', 'wind': True, 'p_good_value': 1.0}

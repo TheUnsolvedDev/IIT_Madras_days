@@ -20,7 +20,7 @@ def accuracy(probs, labels):
 
 
 class NeuralNetwork:
-    def __init__(self, layer_info=[784, 10], num_hidden=2, num_nodes=32, weight_decay=0.005,  learning_rate=1e-3, optimizer='rmsprop', batch_size=64, weights_init='xavier_normal', activation='relu') -> None:
+    def __init__(self, layer_info=[784, 10], num_hidden=4, num_nodes=64, weight_decay=0,  learning_rate=1e-3, optimizer='sgd', batch_size=64, weights_init='random', activation='relu') -> None:
         self.input = layer_info[0]
         self.output = layer_info[-1]
 
@@ -265,16 +265,16 @@ def train(config=None):
 
 
 if __name__ == '__main__':
-    # nn = NeuralNetwork()
-    # import tensorflow as tf
-    # (x_train, y_train), (x_test, y_test) = tf.keras.datasets.fashion_mnist.load_data()
-    # x_train = (x_train/255.0).reshape(-1, 784)
-    # y_train = one_hot(y_train, num_classes=10)
-    # x_test = (x_test/255.0).reshape(-1, 784)
-    # y_test = one_hot(y_test, num_classes=10)
-    # nn.train((x_train, y_train), (x_test, y_test), log=False)
+    nn = NeuralNetwork()
+    import tensorflow as tf
+    (x_train, y_train), (x_test, y_test) = tf.keras.datasets.fashion_mnist.load_data()
+    x_train = (x_train/255.0).reshape(-1, 784)
+    y_train = one_hot(y_train, num_classes=10)
+    x_test = (x_test/255.0).reshape(-1, 784)
+    y_test = one_hot(y_test, num_classes=10)
+    nn.train((x_train, y_train), (x_test, y_test), log=False)
 
-    wandb.login()
-    sweep_id = wandb.sweep(sweep_config, project='Numpy-DL2')
-    wandb.agent(sweep_id, train, count=250)
-    wandb.finish()
+    # wandb.login()
+    # sweep_id = wandb.sweep(sweep_config, project='Numpy-DL2')
+    # wandb.agent(sweep_id, train, count=250)
+    # wandb.finish()
