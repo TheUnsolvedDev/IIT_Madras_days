@@ -2,8 +2,9 @@ import os
 import tqdm
 import matplotlib.pyplot as plt
 
-from strategy import Strategies
+from strategy import *
 from room_environment import *
+from utils import *
 
 
 class Solver:
@@ -12,58 +13,76 @@ class Solver:
         self.size = size
         self.sparsity = sparsity
         self.episode_length = episode_length
-        # self.env = Environment(type=type, sparsity=sparsity, size=size)
         self.env = env
-        self.strategy = Strategies()
+        self.all_possible_actions = np.array(
+            [self.env._action_vector(i) for i in range(self.env.total_actions)])
+
+        self.reconstruction = StrategiesReconstruction()
+        self.policy = StartegiesAction(self.all_possible_actions)
         self.num_images = 24
 
     def initialize(self):
         self.env.reset()
         self.A_ts = []
         self.B_ts = []
-        self.all_possible_actions = np.array(
-            [self.env._action_vector(i) for i in range(self.env.total_actions)])
 
-    def action_select(self, theta_hat):
-        eig_vals, eig_vecs = jnp.linalg.eigh(theta_hat)
-        return jnp.argmin(jnp.dot(self.all_possible_actions, eig_vecs[0]))
-
-    def simulate(self, strategy='without_reg', plot_images=True):
+    def simulate(self, reconstruction='without_regularization', strategy='min_eigenvalue_info', plot_images=True):
         self.initialize()
         action = np.random.choice(self.size**4)
         true_map = self.env.map_star
         pred_images = []
+
+        os.makedirs(f'plots_{reconstruction}_{strategy}', exist_ok=True)
+        logger = DataLogger(
+            file_path=f'plots_{reconstruction}_{strategy}/{reconstruction}_{strategy}_{self.type}.csv')
+
         for t in tqdm.tqdm(range(self.episode_length)):
             A_t, B_t = self.env.step(action)
             self.A_ts.append(A_t)
             self.B_ts.append(B_t)
 
-            if strategy == 'without_reg':
-                theta_hat = self.strategy.without_regularization(
+            if reconstruction == 'without_regularization':
+                theta_hat = self.reconstruction.without_regularization(
                     self.A_ts, self.B_ts)
-            elif strategy == 'with_reg':
-                theta_hat = self.strategy.with_regularization(
-                    self.A_ts, self.B_ts, size=self.size, sparsity=self.env.sparsity)
-            elif strategy == 'with_reg_and_zero_prior':
-                theta_hat = self.strategy.with_regularization_and_zero_prior(
+            elif reconstruction == 'with_tikhonov_and_identity':
+                theta_hat = self.reconstruction.with_tikhonov_and_identity(
+                    self.A_ts, self.B_ts)
+            elif reconstruction == 'with_tikhonov_and_lambda_identity':
+                theta_hat = self.reconstruction.with_tikhonov_and_lambda_identity(
+                    self.A_ts, self.B_ts, lamda=0.01)
+            elif reconstruction == 'with_LOG_regularization_and_sparsity_prior':
+                theta_hat = self.reconstruction.with_LOG_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=self.sparsity)
+            elif reconstruction == 'with_LOG_regularization_and_zero_prior':
+                theta_hat = self.reconstruction.with_LOG_regularization_and_zero_prior(
+                    self.A_ts, self.B_ts)
+            elif reconstruction == 'with_Laplacian_regularization':
+                theta_hat = self.reconstruction.with_Laplacian_regularization(
                     self.A_ts, self.B_ts, size=self.size)
-            elif strategy == 'tikh_reg':
-                theta_hat = self.strategy.with_tikhonov_regularization(
-                    self.A_ts, self.B_ts, size=self.size)
-            elif strategy == 'nnls':
-                theta_hat = self.strategy.with_non_negative_least_square(
+            elif reconstruction == 'with_non_negative_least_square':
+                theta_hat = self.reconstruction.with_non_negative_least_square(
                     self.A_ts, self.B_ts)
-            elif strategy == 'tikh_nnls':
-                theta_hat = self.strategy.with_tikhonov_and_nnls(
-                    self.A_ts, self.B_ts)
-            action = self.action_select(theta_hat)
+            else:
+                print("Wrong reconstruction choosen")
+                exit(0)
+
+            if strategy == 'min_eigenvalue_info':
+                action = self.policy.min_eigenvalue_info_action(theta_hat)
+            else:
+                action = self.policy.random_action(theta_hat)
 
             if (t+1) % (self.episode_length//self.num_images) == 0:
                 pred_images.append(theta_hat.reshape(self.size, self.size))
 
+            pred_map = theta_hat.reshape(true_map.shape)
+            mse_value = calculate_mse(true_map, pred_map)
+            ssim_value = calculate_ssim(true_map, pred_map)
+            psnr_value = calculate_psnr(true_map, pred_map)
+            data = [action, psnr_value, mse_value, ssim_value]
+            logger.append_log(data)
+
         pred_images[-1] = theta_hat.reshape(self.size, self.size)
         if plot_images:
-            os.makedirs('plots_'+strategy, exist_ok=True)
             fig, ax = plt.subplots(5, 5, figsize=(self.size*2, self.size*2))
             fig.tight_layout()
             for i in range(5):
@@ -81,7 +100,7 @@ class Solver:
                                            str((self.episode_length//self.num_images)*(4*i + j)))
             # plt.savefig(f'plots/with_{strategy}_{self.type}.png')
             plt.savefig(
-                f'plots_{strategy}/with_{strategy}_{self.type}.png')
+                f'plots_{reconstruction}_{strategy}/with_{reconstruction}_{strategy}_{self.type}.png')
             plt.close()
         true_map = self.env.map_star
         pred_map = theta_hat.reshape(self.size, self.size)
@@ -91,8 +110,8 @@ class Solver:
 if __name__ == '__main__':
     num_maps = 10
 
-    strategies = ['without_reg', 'with_reg',
-                  'with_reg_and_zero_prior', 'tikh_reg', 'nnls', 'tikh_nnls']
+    strategies = ['without_regularization', 'with_tikhonov_and_identity',
+                  'with_tikhonov_and_lambda_identity', 'with_LOG_regularization_and_sparsity_prior', 'with_LOG_regularization_and_zero_prior', 'with_Laplacian_regularization', 'with_non_negative_least_square']
     map_dict = {}
     evaluation_dict = {}
     for strategy in strategies:
@@ -110,7 +129,7 @@ if __name__ == '__main__':
         solve = Solver(environ, type=type, size=12,
                        sparsity=0.6, episode_length=1000)
         for strategy in strategies:
-            true_map, pred_map = solve.simulate(strategy)
+            true_map, pred_map = solve.simulate(reconstruction=strategy,strategy = 'random')
             map_dict[strategy].append((true_map, pred_map))
 
     for metric in metrics:

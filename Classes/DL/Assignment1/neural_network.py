@@ -1,6 +1,8 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from activations import *
 from optimizers import *
+from losses import *
 import wandb
 
 
@@ -8,19 +10,12 @@ def one_hot(a, num_classes):
     return np.squeeze(np.eye(num_classes)[a.reshape(-1)])
 
 
-def cross_entropy_loss(predictions, targets, epsilon=1e-12):
-    predictions = np.clip(predictions, epsilon, 1. - epsilon)
-    N = predictions.shape[0]
-    ce = -np.sum(targets*np.log(predictions+1e-9))/N
-    return ce
-
-
 def accuracy(probs, labels):
     return np.mean(probs.argmax(axis=1) == labels.argmax(axis=1))
 
 
 class NeuralNetwork:
-    def __init__(self, layer_info=[784, 10], num_hidden=4, num_nodes=64, weight_decay=0,  learning_rate=1e-3, optimizer='sgd', batch_size=64, weights_init='random', activation='relu') -> None:
+    def __init__(self, layer_info=[784, 10], num_hidden=2, num_nodes=[64, 32], weight_decay=0.005,  learning_rate=0.001, optimizer='nadam', batch_size=256, weights_init='xavier_normal', activation='tanh') -> None:
         self.input = layer_info[0]
         self.output = layer_info[-1]
 
@@ -31,8 +26,11 @@ class NeuralNetwork:
         self.weights_init = weights_init
         self.activation = activation
 
+        if type(num_nodes) == int:
+            num_nodes = [num_nodes]*num_hidden
+
         self.layer_info = [self.input] + \
-            [num_nodes for i in range(num_hidden)]+[self.output]
+            [num_nodes[i] for i in range(num_hidden)]+[self.output]
         self.variables = self._init_weights(weights_init)
         self.cache_results = {}
 
@@ -61,6 +59,15 @@ class NeuralNetwork:
                                     str(ind)] = np.zeros((dim0, dim1))
                 self.opt_parameters['square_db' +
                                     str(ind)] = np.zeros((1, dim1))
+                if self.optimizer == 'nesterov' or self.optimizer == 'nadam':
+                    self.opt_parameters['velocity_curr_dw' +
+                                        str(ind)] = np.zeros((dim0, dim1))
+                    self.opt_parameters['velocity_curr_db' +
+                                        str(ind)] = np.zeros((1, dim1))
+                    self.opt_parameters['square_curr_dw' +
+                                        str(ind)] = np.zeros((dim0, dim1))
+                    self.opt_parameters['square_curr_db' +
+                                        str(ind)] = np.zeros((1, dim1))
 
         return variables
 
@@ -90,7 +97,6 @@ class NeuralNetwork:
         grads = {}
 
         caches_keys = list(self.cache_results.keys())
-        wb_keys = list(weights_and_biases.keys())
         num_caches = len(caches_keys)
 
         A_prev, Z = self.cache_results[caches_keys[num_caches-1]]
@@ -132,18 +138,35 @@ class NeuralNetwork:
         return grads
 
     def train_one_step(self, weights_and_biases, probs, labels, iter_number=None, opt_parameters=None):
-        grads = self.backward(probs, labels, weights_and_biases)
         if self.optimizer == 'sgd':
+            grads = self.backward(probs, labels, weights_and_biases)
             return Optimizers.sgd(weights_and_biases, grads, self.learning_rate)
         elif self.optimizer == 'momentum':
+            grads = self.backward(probs, labels, weights_and_biases)
             return Optimizers.momentum(weights_and_biases, grads, self.learning_rate, beta=0.9, opt_parameters=opt_parameters)
+        elif self.optimizer == 'nesterov':
+            opt_parameters['grad_func'] = self.backward
+            opt_parameters['data'] = self.forward
+            opt_parameters['prediction'] = probs
+            opt_parameters['labels'] = labels
+            return Optimizers.nesterov(weights_and_biases, None, self.learning_rate, beta=0.9, opt_parameters=opt_parameters)
         elif self.optimizer == 'rmsprop':
+            grads = self.backward(probs, labels, weights_and_biases)
             return Optimizers.rmsprop(weights_and_biases, grads, self.learning_rate, beta2=0.999, opt_parameters=opt_parameters)
         elif self.optimizer == 'adam':
+            grads = self.backward(probs, labels, weights_and_biases)
             return Optimizers.adam(weights_and_biases, grads, self.learning_rate, iter_number=iter_number, beta=0.9, beta2=0.999, opt_parameters=opt_parameters)
+        elif self.optimizer == 'nadam':
+            opt_parameters['grad_func'] = self.backward
+            opt_parameters['forward_func'] = self.forward
+            opt_parameters['data'] = probs
+            opt_parameters['labels'] = labels
+            return Optimizers.nadam(weights_and_biases, None, self.learning_rate, iter_number=iter_number, beta=0.9, beta2=0.999, opt_parameters=opt_parameters)
 
     def train(self, train, test, epochs=100, log=True):
         batch_size = self.batch_size
+        train_losses, test_losses = [], []
+        train_accs, test_accs = [], []
 
         for _ in range(1, epochs+1):
             train_data, train_labels = train
@@ -162,12 +185,25 @@ class NeuralNetwork:
                 if self.optimizer == 'sgd':
                     self.variables = self.train_one_step(
                         self.variables, probs, batch_labels)
+                elif self.optimizer == 'momentum':
+                    self.variables, self.opt_parameters = self.train_one_step(
+                        self.variables, probs, batch_labels, _, self.opt_parameters)
+                elif self.optimizer == 'nesterov':
+                    self.variables, self.opt_parameters = self.train_one_step(
+                        self.variables, batch_data, batch_labels, _, self.opt_parameters)
+                elif self.optimizer == 'rmsprop':
+                    self.variables, self.opt_parameters = self.train_one_step(
+                        self.variables, probs, batch_labels, _, self.opt_parameters)
                 elif self.optimizer == 'adam':
                     self.variables, self.opt_parameters = self.train_one_step(
                         self.variables, probs, batch_labels, _, self.opt_parameters)
+                elif self.optimizer == 'nadam':
+                    self.variables, self.opt_parameters = self.train_one_step(
+                        self.variables, batch_data, batch_labels, _, self.opt_parameters)
+
             if (_ % 5 == 0) and (not log):
                 print(
-                    '[{0}/{1}]\t train_loss:{2:.3f}\t train_acc: {3:.3f}'.format(_, epochs, train_loss/i, train_acc/i), end='\t')
+                    '[{0}/{1}]\t train_loss:{2:.3f}\t train_acc: {3:.3f}'.format('0'*(len(str(epochs))-len(str(_)))+str(_), epochs, train_loss/i, train_acc/i), end='\t')
             if log:
                 wandb.log({'epoch': _})
                 wandb.log({'train_loss': train_loss/i})
@@ -178,6 +214,8 @@ class NeuralNetwork:
             np.random.shuffle(train_batches)
             test_loss = 0
             test_acc = 0
+            predictions = np.array([])
+            labels = np.array([])
             for i, ind in enumerate(test_batches):
                 batch_data = test_data[ind*batch_size:(ind+1)*batch_size]
                 batch_labels = test_labels[ind*batch_size:(ind+1)*batch_size]
@@ -185,9 +223,18 @@ class NeuralNetwork:
                 probs = self.forward(batch_data, self.variables)
                 test_loss += cross_entropy_loss(probs, batch_labels)
                 test_acc += accuracy(probs, batch_labels)
+                predictions = np.concatenate(
+                    (predictions, probs.argmax(1)), axis=0)
+                labels = np.concatenate(
+                    (labels, batch_labels.argmax(1)), axis=0)
+
             if log:
                 wandb.log({'test_loss': test_loss/i})
                 wandb.log({'test_accuracy': test_acc/i})
+                class_names = ["t-shirt_top", 'trouser_pants', 'pullover shirt',
+                               'dress', 'coat', 'sandal', 'shirt', 'sneaker', 'bag', 'ankle boot']
+                wandb.log({"conf_mat": wandb.plot.confusion_matrix(
+                    probs=None, y_true=labels, preds=predictions, class_names=class_names)})
 
             if (_ % 5 == 0) and (not log):
                 print(
@@ -220,7 +267,7 @@ parameters_dict = {
         'values': [1e-3, 1e-4]
     },
     'optimizer': {
-        'values': ['sgd', 'momentum', 'rmsprop', 'adam']
+        'values': ['sgd', 'momentum', 'nesterov', 'rmsprop', 'adam', 'nadam']
     },
     'batch_size': {
         'values': [16, 32, 64]
@@ -275,6 +322,6 @@ if __name__ == '__main__':
     nn.train((x_train, y_train), (x_test, y_test), log=False)
 
     # wandb.login()
-    # sweep_id = wandb.sweep(sweep_config, project='Numpy-DL2')
+    # sweep_id = wandb.sweep(sweep_config, project='DL_assignment_1')
     # wandb.agent(sweep_id, train, count=250)
     # wandb.finish()

@@ -111,6 +111,21 @@ def calculate_psnr(img1, img2):
     return 20 * np.log10(255.0 / np.sqrt(mse))
 
 
+class DataLogger:
+    def __init__(self, file_path):
+        self.file_path = file_path
+        self.count = 0
+        with open(self.file_path, 'w') as f:
+            f.write(f'step,action,psnr_value,mse_value,ssim_value\n')
+
+    def append_log(self, data):
+        self.count += 1
+        action, psnr_value, mse_value, ssim_value = data
+        with open(self.file_path, 'a') as file:
+            file.write(
+                f'{self.count},{action},{psnr_value},{mse_value},{ssim_value}\n')
+
+
 if __name__ == '__main__':
     for i in LOG_kernel(8):
         print(i.reshape(8, 8))
