@@ -106,7 +106,10 @@ class StartegiesAction:
 
     def min_eigenvalue_info_action(self, theta_hat):
         eig_vals, eig_vecs = jnp.linalg.eigh(theta_hat)
-        return jnp.argmin(jnp.dot(self.all_possible_actions, eig_vecs[0]))
+        sorted_indices = jnp.argsort(eig_vals)
+        sorted_eig_vals = eig_vals[sorted_indices]
+        sorted_eig_vecs = eig_vecs[sorted_indices]
+        return jnp.argmin(jnp.dot(self.all_possible_actions, sorted_eig_vecs[0]))
 
     def random_action(self, theta_hat):
         return np.random.randint(len(self.all_possible_actions))

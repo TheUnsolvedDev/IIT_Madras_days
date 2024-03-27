@@ -65,7 +65,7 @@ class CreateRooms:
             prng[1], minval=0, maxval=2, shape=(4,))
         num_objects_per_quad = 5
         prng = prng[-1]
-        
+
         for quad, fill in enumerate(fill_quads):
             for objects in range(num_objects_per_quad):
                 prng = jax.random.split(prng, 8)
@@ -93,9 +93,11 @@ class CreateRooms:
 
         self.sparsity = self.room.astype(bool).astype(int).mean()
         self.room += np.random.normal(0, 0.1, size=self.room.shape)
-        self.total_actions = np.power(self.size, 4)
+        self.total_actions = int((self.size**2)*(self.size**2-1)/2)
         self.room = np.maximum(self.room, 0)
         self.map_star = self.room
+        self.map_star = (self.map_star - self.map_star.min()) / \
+            (self.map_star.max() - self.map_star.min())*255.0
         # self.plot_room(self.map_star)
 
     def _action_vector(self, number):

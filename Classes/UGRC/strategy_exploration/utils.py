@@ -3,7 +3,7 @@ import numpy as np
 import jax.numpy as jnp
 import pickle
 import matplotlib.pyplot as plt
-from skimage.metrics import structural_similarity as ssim
+import skimage.metrics as skmetrics
 
 key = jax.random.PRNGKey(0)
 
@@ -91,24 +91,20 @@ def read_value():
 
 
 def calculate_ssim(img1, img2):
-    img1 = np.clip(np.array(img1)*255, 0, 255).astype(np.uint8)
-    img2 = np.clip(np.array(img2)*255, 0, 255).astype(np.uint8)
-    return ssim(img1, img2)
+    img1 = np.clip(np.array(img1), 0, 255)
+    img2 = np.clip(np.array(img2), 0, 255)
+    return skmetrics.structural_similarity(im1=img1, im2=img2, data_range=255, channel_axis=1)
 
 
 def calculate_mse(imageA, imageB):
-    err = np.sum((imageA.astype("float") - imageB.astype("float")) ** 2)
-    err /= float(imageA.shape[0] * imageA.shape[1])
-    return err
+    imageA, imageB = imageA/255.0, imageB/255.0
+    return skmetrics.mean_squared_error(image0=imageA, image1=imageB)
 
 
 def calculate_psnr(img1, img2):
-    img1 = img1.astype(np.float64)
-    img2 = img2.astype(np.float64)
-    mse = np.mean((img1 - img2)**2)
-    if mse == 0:
-        return float('inf')
-    return 20 * np.log10(255.0 / np.sqrt(mse))
+    img1 = np.clip(np.array(img1), 0.1, 255)
+    img2 = np.clip(np.array(img2), 0.1, 255)
+    return skmetrics.peak_signal_noise_ratio(image_true=img1, image_test=img2, data_range=255)
 
 
 class DataLogger:
@@ -116,14 +112,14 @@ class DataLogger:
         self.file_path = file_path
         self.count = 0
         with open(self.file_path, 'w') as f:
-            f.write(f'step,action,psnr_value,mse_value,ssim_value\n')
+            f.write(f'step,action,psnr_value,mse_value,ssim_value,rank\n')
 
     def append_log(self, data):
         self.count += 1
-        action, psnr_value, mse_value, ssim_value = data
+        action, psnr_value, mse_value, ssim_value, rank = data
         with open(self.file_path, 'a') as file:
             file.write(
-                f'{self.count},{action},{psnr_value},{mse_value},{ssim_value}\n')
+                f'{self.count},{action},{psnr_value},{mse_value},{ssim_value},{rank}\n')
 
 
 if __name__ == '__main__':

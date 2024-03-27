@@ -1,6 +1,7 @@
 import os
 import tqdm
 import matplotlib.pyplot as plt
+from collections import defaultdict
 
 from strategy import *
 from room_environment import *
@@ -28,13 +29,14 @@ class Solver:
 
     def simulate(self, reconstruction='without_regularization', strategy='min_eigenvalue_info', plot_images=True):
         self.initialize()
-        action = np.random.choice(self.size**4)
+        action = np.random.choice(int((self.size**2)*(self.size**2-1)*0.5))
         true_map = self.env.map_star
         pred_images = []
 
         os.makedirs(f'plots_{reconstruction}_{strategy}', exist_ok=True)
         logger = DataLogger(
             file_path=f'plots_{reconstruction}_{strategy}/{reconstruction}_{strategy}_{self.type}.csv')
+        action_hash = defaultdict(int)
 
         for t in tqdm.tqdm(range(self.episode_length)):
             A_t, B_t = self.env.step(action)
@@ -66,19 +68,21 @@ class Solver:
                 print("Wrong reconstruction choosen")
                 exit(0)
 
+            theta_hat_temp = theta_hat  # jnp.dot(theta_hat, theta_hat.T)
             if strategy == 'min_eigenvalue_info':
-                action = self.policy.min_eigenvalue_info_action(theta_hat)
-            else:
-                action = self.policy.random_action(theta_hat)
+                action = int(
+                    self.policy.min_eigenvalue_info_action(theta_hat_temp))
+            elif strategy == 'random':
+                action = self.policy.random_action(theta_hat_temp)
 
             if (t+1) % (self.episode_length//self.num_images) == 0:
                 pred_images.append(theta_hat.reshape(self.size, self.size))
-
+            rank = jnp.linalg.matrix_rank(jnp.array(self.A_ts))
             pred_map = theta_hat.reshape(true_map.shape)
             mse_value = calculate_mse(true_map, pred_map)
             ssim_value = calculate_ssim(true_map, pred_map)
             psnr_value = calculate_psnr(true_map, pred_map)
-            data = [action, psnr_value, mse_value, ssim_value]
+            data = [action, psnr_value, mse_value, ssim_value, rank]
             logger.append_log(data)
 
         pred_images[-1] = theta_hat.reshape(self.size, self.size)
@@ -108,41 +112,46 @@ class Solver:
 
 
 if __name__ == '__main__':
-    num_maps = 10
-
-    strategies = ['without_regularization', 'with_tikhonov_and_identity',
-                  'with_tikhonov_and_lambda_identity', 'with_LOG_regularization_and_sparsity_prior', 'with_LOG_regularization_and_zero_prior', 'with_Laplacian_regularization', 'with_non_negative_least_square']
+    num_maps = 5
+    size = 15
+    reconstructions = ['without_regularization', 'with_tikhonov_and_identity',
+                       'with_tikhonov_and_lambda_identity', 'with_LOG_regularization_and_sparsity_prior', 'with_LOG_regularization_and_zero_prior', 'with_Laplacian_regularization', 'with_non_negative_least_square']
+    strategies = ['min_eigenvalue_info', 'random'][:1]
     map_dict = {}
     evaluation_dict = {}
-    for strategy in strategies:
-        map_dict[strategy] = []
+
+    for reconstruction in reconstructions:
+        map_dict[reconstruction] = []
 
     metrics = [calculate_psnr, calculate_mse, calculate_ssim]
+
     for metric in metrics:
         evaluation_dict[metric.__name__] = {}
-        for strategy in strategies:
-            evaluation_dict[metric.__name__][strategy] = []
+        for reconstruction in reconstructions:
+            evaluation_dict[metric.__name__][reconstruction] = []
 
     for type in range(num_maps):
         rng = np.random.default_rng(type)
-        environ = CreateRooms(type=type, size=12)
-        solve = Solver(environ, type=type, size=12,
-                       sparsity=0.6, episode_length=1000)
-        for strategy in strategies:
-            true_map, pred_map = solve.simulate(reconstruction=strategy,strategy = 'random')
-            map_dict[strategy].append((true_map, pred_map))
+        environ = CreateRooms(type=type, size=size)
+        solve = Solver(environ, type=type, size=size,
+                       sparsity=0.6, episode_length=int(1.5*size*size))
+        for reconstruction in reconstructions:
+            for strategy in strategies:
+                true_map, pred_map = solve.simulate(
+                    reconstruction=reconstruction, strategy=strategy)
+                map_dict[reconstruction].append((true_map, pred_map))
 
     for metric in metrics:
-        for strategy in strategies:
-            evaluation_dict[metric.__name__][strategy] += list(
-                map(lambda img: metric(img[0], img[1]), map_dict[strategy]))
+        for reconstruction in reconstructions:
+            evaluation_dict[metric.__name__][reconstruction] += list(
+                map(lambda img: metric(img[0], img[1]), map_dict[reconstruction]))
 
     fig, ax = plt.subplots(1, len(metrics), figsize=(17, 5))
 
     for ind, func in enumerate(metrics):
-        for strategy in strategies:
+        for reconstruction in reconstructions:
             ax[ind].plot(evaluation_dict[func.__name__]
-                         [strategy], label=strategy)
+                         [reconstruction], label=reconstruction)
         ax[ind].set_xlabel('ith Image')
         ax[ind].set_ylabel(func.__name__.upper())
         ax[ind].legend()
