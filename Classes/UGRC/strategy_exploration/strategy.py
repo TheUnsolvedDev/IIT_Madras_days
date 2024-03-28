@@ -20,7 +20,7 @@ class StrategiesReconstruction:
         theta_hat_2 = (jnp.array(A_ts).T @
                        jnp.array(B_ts).reshape((-1, 1)))
         theta_hat = jax.device_get(jnp.dot(theta_hat_1, theta_hat_2))
-        return theta_hat
+        return theta_hat, (0*jnp.eye(V_t.shape[0]), 0)
 
     @staticmethod
     # with regularization and identity matrix
@@ -30,7 +30,7 @@ class StrategiesReconstruction:
         theta_hat_2 = (jnp.array(A_ts).T @
                        jnp.array(B_ts).reshape((-1, 1)))
         theta_hat = jax.device_get(jnp.dot(theta_hat_1, theta_hat_2))
-        return theta_hat
+        return theta_hat, (jnp.eye(V_t.shape[0]), 1)
 
     @staticmethod
     # with regularization and lambda identity matrix
@@ -41,14 +41,14 @@ class StrategiesReconstruction:
         theta_hat_2 = (jnp.array(A_ts).T @
                        jnp.array(B_ts).reshape((-1, 1)))
         theta_hat = jax.device_get(jnp.dot(theta_hat_1, theta_hat_2))
-        return theta_hat
+        return theta_hat, (jnp.eye(V_t.shape[0]), kwargs['lamda'])
 
     @staticmethod
     # LOG kernel reconstruction with sparsity prior
     def with_LOG_regularization_and_sparsity_prior(A_ts, B_ts, **kwargs):
         if StrategiesReconstruction.L is None:
             StrategiesReconstruction.L = LOG_kernel(kwargs['size'])
-            StrategiesReconstruction.H = jnp.dot(
+            StrategiesReconstruction.H = kwargs['lamda']*jnp.dot(
                 StrategiesReconstruction.L, StrategiesReconstruction.L)
             StrategiesReconstruction.Theta_prior = kwargs['sparsity'] * \
                 jnp.zeros((kwargs['size']**2, 1))
@@ -59,14 +59,14 @@ class StrategiesReconstruction:
         theta_hat_2 = (jnp.array(A_ts).T @
                        jnp.array(B_ts).reshape((-1, 1)) + StrategiesReconstruction.H@StrategiesReconstruction.Theta_prior)
         theta_hat = jax.device_get(jnp.dot(theta_hat_1, theta_hat_2))
-        return theta_hat
+        return theta_hat, (StrategiesReconstruction.H, kwargs['lamda'])
 
     @staticmethod
     # LOG kernel reconstruction with zero prior
     def with_LOG_regularization_and_zero_prior(A_ts, B_ts, **kwargs):
         if StrategiesReconstruction.L is None:
             StrategiesReconstruction.L = LOG_kernel(kwargs['size'])
-            StrategiesReconstruction.H = jnp.dot(
+            StrategiesReconstruction.H = kwargs['lamda']*jnp.dot(
                 StrategiesReconstruction.L, StrategiesReconstruction.L)
             StrategiesReconstruction.Theta_prior = 0
 
@@ -76,7 +76,7 @@ class StrategiesReconstruction:
         theta_hat_2 = (jnp.array(A_ts).T @
                        jnp.array(B_ts).reshape((-1, 1)) + StrategiesReconstruction.H@StrategiesReconstruction.Theta_prior)
         theta_hat = jax.device_get(jnp.dot(theta_hat_1, theta_hat_2))
-        return theta_hat
+        return theta_hat, (StrategiesReconstruction.H, kwargs['lamda'])
 
     @staticmethod
     # Laplacian Regularization Ayon sir's
@@ -90,7 +90,7 @@ class StrategiesReconstruction:
             epsRs=[np.sqrt(0.1)],
             **dict(damp=np.sqrt(1e-4), iter_lim=50, show=0)
         )[0].reshape(-1, 1)
-        return theta_hat
+        return theta_hat, (StrategiesReconstruction.H, 1)
 
     @staticmethod
     # Non negative least square regularization
