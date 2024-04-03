@@ -138,20 +138,25 @@ class DuelingDQNMean:
         self.counter = 1
         self.updates = 1
 
+    @functools.partial(jax.jit, static_argnums=(0,))
+    def policy_greedy(self, q_state, state):
+        q_values = self.value.apply(q_state.params, state)
+        action = q_values.argmax(axis=-1)[0]
+        return action
+
     def sample(self, state, epsilon=0.1):
         if np.random.uniform() < epsilon:
             return np.random.randint(0, self.num_actions)
-        q_values = self.value.apply(self.value_state.params, state)
-        action = np.array(q_values).argmax(axis=-1)[0]
+        action = np.array(self.policy_greedy(self.value_state, state))
         return action
 
-    def update(self, states, actions, rewards, next_states,  dones):
+    @functools.partial(jax.jit, static_argnums=(0,))
+    def update(self, value_state, states, actions, rewards, next_states,  dones):
         value_next_target = self.value.apply(
-            self.value_state.target_params, next_states)
+            value_state.target_params, next_states)
         value_next_target = jnp.max(value_next_target, axis=-1)
         next_q_value = (rewards + (1 - dones) * GAMMA * value_next_target)
 
-        @jax.jit
         def mse_loss(params):
             value_pred = self.value.apply(params, states)
             value_pred = value_pred[jnp.arange(
@@ -159,9 +164,9 @@ class DuelingDQNMean:
             return ((jax.lax.stop_gradient(next_q_value) - value_pred) ** 2).mean()
 
         loss_value, grads = jax.value_and_grad(
-            mse_loss)(self.value_state.params)
-        self.value_state = self.value_state.apply_gradients(grads=grads)
-        return loss_value
+            mse_loss)(value_state.params)
+        value_state = value_state.apply_gradients(grads=grads)
+        return loss_value, value_state
 
     def train_single_step(self):
         state = self.env.reset(seed=self.seed)[0]
@@ -184,8 +189,8 @@ class DuelingDQNMean:
                 indices = self.replay_buffer.sample(BATCH_SIZE)
                 states, actions, rewards, next_states, dones = self.replay_buffer.get_batch(
                     indices)
-                loss_values = self.update(
-                    states, actions, rewards, next_states,  dones)
+                loss_values, self.value_state = self.update(self.value_state,
+                                                            states, actions, rewards, next_states,  dones)
                 if self.updates % UPDATE_EVERY == 0:
                     self.value_state = self.value_state.replace(target_params=optax.incremental_update(
                         self.value_state.params, self.value_state.target_params, 0.9))
@@ -220,20 +225,25 @@ class DuelingDQNMax:
         self.counter = 1
         self.updates = 1
 
+    @functools.partial(jax.jit, static_argnums=(0,))
+    def policy_greedy(self, q_state, state):
+        q_values = self.value.apply(q_state.params, state)
+        action = q_values.argmax(axis=-1)[0]
+        return action
+
     def sample(self, state, epsilon=0.1):
         if np.random.uniform() < epsilon:
             return np.random.randint(0, self.num_actions)
-        q_values = self.value.apply(self.value_state.params, state)
-        action = np.array(q_values).argmax(axis=-1)[0]
+        action = np.array(self.policy_greedy(self.value_state, state))
         return action
 
-    def update(self, states, actions, rewards, next_states,  dones):
+    @functools.partial(jax.jit, static_argnums=(0,))
+    def update(self, value_state, states, actions, rewards, next_states,  dones):
         value_next_target = self.value.apply(
-            self.value_state.target_params, next_states)
+            value_state.target_params, next_states)
         value_next_target = jnp.max(value_next_target, axis=-1)
         next_q_value = (rewards + (1 - dones) * GAMMA * value_next_target)
 
-        @jax.jit
         def mse_loss(params):
             value_pred = self.value.apply(params, states)
             value_pred = value_pred[jnp.arange(
@@ -241,9 +251,9 @@ class DuelingDQNMax:
             return ((jax.lax.stop_gradient(next_q_value) - value_pred) ** 2).mean()
 
         loss_value, grads = jax.value_and_grad(
-            mse_loss)(self.value_state.params)
-        self.value_state = self.value_state.apply_gradients(grads=grads)
-        return loss_value
+            mse_loss)(value_state.params)
+        value_state = value_state.apply_gradients(grads=grads)
+        return loss_value, value_state
 
     def train_single_step(self):
         state = self.env.reset(seed=self.seed)[0]
@@ -266,8 +276,8 @@ class DuelingDQNMax:
                 indices = self.replay_buffer.sample(BATCH_SIZE)
                 states, actions, rewards, next_states, dones = self.replay_buffer.get_batch(
                     indices)
-                loss_values = self.update(
-                    states, actions, rewards, next_states,  dones)
+                loss_values, self.value_state = self.update(self.value_state,
+                                                            states, actions, rewards, next_states,  dones)
                 if self.updates % UPDATE_EVERY == 0:
                     self.value_state = self.value_state.replace(target_params=optax.incremental_update(
                         self.value_state.params, self.value_state.target_params, 0.9))
@@ -301,12 +311,12 @@ class Simulation:
 
 
 if __name__ == '__main__':
-    cartpole_dqn_mean = Simulation('CartPole-v1', algorithm=DuelingDQNMean)
-    cartpole_dqn_mean.train()
-    rewards_cartpole_dqn_mean = cartpole_dqn_mean.rewards
-    mean_rcr = np.mean(rewards_cartpole_dqn_mean, axis=0)
-    std_rcr = np.std(rewards_cartpole_dqn_mean, axis=0)
-    plot_data(mean_rcr, std_rcr, name='Cartpole dqn_mean')
+    # cartpole_dqn_mean = Simulation('CartPole-v1', algorithm=DuelingDQNMean)
+    # cartpole_dqn_mean.train()
+    # rewards_cartpole_dqn_mean = cartpole_dqn_mean.rewards
+    # mean_rcr = np.mean(rewards_cartpole_dqn_mean, axis=0)
+    # std_rcr = np.std(rewards_cartpole_dqn_mean, axis=0)
+    # plot_data(mean_rcr, std_rcr, name='Cartpole dqn_mean_try')
 
     cartpole_dqn_max = Simulation('CartPole-v1', algorithm=DuelingDQNMax)
     cartpole_dqn_max.train()
@@ -315,12 +325,12 @@ if __name__ == '__main__':
     std_rcb = np.std(rewards_cartpole_dqn_max, axis=0)
     plot_data(mean_rcb, std_rcb, name='Cartpole dqn_max')
 
-    acrobot_dqn_mean = Simulation('Acrobot-v1', algorithm=DuelingDQNMean)
-    acrobot_dqn_mean.train()
-    rewards_acrobot_dqn_mean = acrobot_dqn_mean.rewards
-    mean_rar = np.mean(rewards_acrobot_dqn_mean, axis=0)
-    std_rar = np.std(rewards_acrobot_dqn_mean, axis=0)
-    plot_data(mean_rar, std_rar, name='Acrobot dqn_mean')
+    # acrobot_dqn_mean = Simulation('Acrobot-v1', algorithm=DuelingDQNMean)
+    # acrobot_dqn_mean.train()
+    # rewards_acrobot_dqn_mean = acrobot_dqn_mean.rewards
+    # mean_rar = np.mean(rewards_acrobot_dqn_mean, axis=0)
+    # std_rar = np.std(rewards_acrobot_dqn_mean, axis=0)
+    # plot_data(mean_rar, std_rar, name='Acrobot dqn_mean')
 
     acrobot_dqn_max = Simulation('Acrobot-v1', algorithm=DuelingDQNMax)
     acrobot_dqn_max.train()
@@ -329,29 +339,29 @@ if __name__ == '__main__':
     std_rab = np.std(rewards_acrobot_dqn_max, axis=0)
     plot_data(mean_rab, std_rab, name='Acrobot dqn_max')
 
-    mean_mat = [mean_rcr, mean_rcb, mean_rar, mean_rab]
+    # mean_mat = [mean_rcr, mean_rcb, mean_rar, mean_rab]
 
-    std_mat = [std_rcr, std_rcb, std_rar, std_rab]
+    # std_mat = [std_rcr, std_rcb, std_rar, std_rab]
 
-    names = ['cartpole_dqn_mean', 'cartpole_dqn_max',
-             'acrobot_dqn_mean', 'acrobot_dqn_max']
+    # names = ['cartpole_dqn_mean', 'cartpole_dqn_max',
+    #          'acrobot_dqn_mean', 'acrobot_dqn_max']
 
-    fig, ax = plt.subplots(2, 2, figsize=(12, 12))
-    for i in range(2):
-        for j in range(2):
-            mean = mean_mat[i*2+j]
-            std = std_mat[i*2+j]
-            x = range(len(mean))
-            ax[i][j].plot(x, mean, color='blue', label='Mean')
-            ax[i][j].plot(x, smooth_rewards(mean),
-                          color='orange', label='smoothed')
-            ax[i][j].fill_between(x, mean - std, mean + std, color='blue',
-                                  alpha=0.3, label='Mean ± Std')
-            ax[i][j].set_xlabel('Steps')
-            ax[i][j].set_ylabel('Rewards')
-            ax[i][j].set_title(names[i*2+j])
-            ax[i][j].legend()
-            ax[i][j].grid(True)
+    # fig, ax = plt.subplots(2, 2, figsize=(12, 12))
+    # for i in range(2):
+    #     for j in range(2):
+    #         mean = mean_mat[i*2+j]
+    #         std = std_mat[i*2+j]
+    #         x = range(len(mean))
+    #         ax[i][j].plot(x, mean, color='blue', label='Mean')
+    #         ax[i][j].plot(x, smooth_rewards(mean),
+    #                       color='orange', label='smoothed')
+    #         ax[i][j].fill_between(x, mean - std, mean + std, color='blue',
+    #                               alpha=0.3, label='Mean ± Std')
+    #         ax[i][j].set_xlabel('Steps')
+    #         ax[i][j].set_ylabel('Rewards')
+    #         ax[i][j].set_title(names[i*2+j])
+    #         ax[i][j].legend()
+    #         ax[i][j].grid(True)
 
-    plt.savefig("FullDataDQN.png")
-    plt.show()
+    # plt.savefig("FullDataDQN.png")
+    # plt.show()
