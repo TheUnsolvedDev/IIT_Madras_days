@@ -301,19 +301,19 @@ class Simulation:
 
 
 if __name__ == '__main__':
-    # cartpole_dqn_mean = Simulation('CartPole-v1', algorithm=DuelingDQNMean)
-    # cartpole_dqn_mean.train()
-    # rewards_cartpole_dqn_mean = cartpole_dqn_mean.rewards
-    # mean_rcr = np.mean(rewards_cartpole_dqn_mean, axis=0)
-    # std_rcr = np.std(rewards_cartpole_dqn_mean, axis=0)
-    # plot_data(mean_rcr, std_rcr, name='Cartpole dqn_mean')
+    cartpole_dqn_mean = Simulation('CartPole-v1', algorithm=DuelingDQNMean)
+    cartpole_dqn_mean.train()
+    rewards_cartpole_dqn_mean = cartpole_dqn_mean.rewards
+    mean_rcr = np.mean(rewards_cartpole_dqn_mean, axis=0)
+    std_rcr = np.std(rewards_cartpole_dqn_mean, axis=0)
+    plot_data(mean_rcr, std_rcr, name='Cartpole dqn_mean')
 
-    # cartpole_dqn_max = Simulation('CartPole-v1', algorithm=DuelingDQNMax)
-    # cartpole_dqn_max.train()
-    # rewards_cartpole_dqn_max = cartpole_dqn_max.rewards
-    # mean_rcb = np.mean(rewards_cartpole_dqn_max, axis=0)
-    # std_rcb = np.std(rewards_cartpole_dqn_max, axis=0)
-    # plot_data(mean_rcb, std_rcb, name='Cartpole dqn_max')
+    cartpole_dqn_max = Simulation('CartPole-v1', algorithm=DuelingDQNMax)
+    cartpole_dqn_max.train()
+    rewards_cartpole_dqn_max = cartpole_dqn_max.rewards
+    mean_rcb = np.mean(rewards_cartpole_dqn_max, axis=0)
+    std_rcb = np.std(rewards_cartpole_dqn_max, axis=0)
+    plot_data(mean_rcb, std_rcb, name='Cartpole dqn_max')
 
     acrobot_dqn_mean = Simulation('Acrobot-v1', algorithm=DuelingDQNMean)
     acrobot_dqn_mean.train()
@@ -329,29 +329,29 @@ if __name__ == '__main__':
     std_rab = np.std(rewards_acrobot_dqn_max, axis=0)
     plot_data(mean_rab, std_rab, name='Acrobot dqn_max')
 
-    # mean_mat = [mean_rcr, mean_rcb, mean_rar, mean_rab]
+    mean_mat = [mean_rcr, mean_rcb, mean_rar, mean_rab]
 
-    # std_mat = [std_rcr, std_rcb, std_rar, std_rab]
+    std_mat = [std_rcr, std_rcb, std_rar, std_rab]
 
-    # names = ['cartpole_dqn_mean', 'cartpole_dqn_max',
-    #          'acrobot_dqn_mean', 'acrobot_dqn_max']
+    names = ['cartpole_dqn_mean', 'cartpole_dqn_max',
+             'acrobot_dqn_mean', 'acrobot_dqn_max']
 
-    # fig, ax = plt.subplots(2, 2, figsize=(12, 12))
-    # for i in range(2):
-    #     for j in range(2):
-    #         mean = mean_mat[i*2+j]
-    #         std = std_mat[i*2+j]
-    #         x = range(len(mean))
-    #         ax[i][j].plot(x, mean, color='blue', label='Mean')
-    #         ax[i][j].plot(x, smooth_rewards(mean),
-    #                       color='orange', label='smoothed')
-    #         ax[i][j].fill_between(x, mean - std, mean + std, color='blue',
-    #                               alpha=0.3, label='Mean ± Std')
-    #         ax[i][j].set_xlabel('Steps')
-    #         ax[i][j].set_ylabel('Rewards')
-    #         ax[i][j].set_title(names[i*2+j])
-    #         ax[i][j].legend()
-    #         ax[i][j].grid(True)
+    fig, ax = plt.subplots(2, 2, figsize=(12, 12))
+    for i in range(2):
+        for j in range(2):
+            mean = mean_mat[i*2+j]
+            std = std_mat[i*2+j]
+            x = range(len(mean))
+            ax[i][j].plot(x, mean, color='blue', label='Mean')
+            ax[i][j].plot(x, smooth_rewards(mean),
+                          color='orange', label='smoothed')
+            ax[i][j].fill_between(x, mean - std, mean + std, color='blue',
+                                  alpha=0.3, label='Mean ± Std')
+            ax[i][j].set_xlabel('Steps')
+            ax[i][j].set_ylabel('Rewards')
+            ax[i][j].set_title(names[i*2+j])
+            ax[i][j].legend()
+            ax[i][j].grid(True)
 
-    # plt.savefig("FullDataDQN.png")
-    # plt.show()
+    plt.savefig("FullDataDQN.png")
+    plt.show()

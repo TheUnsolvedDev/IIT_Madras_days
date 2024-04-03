@@ -8,6 +8,7 @@ import optax
 import functools
 import matplotlib.pyplot as plt
 import tqdm
+import gc
 
 ALPHA = 0.001
 GAMMA = 0.99
@@ -130,6 +131,8 @@ class MC_Reinforce:
         episode_actions = jnp.array(episode_actions)
         loss = self.update(episode_states, episode_actions,
                            discounted_rewards*gamma_t)
+        gc.collect()
+        jax.clear_caches()
         return loss, np.sum(episode_rewards)
 
 
