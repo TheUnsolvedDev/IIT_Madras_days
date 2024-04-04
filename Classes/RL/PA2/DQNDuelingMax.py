@@ -15,7 +15,7 @@ ALPHA = 0.0001
 GAMMA = 0.99
 BATCH_SIZE = 64
 CAPACITY = 20000
-UPDATE_EVERY = 20
+UPDATE_EVERY = 50
 
 
 def smooth_rewards(rewards, window_size=10):
@@ -163,7 +163,7 @@ class DuelingDQNMax:
             if truncated or done:
                 break
 
-            if len(self.replay_buffer.buffer) > 128:
+            if len(self.replay_buffer.buffer) > 128 and self.updates % 5 == 0:
                 indices = self.replay_buffer.sample(BATCH_SIZE)
                 states, actions, rewards, next_states, dones = self.replay_buffer.get_batch(
                     indices)
@@ -173,7 +173,7 @@ class DuelingDQNMax:
                     self.value_state = self.value_state.replace(target_params=optax.incremental_update(
                         self.value_state.params, self.value_state.target_params, 0.9))
                 episode_loss += loss_values
-                self.updates += 1
+            self.updates += 1
         gc.collect()
         jax.clear_caches()
         self.counter += 1
@@ -202,12 +202,12 @@ class Simulation:
 
 
 if __name__ == '__main__':
-    # cartpole_dqn_max = Simulation('CartPole-v1', algorithm=DuelingDQNMax)
-    # cartpole_dqn_max.train()
-    # rewards_cartpole_dqn_max = cartpole_dqn_max.rewards
-    # mean_rcb = np.mean(rewards_cartpole_dqn_max, axis=0)
-    # std_rcb = np.std(rewards_cartpole_dqn_max, axis=0)
-    # plot_data(mean_rcb, std_rcb, name='Cartpole DQN Max')
+    cartpole_dqn_max = Simulation('CartPole-v1', algorithm=DuelingDQNMax)
+    cartpole_dqn_max.train()
+    rewards_cartpole_dqn_max = cartpole_dqn_max.rewards
+    mean_rcb = np.mean(rewards_cartpole_dqn_max, axis=0)
+    std_rcb = np.std(rewards_cartpole_dqn_max, axis=0)
+    plot_data(mean_rcb, std_rcb, name='Cartpole DQN Max')
 
     acrobot_dqn_max = Simulation('Acrobot-v1', algorithm=DuelingDQNMax)
     acrobot_dqn_max.train()
