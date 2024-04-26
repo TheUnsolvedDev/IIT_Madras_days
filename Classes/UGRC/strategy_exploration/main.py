@@ -9,7 +9,20 @@ from utils import *
 
 
 class Solver:
-    def __init__(self, env, type, size, sparsity, episode_length) -> None:
+    def __init__(self,
+                 env: 'RoomEnvironment',  # type: ignore
+                 type: int,
+                 size: int,
+                 sparsity: int,
+                 episode_length: int) -> None:
+        """
+        Args:
+            env (RoomEnvironment): The environment to use for the simulation.
+            type (int): The seed to use for generating the room.
+            size (int): The size of the room.
+            sparsity (int): The sparsity of the room.
+            episode_length (int): The length of each episode.
+        """
         self.type = type
         self.size = size
         self.sparsity = sparsity
@@ -22,12 +35,36 @@ class Solver:
         self.policy = StartegiesAction(self.all_possible_actions)
         self.num_images = 24
 
-    def initialize(self):
+    def initialize(self) -> None:
+        """
+        Resets the environment and clears the collected data.
+
+        Returns:
+            None
+        """
         self.env.reset()
         self.A_ts = []
         self.B_ts = []
 
-    def simulate(self, reconstruction='without_regularization', strategy='min_eigenvalue_info', lamda=0.01, plot_images=True):
+    def simulate(self,
+                 reconstruction: str = 'without_regularization',
+                 strategy: str = 'min_eigenvalue_info',
+                 lamda: float = 0.01,
+                 plot_images: bool = True) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Simulates the environment using the provided reconstruction method and strategy.
+
+        Args:
+            reconstruction (str): The reconstruction method to use. Currently supports 'without_regularization', 'with_tikhonov_and_identity',
+            'with_tikhonov_and_lambda_identity', 'with_LOG_regularization_and_sparsity_prior', 'with_LOG_regularization_and_zero_prior', 'with_Laplacian_regularization',
+            and 'with_non_negative_least_square'. Defaults to 'without_regularization'.
+            strategy (str): The strategy to use. Currently supports 'min_eigenvalue_info' and 'random'. Defaults to 'min_eigenvalue_info'.
+            lamda (float): The regularization parameter. Defaults to 0.01.
+            plot_images (bool): Whether to save plots of the predicted maps. Defaults to True.
+
+        Returns:
+            Tuple[np.ndarray, np.ndarray]: The true map and the predicted map.
+        """
         self.initialize()
         action = np.random.choice(int((self.size**2)*(self.size**2-1)*0.5))
         true_map = self.env.map_star
@@ -44,11 +81,11 @@ class Solver:
             self.B_ts.append(B_t)
 
             if reconstruction == 'without_regularization':
-                theta_hat, meta_data = self.reconstruction.without_regularization(
-                    self.A_ts, self.B_ts)
+                theta_hat, meta_data = self.reconstruction.with_tikhonov_and_lambda_identity(
+                    self.A_ts, self.B_ts, lamda=0.0)
             elif reconstruction == 'with_tikhonov_and_identity':
-                theta_hat, meta_data = self.reconstruction.with_tikhonov_and_identity(
-                    self.A_ts, self.B_ts)
+                theta_hat, meta_data = self.reconstruction.with_tikhonov_and_lambda_identity(
+                    self.A_ts, self.B_ts, lamda=1)
             elif reconstruction == 'with_tikhonov_and_lambda_identity':
                 theta_hat, meta_data = self.reconstruction.with_tikhonov_and_lambda_identity(
                     self.A_ts, self.B_ts, lamda=0.01)
@@ -65,16 +102,16 @@ class Solver:
                 theta_hat, meta_data = self.reconstruction.with_non_negative_least_square(
                     self.A_ts, self.B_ts)
             else:
-                print("Wrong reconstruction choosen")
+                print("Wrong reconstruction choosen", reconstruction)
                 exit(0)
             kernel, lamda = meta_data
-            theta_hat_temp = jnp.dot(
+            V_t = jnp.dot(
                 jnp.array(self.A_ts).T, jnp.array(self.A_ts)) + lamda*kernel
             if strategy == 'min_eigenvalue_info':
                 action = int(
-                    self.policy.min_eigenvalue_info_action(theta_hat_temp))
+                    self.policy.min_eigenvalue_info_action(V_t))
             elif strategy == 'random':
-                action = self.policy.random_action(theta_hat_temp)
+                action = self.policy.random_action(V_t)
 
             if (t+1) % (self.episode_length//self.num_images) == 0:
                 pred_images.append(theta_hat.reshape(self.size, self.size))
@@ -117,7 +154,8 @@ if __name__ == '__main__':
     size = 15
     reconstructions = ['without_regularization', 'with_tikhonov_and_identity',
                        'with_tikhonov_and_lambda_identity', 'with_LOG_regularization_and_sparsity_prior', 'with_LOG_regularization_and_zero_prior', 'with_Laplacian_regularization']  # , 'with_non_negative_least_square']
-    strategies = ['min_eigenvalue_info', 'random']
+    # reconstructions = ['with_LOG_regularization_and_sparsity_prior']
+    strategies = ['min_eigenvalue_info']  # , 'random']
     map_dict = {}
     evaluation_dict = {}
 

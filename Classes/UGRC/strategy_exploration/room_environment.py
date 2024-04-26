@@ -2,13 +2,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 import jax
 import jax.numpy as jnp
+from typing import Tuple
 
 from utils import *
 
 
 class CreateRooms:
-    def __init__(self, type=1, size=13):
-        assert size >= 10
+    def __init__(self,
+                 type: int = 1,  # type: ignore
+                 size: int = 13) -> None:
+        """
+        Args:
+            type (int): A random seed for the room creation
+            size (int): The size of the room
+        """
+        assert size >= 10, "The size of the room must be at least 10"
         self.size = size
         self.type = type
         self.wall_attenuation = 5
@@ -16,8 +24,14 @@ class CreateRooms:
         self.prng = jax.random.PRNGKey(self.type)
         self.reset()
 
-    def reset(self):
-        self.room = np.zeros((self.size, self.size))
+    def reset(self) -> np.ndarray:
+        """
+        Resets the room to its initial state and returns the current state.
+
+        Returns:
+            np.ndarray: The current state of the room.
+        """
+        self.room = np.zeros((self.size, self.size), dtype=np.float32)
         self.room[:, 0] = self.room[:, -1] = self.room[0,
                                                        :] = self.room[-1, :] = self.wall_attenuation
         if self.size % 2 == 0:
@@ -97,10 +111,20 @@ class CreateRooms:
         self.room = np.maximum(self.room, 0)
         self.map_star = self.room
         self.map_star = (self.map_star - self.map_star.min()) / \
-            (self.map_star.max() - self.map_star.min())*255.0
+            (self.map_star.max() - self.map_star.min())
         # self.plot_room(self.map_star)
+        return self.map_star
 
-    def _action_vector(self, number):
+    def _action_vector(self, number: int) -> np.ndarray:
+        """
+        Returns a boolean vector representing the action taken.
+
+        Args:
+            number: Integer representing the action taken.
+
+        Returns:
+            np.ndarray: Boolean vector representing the action taken.
+        """
         action = convert_actions(number, self.size)
         cut_indices = bresenham_line(*action)
         mask = np.zeros_like(self.map_star)
@@ -108,7 +132,16 @@ class CreateRooms:
         mask[rows, cols] = 1
         return mask.flatten()
 
-    def step(self, action):
+    def step(self, action: int) -> Tuple[np.ndarray, float]:
+        """
+        Perform the action on the environment and return the resulting mask and reward.
+
+        Args:
+            action (int): The action taken by the agent.
+
+        Returns:
+            Tuple[np.ndarray, float]: A tuple containing the mask of the cuts made and the reward received.
+        """
         if 0 < action and action >= self.total_actions:
             raise ValueError(
                 f"Not in the range of total actions [{0}:{self.total_actions})")
@@ -116,11 +149,31 @@ class CreateRooms:
         reward = self._reward_value(mask)
         return mask, reward
 
-    def _reward_value(self, action_vector):
-        reward = self.map_star.flatten()@action_vector + np.random.normal(0, 0.01)
+
+    def _reward_value(self, action_vector: np.ndarray) -> float:
+        """
+        Computes the reward value for the given action.
+
+        Args:
+            action_vector (np.ndarray): The boolean vector representing the action taken.
+
+        Returns:
+            float: The reward value.
+        """
+        reward = np.dot(self.map_star.flatten(), action_vector) + np.random.normal(0, 0.01)
         return reward
 
-    def plot_room(self, array):
+
+    def plot_room(self, array: np.ndarray) -> None:
+        """
+        Plots the room with the given array.
+
+        Args:
+            array (np.ndarray): The array to plot.
+
+        Returns:
+            None
+        """
         plt.imshow(array)
         plt.show()
 
