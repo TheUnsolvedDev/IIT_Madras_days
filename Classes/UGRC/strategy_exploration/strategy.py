@@ -30,28 +30,70 @@ class StrategiesReconstruction:
                 theta (ndarray): The reconstructed theta.
                 (ndarray, float): Tuple of identity matrix and lamda.
         """
+        if StrategiesReconstruction.L is None:
+            StrategiesReconstruction.L = jnp.eye(kwargs['size']**2)
+            StrategiesReconstruction.H = kwargs['lamda']*jnp.dot(
+                StrategiesReconstruction.L, StrategiesReconstruction.L)
+            StrategiesReconstruction.Theta_prior = kwargs['sparsity'] * \
+                jnp.zeros((kwargs['size']**2, 1))
+
         V_t = jnp.dot(jnp.array(A_ts).T, jnp.array(A_ts))
-        if kwargs['lamda'] != 0:
-            theta_hat_1 = jnp.linalg.inv(
-                V_t + kwargs['lamda']*jnp.eye(V_t.shape[0]))
+        M_t = StrategiesReconstruction.H + V_t
+        if kwargs['lamda'] == 0:
+            theta_hat_1 = jnp.linalg.pinv(M_t)
         else:
-            theta_hat_1 = jnp.linalg.pinv( V_t )
-        
+            theta_hat_1 = jnp.linalg.inv(M_t)
         theta_hat_2 = (jnp.array(A_ts).T @
-                       jnp.array(B_ts).reshape((-1, 1)))
+                       jnp.array(B_ts).reshape((-1, 1)) + StrategiesReconstruction.H@StrategiesReconstruction.Theta_prior)
         theta_hat = jax.device_get(jnp.dot(theta_hat_1, theta_hat_2))
-        return theta_hat, (jnp.eye(V_t.shape[0]), kwargs['lamda'])
+        return theta_hat, (StrategiesReconstruction.H, kwargs['lamda'])
 
     @staticmethod
     # LOG kernel reconstruction with sparsity prior
-    def with_LOG_regularization_and_sparsity_prior(A_ts, B_ts, **kwargs):
+    def with_Gauss_regularization_and_sparsity_prior(A_ts, B_ts, **kwargs):
+        """
+        Gauss kernel reconstruction with sparsity prior.
+
+        Args:
+            A_ts (list): A list of time series data.
+            B_ts (list): A list of time series data.
+            **kwargs: Additional keyword arguments.
+                size (int): The size of the kernel.
+                lamda (float): The regularization parameter.
+                sparsity (float): The sparsity parameter.
+
+        Returns:
+            tuple: A tuple containing the reconstructed theta and a tuple of H and lamda.
+                theta (ndarray): The reconstructed theta.
+                H (ndarray): The kernel matrix.
+                lamda (float): The regularization parameter.
+
+        """
+        if StrategiesReconstruction.L is None:
+            StrategiesReconstruction.L = Gauss_kernel(kwargs['size'])
+            StrategiesReconstruction.H = kwargs['lamda']*jnp.dot(
+                StrategiesReconstruction.L, StrategiesReconstruction.L)
+            StrategiesReconstruction.Theta_prior = kwargs['sparsity'] * \
+                jnp.zeros((kwargs['size']**2, 1))
+
+        V_t = jnp.dot(jnp.array(A_ts).T, jnp.array(A_ts))
+        M_t = StrategiesReconstruction.H + V_t
+        theta_hat_1 = jnp.linalg.inv(M_t)
+        theta_hat_2 = (jnp.array(A_ts).T @
+                       jnp.array(B_ts).reshape((-1, 1)) + StrategiesReconstruction.H@StrategiesReconstruction.Theta_prior)
+        theta_hat = jax.device_get(jnp.dot(theta_hat_1, theta_hat_2))
+        return theta_hat, (StrategiesReconstruction.H, kwargs['lamda'])
+
+    @staticmethod
+    # LOG kernel reconstruction with sparsity prior
+    def with_LOG_regularization_and_sparsity_prior(A_ts: list, B_ts: list, **kwargs: dict) -> tuple:
         """
         LOG kernel reconstruction with sparsity prior.
 
         Args:
             A_ts (list): A list of time series data.
             B_ts (list): A list of time series data.
-            **kwargs: Additional keyword arguments.
+            **kwargs (dict): Additional keyword arguments.
                 size (int): The size of the kernel.
                 lamda (float): The regularization parameter.
                 sparsity (float): The sparsity parameter.
@@ -77,12 +119,12 @@ class StrategiesReconstruction:
                        jnp.array(B_ts).reshape((-1, 1)) + StrategiesReconstruction.H@StrategiesReconstruction.Theta_prior)
         theta_hat = jax.device_get(jnp.dot(theta_hat_1, theta_hat_2))
         return theta_hat, (StrategiesReconstruction.H, kwargs['lamda'])
-
+    
     @staticmethod
-    # LOG kernel reconstruction with zero prior
-    def with_LOG_regularization_and_zero_prior(A_ts, B_ts, **kwargs):
+    # Sharpen kernel reconstruction with sparsity prior
+    def with_Sharpen_regularization_and_sparsity_prior(A_ts, B_ts, **kwargs):
         """
-        LOG kernel reconstruction with zero prior.
+        Sharpenkernel reconstruction with sparsity prior.
 
         Args:
             A_ts (list): A list of time series data.
@@ -90,25 +132,30 @@ class StrategiesReconstruction:
             **kwargs: Additional keyword arguments.
                 size (int): The size of the kernel.
                 lamda (float): The regularization parameter.
+                sparsity (float): The sparsity parameter.
 
         Returns:
             tuple: A tuple containing the reconstructed theta and a tuple of H and lamda.
                 theta (ndarray): The reconstructed theta.
                 H (ndarray): The kernel matrix.
                 lamda (float): The regularization parameter.
+
         """
         if StrategiesReconstruction.L is None:
-            StrategiesReconstruction.L = LOG_kernel(kwargs['size'])
+            StrategiesReconstruction.L = Sharpen_kernel(kwargs['size'])
             StrategiesReconstruction.H = kwargs['lamda']*jnp.dot(
                 StrategiesReconstruction.L, StrategiesReconstruction.L)
+            StrategiesReconstruction.Theta_prior = kwargs['sparsity'] * \
+                jnp.zeros((kwargs['size']**2, 1))
 
         V_t = jnp.dot(jnp.array(A_ts).T, jnp.array(A_ts))
         M_t = StrategiesReconstruction.H + V_t
         theta_hat_1 = jnp.linalg.inv(M_t)
         theta_hat_2 = (jnp.array(A_ts).T @
-                       jnp.array(B_ts).reshape((-1, 1)))
+                       jnp.array(B_ts).reshape((-1, 1)) + StrategiesReconstruction.H@StrategiesReconstruction.Theta_prior)
         theta_hat = jax.device_get(jnp.dot(theta_hat_1, theta_hat_2))
         return theta_hat, (StrategiesReconstruction.H, kwargs['lamda'])
+
 
     @staticmethod
     # Laplacian Regularization Ayon sir's

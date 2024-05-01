@@ -29,7 +29,6 @@ def generate_map(n: int, sparsity: float, seed: int = 0) -> np.ndarray:
     return binary_map
 
 
-
 def LOG_kernel(size: int = 5) -> np.ndarray:
     """
     Generate a 2D LOG kernel of size (size, size) without border padding.
@@ -45,6 +44,69 @@ def LOG_kernel(size: int = 5) -> np.ndarray:
         [0, 1, 0],
         [1, -4, 1],
         [0, 1, 0]
+    ])
+    row_traverse = size[0] - log_kernel.shape[0] + 1
+    col_traverse = size[1] - log_kernel.shape[1] + 1
+
+    L = []
+
+    for row in range(row_traverse):
+        for col in range(col_traverse):
+            kernel = np.zeros(size)
+            kernel[row:row+log_kernel.shape[0],
+                   col:col+log_kernel.shape[1]] = log_kernel
+            kernel = kernel[1:kernel.shape[0]-1, 1:kernel.shape[1]-1]
+            L.append(kernel.flatten())
+
+    return np.array(L)
+
+
+def Gauss_kernel(size: int = 5) -> np.ndarray:
+    """
+    Generate a 2D Gauss kernel of size (size, size) without border padding.
+
+    Args:
+        size (int): The size of the kernel.
+
+    Returns:
+        np.ndarray: The generated LOG kernel with shape (size*size, ).
+    """
+    size = [size+2, size+2]
+    log_kernel = np.array([
+        [1, 2, 1],
+        [2, 4, 2],
+        [1, 2, 1]
+    ])
+    row_traverse = size[0] - log_kernel.shape[0] + 1
+    col_traverse = size[1] - log_kernel.shape[1] + 1
+
+    L = []
+
+    for row in range(row_traverse):
+        for col in range(col_traverse):
+            kernel = np.zeros(size)
+            kernel[row:row+log_kernel.shape[0],
+                   col:col+log_kernel.shape[1]] = log_kernel
+            kernel = kernel[1:kernel.shape[0]-1, 1:kernel.shape[1]-1]
+            L.append(kernel.flatten())
+
+    return np.array(L)
+
+def Sharpen_kernel(size: int = 5) -> np.ndarray:
+    """
+    Generate a 2D Sharpen kernel of size (size, size) without border padding.
+
+    Args:
+        size (int): The size of the kernel.
+
+    Returns:
+        np.ndarray: The generated LOG kernel with shape (size*size, ).
+    """
+    size = [size+2, size+2]
+    log_kernel = np.array([
+        [0, -1, 0],
+        [-1, 5, -1],
+        [0, -1, 0]
     ])
     row_traverse = size[0] - log_kernel.shape[0] + 1
     col_traverse = size[1] - log_kernel.shape[1] + 1
@@ -118,7 +180,6 @@ def bresenham_line(x1: int, y1: int, x2: int, y2: int) -> List[Tuple[int, int]]:
     return line_points
 
 
-
 def write_value(value: Any) -> None:
     """
     Writes the given value to a file using pickle.
@@ -164,8 +225,6 @@ def calculate_ssim(img1: np.ndarray, img2: np.ndarray) -> float:
         im1=img1, im2=img2, data_range=255, channel_axis=1)
 
 
-
-
 def calculate_mse(imageA, imageB):
     return skmetrics.mean_squared_error(image0=imageA, image1=imageB)
 
@@ -186,8 +245,7 @@ def calculate_psnr(image_true: np.ndarray, image_test: np.ndarray) -> float:
     image_true = np.clip(np.array(image_true), 0.1, 255)
     image_test = np.clip(np.array(image_test), 0.1, 255)
     return skmetrics.peak_signal_noise_ratio(image_true=image_true, image_test=image_test,
-                                              data_range=255)
-
+                                             data_range=255)
 
 
 class DataLogger:
@@ -227,5 +285,5 @@ class DataLogger:
 
 
 if __name__ == '__main__':
-    for i in LOG_kernel(8):
-        print(i.reshape(8, 8))
+    for i in LOG_kernel(3):
+        print(i)

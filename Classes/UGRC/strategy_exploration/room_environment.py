@@ -107,7 +107,7 @@ class CreateRooms:
 
         self.sparsity = self.room.astype(bool).astype(int).mean()
         self.room += np.random.normal(0, 0.1, size=self.room.shape)
-        self.total_actions = int((self.size**2)*(self.size**2-1)/2)
+        self.total_actions = self.size**4
         self.room = np.maximum(self.room, 0)
         self.map_star = self.room
         self.map_star = (self.map_star - self.map_star.min()) / \
@@ -179,5 +179,5 @@ class CreateRooms:
 
 
 if __name__ == '__main__':
-    for i in range(10):
-        rooms = CreateRooms(type=i)
+    rooms = CreateRooms(type=0)
+    print(rooms._action_vector(13**4-1).reshape((rooms.size, rooms.size)))

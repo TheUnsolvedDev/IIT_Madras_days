@@ -66,7 +66,7 @@ class Solver:
             Tuple[np.ndarray, np.ndarray]: The true map and the predicted map.
         """
         self.initialize()
-        action = np.random.choice(int((self.size**2)*(self.size**2-1)*0.5))
+        action = np.random.choice(self.env.total_actions)
         true_map = self.env.map_star
         pred_images = []
 
@@ -80,21 +80,69 @@ class Solver:
             self.A_ts.append(A_t)
             self.B_ts.append(B_t)
 
-            if reconstruction == 'without_regularization':
+            if reconstruction == 'without_regularization_and_zero_prior':
                 theta_hat, meta_data = self.reconstruction.with_tikhonov_and_lambda_identity(
-                    self.A_ts, self.B_ts, lamda=0.0)
-            elif reconstruction == 'with_tikhonov_and_identity':
+                    self.A_ts, self.B_ts, size=self.size, sparsity=0, lamda=0.0)
+            elif reconstruction == 'without_regularization_and_sparsity_prior':
                 theta_hat, meta_data = self.reconstruction.with_tikhonov_and_lambda_identity(
-                    self.A_ts, self.B_ts, lamda=1)
-            elif reconstruction == 'with_tikhonov_and_lambda_identity':
+                    self.A_ts, self.B_ts, size=self.size, sparsity=self.sparsity, lamda=0.0)
+
+            elif reconstruction == 'with_tikhonov_and_identity_and_zero_prior':
                 theta_hat, meta_data = self.reconstruction.with_tikhonov_and_lambda_identity(
-                    self.A_ts, self.B_ts, lamda=0.01)
+                    self.A_ts, self.B_ts, size=self.size, sparsity=0, lamda=1)
+            elif reconstruction == 'with_tikhonov_and_identity_and_sparsity_prior':
+                theta_hat, meta_data = self.reconstruction.with_tikhonov_and_lambda_identity(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=self.sparsity, lamda=1)
+
+            elif reconstruction == 'with_tikhonov_and_lambda_zero_prior':
+                theta_hat, meta_data = self.reconstruction.with_tikhonov_and_lambda_identity(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=0, lamda=0.01)
+            elif reconstruction == 'with_tikhonov_and_lambda_sparsity_prior':
+                theta_hat, meta_data = self.reconstruction.with_tikhonov_and_lambda_identity(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=self.sparsity, lamda=0.01)
+
+            elif reconstruction == 'with_Gauss_regularization_and_zero_prior':
+                theta_hat, meta_data = self.reconstruction.with_Gauss_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=0, lamda=1)
+            elif reconstruction == 'with_Gauss_regularization_and_sparsity_prior':
+                theta_hat, meta_data = self.reconstruction.with_Gauss_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=self.sparsity, lamda=1)
+
+            elif reconstruction == 'with_Gauss_regularization_and_lambda_zero_prior':
+                theta_hat, meta_data = self.reconstruction.with_Gauss_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=0, lamda=0.01)
+            elif reconstruction == 'with_Gauss_regularization_and_lambda_sparsity_prior':
+                theta_hat, meta_data = self.reconstruction.with_Gauss_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=self.sparsity, lamda=0.01)
+
+            elif reconstruction == 'with_LOG_regularization_and_zero_prior':
+                theta_hat, meta_data = self.reconstruction.with_LOG_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=0.0, lamda=0.01)
             elif reconstruction == 'with_LOG_regularization_and_sparsity_prior':
                 theta_hat, meta_data = self.reconstruction.with_LOG_regularization_and_sparsity_prior(
                     self.A_ts, self.B_ts, size=self.size, sparsity=self.sparsity, lamda=0.01)
-            elif reconstruction == 'with_LOG_regularization_and_zero_prior':
-                theta_hat, meta_data = self.reconstruction.with_LOG_regularization_and_zero_prior(
-                    self.A_ts, self.B_ts, lamda=0.01)
+
+            elif reconstruction == 'with_LOG_regularization_and_lambda_zero_prior':
+                theta_hat, meta_data = self.reconstruction.with_LOG_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=0.0, lamda=0.01)
+            elif reconstruction == 'with_LOG_regularization_and_lambda_sparsity_prior':
+                theta_hat, meta_data = self.reconstruction.with_LOG_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=self.sparsity, lamda=0.01)
+
+            elif reconstruction == 'with_Sharpen_regularization_and_zero_prior':
+                theta_hat, meta_data = self.reconstruction.with_Sharpen_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=0.0, lamda=0.01)
+            elif reconstruction == 'with_Sharpen_regularization_and_sparsity_prior':
+                theta_hat, meta_data = self.reconstruction.with_Sharpen_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=self.sparsity, lamda=0.01)
+
+            elif reconstruction == 'with_Sharpen_regularization_and_lambda_zero_prior':
+                theta_hat, meta_data = self.reconstruction.with_Sharpen_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=0.0, lamda=0.01)
+            elif reconstruction == 'with_Sharpen_regularization_and_lambda_sparsity_prior':
+                theta_hat, meta_data = self.reconstruction.with_Sharpen_regularization_and_sparsity_prior(
+                    self.A_ts, self.B_ts, size=self.size, sparsity=self.sparsity, lamda=0.01)
+
             elif reconstruction == 'with_Laplacian_regularization':
                 theta_hat, meta_data = self.reconstruction.with_Laplacian_regularization(
                     self.A_ts, self.B_ts, size=self.size)
@@ -106,7 +154,9 @@ class Solver:
                 exit(0)
             kernel, lamda = meta_data
             V_t = jnp.dot(
-                jnp.array(self.A_ts).T, jnp.array(self.A_ts)) + lamda*kernel
+                jnp.array(self.A_ts).T, jnp.array(self.A_ts))
+            if kernel != None:
+                V_t += lamda*kernel
             if strategy == 'min_eigenvalue_info':
                 action = int(
                     self.policy.min_eigenvalue_info_action(V_t))
@@ -121,7 +171,7 @@ class Solver:
             ssim_value = calculate_ssim(true_map, pred_map)
             psnr_value = calculate_psnr(true_map, pred_map)
             data = [action, psnr_value, mse_value, ssim_value, rank]
-            logger.append_log(data)
+            logger.append_log(*data)
 
         pred_images[-1] = theta_hat.reshape(self.size, self.size)
         if plot_images:
@@ -152,10 +202,24 @@ class Solver:
 if __name__ == '__main__':
     num_maps = 5
     size = 15
-    reconstructions = ['without_regularization', 'with_tikhonov_and_identity',
-                       'with_tikhonov_and_lambda_identity', 'with_LOG_regularization_and_sparsity_prior', 'with_LOG_regularization_and_zero_prior', 'with_Laplacian_regularization']  # , 'with_non_negative_least_square']
-    # reconstructions = ['with_LOG_regularization_and_sparsity_prior']
-    strategies = ['min_eigenvalue_info']  # , 'random']
+    reconstructions_without = [
+        'without_regularization_and_zero_prior', 'without_regularization_and_sparsity_prior']
+    reconstructions_tikhonov = ['with_tikhonov_and_identity_and_zero_prior', 'with_tikhonov_and_identity_and_sparsity_prior',
+                                'with_tikhonov_and_lambda_zero_prior', 'with_tikhonov_and_lambda_sparsity_prior']
+    reconstructions_sharpen = ['with_Sharpen_regularization_and_zero_prior', 'with_Sharpen_regularization_and_sparsity_prior',
+                               'with_Sharpen_regularization_and_lambda_zero_prior', 'with_Sharpen_regularization_and_lambda_sparsity_prior']
+    reconstructions_LOGian = ['with_LOG_regularization_and_zero_prior', 'with_LOG_regularization_and_sparsity_prior',
+                              'with_LOG_regularization_and_lambda_zero_prior', 'with_LOG_regularization_and_lambda_sparsity_prior']
+    reconstructions_gassian = ['with_Gauss_regularization_and_zero_prior', 'with_Gauss_regularization_and_sparsity_prior',
+                               'with_Gauss_regularization_and_lambda_zero_prior', 'with_Gauss_regularization_and_lambda_sparsity_prior']
+    reconstructions_laplacian = ['with_Laplacian_regularization']
+    reconstruction_nnls = ['with_non_negative_least_square']
+
+    # reconstructions = reconstructions_without + reconstructions_tikhonov + reconstructions_sharpen + \
+    #     reconstructions_LOGian + reconstructions_gassian + \
+    #     reconstructions_laplacian #+ reconstruction_nnls
+    reconstructions = reconstructions_sharpen
+    strategies = ['min_eigenvalue_info']#, 'random']
     map_dict = {}
     evaluation_dict = {}
 
