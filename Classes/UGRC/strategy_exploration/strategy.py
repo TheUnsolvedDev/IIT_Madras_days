@@ -35,7 +35,7 @@ class StrategiesReconstruction:
             StrategiesReconstruction.H = kwargs['lamda']*jnp.dot(
                 StrategiesReconstruction.L, StrategiesReconstruction.L)
             StrategiesReconstruction.Theta_prior = kwargs['sparsity'] * \
-                jnp.zeros((kwargs['size']**2, 1))
+                jnp.ones((kwargs['size']**2, 1))
 
         V_t = jnp.dot(jnp.array(A_ts).T, jnp.array(A_ts))
         M_t = StrategiesReconstruction.H + V_t
@@ -73,8 +73,9 @@ class StrategiesReconstruction:
             StrategiesReconstruction.L = Gauss_kernel(kwargs['size'])
             StrategiesReconstruction.H = kwargs['lamda']*jnp.dot(
                 StrategiesReconstruction.L, StrategiesReconstruction.L)
+            print(StrategiesReconstruction.H)
             StrategiesReconstruction.Theta_prior = kwargs['sparsity'] * \
-                jnp.zeros((kwargs['size']**2, 1))
+                jnp.ones((kwargs['size']**2, 1))
 
         V_t = jnp.dot(jnp.array(A_ts).T, jnp.array(A_ts))
         M_t = StrategiesReconstruction.H + V_t
@@ -110,7 +111,7 @@ class StrategiesReconstruction:
             StrategiesReconstruction.H = kwargs['lamda']*jnp.dot(
                 StrategiesReconstruction.L, StrategiesReconstruction.L)
             StrategiesReconstruction.Theta_prior = kwargs['sparsity'] * \
-                jnp.zeros((kwargs['size']**2, 1))
+                jnp.ones((kwargs['size']**2, 1))
 
         V_t = jnp.dot(jnp.array(A_ts).T, jnp.array(A_ts))
         M_t = StrategiesReconstruction.H + V_t
@@ -146,7 +147,7 @@ class StrategiesReconstruction:
             StrategiesReconstruction.H = kwargs['lamda']*jnp.dot(
                 StrategiesReconstruction.L, StrategiesReconstruction.L)
             StrategiesReconstruction.Theta_prior = kwargs['sparsity'] * \
-                jnp.zeros((kwargs['size']**2, 1))
+                jnp.ones((kwargs['size']**2, 1))
 
         V_t = jnp.dot(jnp.array(A_ts).T, jnp.array(A_ts))
         M_t = StrategiesReconstruction.H + V_t

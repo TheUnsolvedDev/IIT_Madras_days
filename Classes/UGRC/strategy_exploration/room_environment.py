@@ -179,5 +179,26 @@ class CreateRooms:
 
 
 if __name__ == '__main__':
-    rooms = CreateRooms(type=0)
-    print(rooms._action_vector(13**4-1).reshape((rooms.size, rooms.size)))
+    images = []
+    for i in range(9):
+        rooms = CreateRooms(type=i,size = 20)
+        images.append(rooms.map_star)
+        print(rooms._action_vector(10700).reshape(rooms.size, rooms.size))
+        
+    plt.imshow(rooms._action_vector(10708).reshape(rooms.size, rooms.size))
+    # plt.tight_layout()
+    plt.title('Action 10708 to bresenham line')
+    # plt.axes('off')
+    plt.savefig('plots/action.png')
+    plt.show()
+    
+    # fig,ax = plt.subplots(3,3,figsize=(10,10))
+    # plt.tight_layout()
+    # for i in range(3):
+    #     for j in range(3):
+    #         ax[i,j].imshow(images[i*3+j])
+    #         ax[i,j].axis('off')
+    #         ax[i,j].set_title('Room {}'.format(i*3+j+1))
+    # plt.savefig('plots/rooms.png')
+    # plt.show()
+    

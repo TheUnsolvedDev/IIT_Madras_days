@@ -2,6 +2,7 @@ import os
 import tqdm
 import matplotlib.pyplot as plt
 from collections import defaultdict
+import gc
 
 from strategy import *
 from room_environment import *
@@ -202,23 +203,34 @@ class Solver:
 if __name__ == '__main__':
     num_maps = 5
     size = 15
-    reconstructions_without = [
-        'without_regularization_and_zero_prior', 'without_regularization_and_sparsity_prior']
-    reconstructions_tikhonov = ['with_tikhonov_and_identity_and_zero_prior', 'with_tikhonov_and_identity_and_sparsity_prior',
-                                'with_tikhonov_and_lambda_zero_prior', 'with_tikhonov_and_lambda_sparsity_prior']
-    reconstructions_sharpen = ['with_Sharpen_regularization_and_zero_prior', 'with_Sharpen_regularization_and_sparsity_prior',
-                               'with_Sharpen_regularization_and_lambda_zero_prior', 'with_Sharpen_regularization_and_lambda_sparsity_prior']
-    reconstructions_LOGian = ['with_LOG_regularization_and_zero_prior', 'with_LOG_regularization_and_sparsity_prior',
-                              'with_LOG_regularization_and_lambda_zero_prior', 'with_LOG_regularization_and_lambda_sparsity_prior']
-    reconstructions_gassian = ['with_Gauss_regularization_and_zero_prior', 'with_Gauss_regularization_and_sparsity_prior',
-                               'with_Gauss_regularization_and_lambda_zero_prior', 'with_Gauss_regularization_and_lambda_sparsity_prior']
+    reconstructions_without = sorted([
+        'without_regularization_and_zero_prior', 
+        'without_regularization_and_sparsity_prior'])
+    reconstructions_tikhonov = sorted([
+        'with_tikhonov_and_identity_and_zero_prior', 
+        'with_tikhonov_and_identity_and_sparsity_prior',
+        'with_tikhonov_and_lambda_zero_prior', 
+        'with_tikhonov_and_lambda_sparsity_prior'])
+    reconstructions_sharpen = sorted([
+        'with_Sharpen_regularization_and_zero_prior', 
+        'with_Sharpen_regularization_and_sparsity_prior',
+        'with_Sharpen_regularization_and_lambda_zero_prior', 
+        'with_Sharpen_regularization_and_lambda_sparsity_prior'])
+    reconstructions_LOGian = sorted([
+        'with_LOG_regularization_and_zero_prior', 
+        'with_LOG_regularization_and_sparsity_prior',
+        'with_LOG_regularization_and_lambda_zero_prior', 
+        'with_LOG_regularization_and_lambda_sparsity_prior'])
+    reconstructions_gaussian = sorted([
+        'with_Gauss_regularization_and_zero_prior', 
+        'with_Gauss_regularization_and_sparsity_prior',
+        'with_Gauss_regularization_and_lambda_zero_prior', 
+        'with_Gauss_regularization_and_lambda_sparsity_prior'])
     reconstructions_laplacian = ['with_Laplacian_regularization']
     reconstruction_nnls = ['with_non_negative_least_square']
 
-    # reconstructions = reconstructions_without + reconstructions_tikhonov + reconstructions_sharpen + \
-    #     reconstructions_LOGian + reconstructions_gassian + \
-    #     reconstructions_laplacian #+ reconstruction_nnls
-    reconstructions = reconstructions_sharpen
+    reconstructions = reconstructions_gaussian
+    # reconstructions = reconstructions_tikhonov[1:2]
     strategies = ['min_eigenvalue_info']#, 'random']
     map_dict = {}
     evaluation_dict = {}
@@ -234,14 +246,17 @@ if __name__ == '__main__':
             evaluation_dict[metric.__name__][reconstruction] = []
 
     for type in range(num_maps):
-        rng = np.random.default_rng(type)
-        environ = CreateRooms(type=type, size=size)
-        solve = Solver(environ, type=type, size=size,
-                       sparsity=0.6, episode_length=int(1.5*size*size))
         for reconstruction in reconstructions:
+            rng = np.random.default_rng(type)
+            environ = CreateRooms(type=type, size=size)
+            solve = Solver(environ, type=type, size=size,
+                        sparsity=0.6, episode_length=int(1.5*size*size))
+            print('Working on ' + reconstruction + ' with type ' + str(type))
             for strategy in strategies:
                 true_map, pred_map = solve.simulate(
                     reconstruction=reconstruction, strategy=strategy)
+                jax.clear_caches()
+                gc.collect()
                 map_dict[reconstruction].append((true_map, pred_map))
 
     for metric in metrics:
