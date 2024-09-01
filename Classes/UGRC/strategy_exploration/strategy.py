@@ -73,7 +73,6 @@ class StrategiesReconstruction:
             StrategiesReconstruction.L = Gauss_kernel(kwargs['size'])
             StrategiesReconstruction.H = kwargs['lamda']*jnp.dot(
                 StrategiesReconstruction.L, StrategiesReconstruction.L)
-            print(StrategiesReconstruction.H)
             StrategiesReconstruction.Theta_prior = kwargs['sparsity'] * \
                 jnp.ones((kwargs['size']**2, 1))
 
@@ -192,5 +191,5 @@ class StartegiesAction:
         sorted_eig_vecs = eig_vecs[sorted_indices]
         return jnp.argmin(jnp.dot(self.all_possible_actions, sorted_eig_vecs[0]))
 
-    def random_action(self, theta_hat):
+    def random_action(self, theta_hat, centres = [(1,1),(3,3)]):
         return np.random.randint(len(self.all_possible_actions))

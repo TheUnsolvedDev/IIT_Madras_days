@@ -5,8 +5,10 @@ from collections import defaultdict
 import gc
 
 from strategy import *
-from room_environment import *
+from environment import *
 from utils import *
+
+import argparse
 
 
 class Solver:
@@ -71,9 +73,9 @@ class Solver:
         true_map = self.env.map_star
         pred_images = []
 
-        os.makedirs(f'{strategy}/plots_{reconstruction}', exist_ok=True)
+        os.makedirs(f'{strategy}_{size}x{size}/plots_{reconstruction}', exist_ok=True)
         logger = DataLogger(
-            file_path=f'{strategy}/plots_{reconstruction}/{reconstruction}_{strategy}_{self.type}.csv')
+            file_path=f'{strategy}_{size}x{size}/plots_{reconstruction}/{reconstruction}_{strategy}_{self.type}.csv')
         action_hash = defaultdict(int)
 
         for t in tqdm.tqdm(range(self.episode_length)):
@@ -171,7 +173,9 @@ class Solver:
             mse_value = calculate_mse(true_map, pred_map)
             ssim_value = calculate_ssim(true_map, pred_map)
             psnr_value = calculate_psnr(true_map, pred_map)
-            data = [action, psnr_value, mse_value, ssim_value, rank]
+            action_vector = convert_actions(action, self.size)
+            data = [action, psnr_value, mse_value,
+                    ssim_value, rank, action_vector]
             logger.append_log(*data)
 
         pred_images[-1] = theta_hat.reshape(self.size, self.size)
@@ -193,7 +197,7 @@ class Solver:
                                            str((self.episode_length//self.num_images)*(4*i + j)))
             # plt.savefig(f'plots/with_{strategy}_{self.type}.png')
             plt.savefig(
-                f'{strategy}/plots_{reconstruction}/with_{reconstruction}_{strategy}_{self.type}.png')
+                f'{strategy}_{size}x{size}/plots_{reconstruction}/with_{reconstruction}_{strategy}_{self.type}.png')
             plt.close()
         true_map = self.env.map_star
         pred_map = theta_hat.reshape(self.size, self.size)
@@ -201,37 +205,70 @@ class Solver:
 
 
 if __name__ == '__main__':
-    num_maps = 5
-    size = 15
+
     reconstructions_without = sorted([
-        'without_regularization_and_zero_prior', 
+        'without_regularization_and_zero_prior',
         'without_regularization_and_sparsity_prior'])
     reconstructions_tikhonov = sorted([
-        'with_tikhonov_and_identity_and_zero_prior', 
+        'with_tikhonov_and_identity_and_zero_prior',
         'with_tikhonov_and_identity_and_sparsity_prior',
-        'with_tikhonov_and_lambda_zero_prior', 
+        'with_tikhonov_and_lambda_zero_prior',
         'with_tikhonov_and_lambda_sparsity_prior'])
     reconstructions_sharpen = sorted([
-        'with_Sharpen_regularization_and_zero_prior', 
+        'with_Sharpen_regularization_and_zero_prior',
         'with_Sharpen_regularization_and_sparsity_prior',
-        'with_Sharpen_regularization_and_lambda_zero_prior', 
+        'with_Sharpen_regularization_and_lambda_zero_prior',
         'with_Sharpen_regularization_and_lambda_sparsity_prior'])
     reconstructions_LOGian = sorted([
-        'with_LOG_regularization_and_zero_prior', 
+        'with_LOG_regularization_and_zero_prior',
         'with_LOG_regularization_and_sparsity_prior',
-        'with_LOG_regularization_and_lambda_zero_prior', 
+        'with_LOG_regularization_and_lambda_zero_prior',
         'with_LOG_regularization_and_lambda_sparsity_prior'])
     reconstructions_gaussian = sorted([
-        'with_Gauss_regularization_and_zero_prior', 
+        'with_Gauss_regularization_and_zero_prior',
         'with_Gauss_regularization_and_sparsity_prior',
-        'with_Gauss_regularization_and_lambda_zero_prior', 
+        'with_Gauss_regularization_and_lambda_zero_prior',
         'with_Gauss_regularization_and_lambda_sparsity_prior'])
     reconstructions_laplacian = ['with_Laplacian_regularization']
     reconstruction_nnls = ['with_non_negative_least_square']
 
-    reconstructions = reconstructions_gaussian
-    # reconstructions = reconstructions_tikhonov[1:2]
-    strategies = ['min_eigenvalue_info']#, 'random']
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-r', '--reconstruction', type=str,
+                        default='with_tikhonov_and_lambda_zero_prior')
+    parser.add_argument('-st', '--strategy', type=str, default='random')
+    parser.add_argument('--lamda', type=float, default=0.01)
+    parser.add_argument('--plot_images', type=bool, default=True)
+    parser.add_argument('-s', '--size', type=int, default=15)
+    parser.add_argument('-nm', '--num_maps', type=int, default=5)
+    args = parser.parse_args()
+
+    num_maps = args.num_maps
+    size = args.size
+    lamda = args.lamda
+
+    if args.reconstruction in reconstructions_without:
+        reconstructions = [args.reconstruction]
+    elif args.reconstruction in reconstructions_tikhonov:
+        reconstructions = [args.reconstruction]
+    elif args.reconstruction in reconstructions_sharpen:
+        reconstructions = [args.reconstruction]
+    elif args.reconstruction in reconstructions_LOGian:
+        reconstructions = [args.reconstruction]
+    elif args.reconstruction in reconstructions_gaussian:
+        reconstructions = [args.reconstruction]
+    elif args.reconstruction in reconstructions_laplacian:
+        reconstructions = [args.reconstruction]
+    else:
+        reconstructions = reconstructions_without+reconstructions_tikhonov+reconstructions_sharpen + \
+            reconstructions_LOGian+reconstructions_gaussian+reconstructions_laplacian
+
+    if args.strategy == 'min_eigenvalue_info':
+        strategies = ['min_eigenvalue_info']
+    elif args.strategy == 'random':
+        strategies = ['random']
+    else:
+        strategies = ['min_eigenvalue_info', 'random']
+
     map_dict = {}
     evaluation_dict = {}
 
@@ -248,16 +285,23 @@ if __name__ == '__main__':
     for type in range(num_maps):
         for reconstruction in reconstructions:
             rng = np.random.default_rng(type)
-            environ = CreateRooms(type=type, size=size)
+            # environ = CreateRooms(type=type, size=size)
+            environ = Environment(size=size,rng=type)
             solve = Solver(environ, type=type, size=size,
-                        sparsity=0.6, episode_length=int(1.5*size*size))
-            print('Working on ' + reconstruction + ' with type ' + str(type))
+                           sparsity=0.6, episode_length=int(1.5*size*size))
+            print('Working on ' + reconstruction +
+                  ' with type ' + str(type), end='')
             for strategy in strategies:
+                print(' and ' + strategy, end='\n')
                 true_map, pred_map = solve.simulate(
                     reconstruction=reconstruction, strategy=strategy)
+                map_dict[reconstruction].append((true_map, pred_map))
                 jax.clear_caches()
                 gc.collect()
-                map_dict[reconstruction].append((true_map, pred_map))
+            jax.clear_caches()
+            gc.collect()
+        jax.clear_caches()
+        gc.collect()    
 
     for metric in metrics:
         for reconstruction in reconstructions:

@@ -92,6 +92,7 @@ def Gauss_kernel(size: int = 5) -> np.ndarray:
 
     return np.array(L)
 
+
 def Sharpen_kernel(size: int = 5) -> np.ndarray:
     """
     Generate a 2D Sharpen kernel of size (size, size) without border padding.
@@ -262,9 +263,9 @@ class DataLogger:
         self.file_path = file_path
         self.count = 0
         with open(self.file_path, 'w') as f:
-            f.write('step,action,psnr_value,mse_value,ssim_value,rank\n')
+            f.write('step,action,psnr_value,mse_value,ssim_value,rank,action\n')
 
-    def append_log(self, action: int, psnr_value: float, mse_value: float, ssim_value: float, rank: int) -> None:
+    def append_log(self, action: int, psnr_value: float, mse_value: float, ssim_value: float, rank: int, action_vector: list) -> None:
         """
         Appends the given data to the log file.
 
@@ -281,7 +282,7 @@ class DataLogger:
         self.count += 1
         with open(self.file_path, 'a') as file:
             file.write(
-                f'{self.count},{action},{psnr_value},{mse_value},{ssim_value},{rank}\n')
+                f'{self.count},{action},{psnr_value},{mse_value},{ssim_value},{rank},{action_vector}\n')
 
 
 if __name__ == '__main__':

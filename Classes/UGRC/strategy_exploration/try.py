@@ -1,12 +1,24 @@
 import numpy as np
-from utils import *
 
-a = np.array([[1,2,3,4,5] for i in range(10)])
+def convert_actions(num: int, to_base: int) -> np.ndarray:
+    """
+    Converts an integer action number to a base-size representation.
 
-b = [np.dot(a[i],a[i].T) for i in range(10)]
+    Args:
+        num (int): The action number to be converted.
+        to_base (int): The base to convert the action number to.
 
-print(a.T@a)
-print(b)
+    Returns:
+        np.ndarray: The converted action number with shape (4, ).
+    """
+    temp = np.zeros(4, dtype=np.int16)
+    count = 0
+    while num > 0:
+        digit = num % to_base
+        num //= to_base
+        temp[count] = digit
+        count += 1
+    return temp[::-1]
 
-a = np.array([[1,2,3,4,5]])
-print(a.T@a)
+for i in range(20**4-1):
+    print(convert_actions(i, 20))
