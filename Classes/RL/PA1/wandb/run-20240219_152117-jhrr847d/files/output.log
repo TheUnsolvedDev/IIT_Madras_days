@@ -1,7 +1,0 @@
-{'algo': 'sarsa', 'start_state': '0_4', 'wind': False, 'p_good_value': 0.7}
-Number of actions 4
-Number of states 100
-start state [4]
-goal state(s) [ 9 22 87]
-
-100%|██████████| 1000/1000 [00:02<00:00, 452.55it/s]

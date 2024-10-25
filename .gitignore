@@ -6,3 +6,6 @@
 *.fatbin
 *.txt
 *.png
+*.pth
+/Classes/Research/Pre
+/Classes/Research/ships
