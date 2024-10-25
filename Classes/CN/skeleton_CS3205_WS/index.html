@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .greeting {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="greeting">
+        <h2 id="username" name="username"></h2>
+        <p>Server time: {{ current_time }}</p>
+    </div>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        
+        var data = urlParams.get('username');
+        
+        var outputDiv = document.getElementById("username");
+        if (data) {
+            outputDiv.textContent = "Welcome to CS3205: " + data;
+        } else {
+            outputDiv.textContent = "No data found in the URL.";
+        }
+    });
+    </script>
+    
+</body>
+</html>
