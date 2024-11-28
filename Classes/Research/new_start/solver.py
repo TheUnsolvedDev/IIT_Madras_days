@@ -5,6 +5,12 @@ import matplotlib.pyplot as plt
 
 from utils import *
 
+# convolve_parallel = jax.vmap(lambda col,kernel: jnp.convolve(col, kernel, mode='same'), in_axes=1, out_axes=1)
+
+
+def conv_parallel(x, kernel):
+    convolve_parallel = jax.vmap(lambda col: jnp.convolve(col, kernel, mode='same'))
+    return convolve_parallel(x)
 
 class Solver:
     def __init__(self, max_iteration=1000) -> None:
@@ -14,14 +20,18 @@ class Solver:
         A, b = jnp.array(A), jnp.array(b)
         return jnp.linalg.pinv(A.T @ A + lambda_ * jnp.eye(A.shape[1])) @ A.T @ b, A.T @ A
     
-    def solve_with_LOG_kernel(self, A, b, prior_value=0.1):
+    def solve_LOG_kernel(self, A, b, prior_value=0.1):
         A, b = jnp.array(A), jnp.array(b)
         theta_prior = jnp.ones(A.shape[1]) * prior_value
-        log_matrix = LOG_kernel(A.shape[1])
-        log_matrix = jnp.dot(log_matrix, log_matrix.T)
-        term1 = jnp.linalg.pinv(A.T @ A + log_matrix)
-        term2 = jnp.dot(A.T,b.reshape(-1,1)) + jnp.dot(log_matrix, theta_prior.reshape(-1,1))
+        new_A = conv_parallel(A, kernel=jnp.array([1,-2,1]))
+        term1 = jnp.linalg.pinv(new_A.T @ new_A) + theta_prior
+        term2 = jnp.dot(A.T,b.reshape(-1,1)) 
         result = jnp.dot(term1, term2)
-        
-        print(theta_prior.shape,log_matrix.shape,term1.shape,term2.shape,result.shape)
         return result.reshape((-1,)), term1
+
+if __name__ == "__main__":
+    
+    n,d,k = 2,5,3
+    A = jax.random.normal(jax.random.PRNGKey(0), (n,d))
+    b = jax.random.normal(jax.random.PRNGKey(1), (k,))
+    print(conv_parallel(A,b) == jnp.array([jnp.convolve(i,b,mode='same') for i in A]))
