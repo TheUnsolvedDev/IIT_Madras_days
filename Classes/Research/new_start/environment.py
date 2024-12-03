@@ -21,8 +21,28 @@ class Env1D:
         return self.map
 
     def act(self, action):
-        int_to_location = idx_to_coord(action, self.size)
+        int_to_location = idx_to_coord_1D(action, self.size)
         mask = bresenham1D(int_to_location[0], int_to_location[1], self.size)
+        return mask,jnp.sum(self.map * mask)
+    
+class Env2D:
+    def __init__(self, size=30, seed=0):
+        self.rng = jax.random.PRNGKey(seed)
+        if size < 8:
+            raise ValueError("size must be greater than 8")
+        self.map_size = size
+        self.size = size*size
+        self.max_action_ind = (self.size - 1) * self.size + (self.size-1)
+        self.reset()
+        
+    def reset(self):
+        self.map = jax.random.bernoulli(self.rng, 0.5, (self.size,))
+        self.map = self.map.astype(jnp.int8)
+        return self.map
+    
+    def act(self, action):
+        int_to_location = idx_to_coord_2D(action, self.map_size)
+        mask = bresenham2D(*int_to_location,self.map_size)
         return mask,jnp.sum(self.map * mask)
 
 
