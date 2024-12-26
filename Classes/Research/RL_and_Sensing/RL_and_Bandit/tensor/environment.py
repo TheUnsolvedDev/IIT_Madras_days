@@ -74,8 +74,15 @@ class Field:
 
 if __name__ == '__main__':
     field = Field()
-    print(field.theta_star)
-    pprint.pprint(field.valid_actions)
-    pprint.pprint(field.actions_to_index)
+    manhattan = {i : 0 for i in range(field.size*2)}
+    for i in range(field.num_actions):
+        transmitter, receiver = field.index_to_action[i]
+        dist = np.abs(transmitter[0] - receiver[0]) + np.abs(transmitter[1] - receiver[1])
+        manhattan[dist] += 1
+        if dist == 18:
+            print(transmitter, receiver)
+    pprint.pprint(manhattan)
+    plt.plot(manhattan.keys(), manhattan.values())
+    plt.show()
     # plt.imshow(field.theta_star)
     # plt.show()
