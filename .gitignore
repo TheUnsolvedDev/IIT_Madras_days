@@ -29,3 +29,4 @@ wandb/*
 /Classes/CS6910_DL/cs6910_assignment3/Attention/wandb
 /Classes/CS6910_DL/cs6910_assignment3/Vanilla/wandb
 /Classes/CS6910_DL/cs6910_assignment3/wandb
+*.h5

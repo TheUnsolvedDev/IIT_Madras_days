@@ -84,5 +84,3 @@ if __name__ == '__main__':
     pprint.pprint(manhattan)
     plt.plot(manhattan.keys(), manhattan.values())
     plt.show()
-    # plt.imshow(field.theta_star)
-    # plt.show()
